@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="SchoolManagementWebsite.Site" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="FreePages.Master.cs" Inherits="SchoolManagementWebsite.Site" %>
 
 <!DOCTYPE html>
 
@@ -18,13 +18,11 @@
             </header>
         </div>
         <div>
-            <asp:ContentPlaceHolder ID="addMoreLinks" runat="server">
                 <ul id="Sidebar">
-                    <li><a href="Home.aspx" runat="server">Начало</a></li>
+                    <li><a href="Validation/Home.aspx" runat="server">Начало</a></li>
                     <li><a href="Validation/Login.aspx" runat="server">Вход</a></li>
                     <li><a href="Validation/RegisterUser.aspx" runat="server">Регистрация</a></li>
-            </asp:ContentPlaceHolder>
-            </ul>
+                </ul>
         </div>
         <hr />
         <asp:ContentPlaceHolder ID="MainContent" runat="server">

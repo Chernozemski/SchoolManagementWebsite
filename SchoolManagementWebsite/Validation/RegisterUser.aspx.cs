@@ -48,12 +48,17 @@ namespace SchoolManagementWebsite.Validation
                     }
                     else if (result == 0)
                     {
-                        lblMessage.Text = "Потребител с това ЕГН/Име вече е записан.";
+                        lblMessage.Text = "Потребител с това ЕГН е записан.";
                         lblMessage.ForeColor = System.Drawing.Color.Red;
                     }
                     else if (result == -1)
                     {
                         lblMessage.Text = "Грешно въведено ЕГН.";
+                        lblMessage.ForeColor = System.Drawing.Color.Red;
+                    }
+                    else if (result == -2)
+                    {
+                        lblMessage.Text = "Потребител с това име е записан.";
                         lblMessage.ForeColor = System.Drawing.Color.Red;
                     }
                     con.Close();

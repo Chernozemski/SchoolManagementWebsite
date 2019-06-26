@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="RegisterUser.aspx.cs" Inherits="SchoolManagementWebsite.Validation.RegisterUser" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/FreePages.Master" AutoEventWireup="true" CodeBehind="RegisterUser.aspx.cs" Inherits="SchoolManagementWebsite.Validation.RegisterUser" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Регистрационна форма:</h2>
@@ -17,7 +17,7 @@
             <td>Парола :
             </td>
             <td>
-                <asp:TextBox ID="txtPassword" placeholder="Парола" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtPassword" placeholder="Парола" runat="server" TextMode="Password"></asp:TextBox>
             </td>
             <td class="hideBorder">
                 <asp:RequiredFieldValidator ValidationGroup="Register" Text="*" ForeColor="Red" ErrorMessage="Трябва да въведете парола." ControlToValidate="txtPassword" runat="server" Display="Dynamic" />
@@ -27,7 +27,7 @@
             <td>Повторна парола :
             </td>
             <td>
-                <asp:TextBox ID="txtRepeatPassword" placeholder="Парола" runat="server" />
+                <asp:TextBox ID="txtRepeatPassword" placeholder="Парола" runat="server" TextMode="Password" />
             </td>
             <td class="hideBorder">
                 <asp:RequiredFieldValidator ValidationGroup="Register" Text="*" ForeColor="Red" ErrorMessage="Трябва да въведете повторна парола." ControlToValidate="txtRepeatPassword" runat="server" Display="Dynamic" />

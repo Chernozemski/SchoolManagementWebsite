@@ -25,3 +25,7 @@ li a
 .bigButton {
     font-size:15px;
 }
+.currentUser {
+    font-size:15px;
+    font-weight:bold;
+}

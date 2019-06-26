@@ -41,7 +41,8 @@ namespace SchoolManagementWebsite.Validation
 
                  if (count == 1)
                  {
-                     FormsAuthentication.RedirectFromLoginPage(txtUserName.Text, true);
+                     FormsAuthentication.RedirectFromLoginPage(txtUserName.Text, false);
+                     Session["UserName"] = txtUserName.Text;
                  }
                  else
                  {

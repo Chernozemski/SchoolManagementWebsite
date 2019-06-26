@@ -24,13 +24,10 @@ Create Procedure spAddTeacher_tblTeacherInfo
 AS
 Begin
 	--Check if director position already established and return 0.
-If (@Position = 1)
-Begin
-	If exists ((select COUNT(PositionId) from tblTeacherInfo Where PositionId=1))
+If ((select COUNT(PositionId) from tblTeacherInfo Where PositionId=1) > 0 And @Position=1)
 		Begin
 			Select 0
 		End
-End
 	--Insert new teacher
 Else
 	Begin
@@ -114,7 +111,7 @@ Begin
 End
 Go 
 
-Alter Procedure spCreateTeacherAccount_tblTeacherAccount
+Create Procedure spCreateTeacherAccount_tblTeacherAccount
 @UserName nvarchar(20),
 @Password nvarchar(max),
 @EGN varchar(10)
@@ -122,25 +119,36 @@ As
 Begin
 
 Declare @Id int
-Set @Id = IsNull((select Id from tblTeacherInfo Where EGN = @EGN),-1)
+Set @Id = IsNull((select Count(Id) from tblTeacherInfo Where EGN = @EGN),-1)
 
+Declare @ResultNum int
 	--Check if Id is null and return -1
 If (@Id = -1)
 	Begin
-		Select -1
+		Set @ResultNum = -1
 	End
-	--Check if Id has an account and if account with same name exist. Return 1 for successful registration.
-Else If  (((Select Count(Id) from tblTeacherAccount Where Id = @Id) = 0) and (Select Count(Id) from tblTeacherAccount Where UserName=@UserName) = 0)
+	--Check if Id has an account.
+Else If  ((Select Count(Id) from tblTeacherAccount Where Id = @Id) = 0)
 	Begin
-		Insert into tblTeacherAccount
-		Values (@Id,@UserName,@Password)
-		Select 1
+	--Check if username exist. Return 1 for successful registration.
+	If ((Select Count(Id) from tblTeacherAccount Where UserName=@UserName) = 0)
+		Begin
+			Insert into tblTeacherAccount
+			Values (@Id,@UserName,@Password)
+			Set @ResultNum = 1
+		End
+	--If the username is taken return -2;
+	Else
+		Begin
+			Set @ResultNum = -2
+		End
 	End
 	--If user already exists return 0.
 Else
 	Begin
-		Select 0
+		Set @ResultNum = 0
 	End
+Select @ResultNum
 End
 Go
 
@@ -163,6 +171,3 @@ Begin
 		End
 End
 Go
-
-Select * from
-tblteacherAccount

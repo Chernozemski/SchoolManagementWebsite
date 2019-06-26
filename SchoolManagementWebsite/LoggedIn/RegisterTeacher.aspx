@@ -1,10 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" ValidateRequest="true" CodeBehind="RegisterTeacher.aspx.cs" Inherits="SchoolManagementWebsite.Validation.Register" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AuthorizedPages.Master" ValidateRequest="true" CodeBehind="RegisterTeacher.aspx.cs" Inherits="SchoolManagementWebsite.Validation.Register" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Вписване на учител:</h2>
     <table>
         <tr>
-            <td class="auto-style10">Собствено име :
+            <td>Собствено име :
             </td>
             <td>
                 <asp:TextBox ID="txtFirstName" placeholder="Лично име" runat="server"></asp:TextBox>

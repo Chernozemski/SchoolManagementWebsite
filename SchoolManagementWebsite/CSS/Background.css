@@ -32,3 +32,8 @@ td {
     width: 150px;
     height: 30px;
 }
+.currentUser {
+    position:fixed;
+    top:10px;
+    left:85%;
+}
