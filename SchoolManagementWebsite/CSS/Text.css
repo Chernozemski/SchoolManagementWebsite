@@ -1,0 +1,27 @@
+﻿body {
+    text-align:center;
+}
+li {
+    list-style-type:none;
+    font-size:20px;
+    letter-spacing:2px;
+    margin:5px 5px;
+}
+li:hover
+{
+    background-color:skyblue;
+        border:1px solid gray;
+}
+li a
+{
+    text-decoration:none;
+    color:white;
+}
+#Title
+{
+    color:white;
+    font-size:15px;
+}
+.bigButton {
+    font-size:15px;
+}

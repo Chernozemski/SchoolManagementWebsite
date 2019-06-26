@@ -1,0 +1,34 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="SchoolManagementWebsite.Site" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link rel="stylesheet" type="text/css" href="CSS/Background.css" runat="server" />
+    <link rel="stylesheet" type="text/css" href="CSS/Text.css" runat="server" />
+</head>
+<body style="background: lightblue;">
+    <form id="form1" runat="server">
+        <div>
+            <header id="Title">
+                <h1 style="height: 30px"><b>Система за училищно управление</b></h1>
+            </header>
+        </div>
+        <div>
+            <asp:ContentPlaceHolder ID="addMoreLinks" runat="server">
+                <ul id="Sidebar">
+                    <li><a href="Home.aspx" runat="server">Начало</a></li>
+                    <li><a href="Validation/Login.aspx" runat="server">Вход</a></li>
+                    <li><a href="Validation/RegisterUser.aspx" runat="server">Регистрация</a></li>
+            </asp:ContentPlaceHolder>
+            </ul>
+        </div>
+        <hr />
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>

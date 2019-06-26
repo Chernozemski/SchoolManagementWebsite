@@ -1,0 +1,34 @@
+﻿#Title {
+    background-image: linear-gradient(lightblue,lightgray);
+    background-repeat: no-repeat;
+    border: 2px solid;
+    border-color: white;
+}
+
+body {
+    background: linear-gradient(lightblue,skyblue, lightblue);
+    background-repeat: no-repeat;
+}
+
+#Sidebar li {
+    display: inline-block;
+}
+
+table {
+    margin: auto;
+    width: 50%;
+    background-color: lightblue;
+}
+
+td {
+    border: 1px solid black;
+}
+
+.hideBorder {
+    border: 0px;
+}
+
+.bigButton {
+    width: 150px;
+    height: 30px;
+}
