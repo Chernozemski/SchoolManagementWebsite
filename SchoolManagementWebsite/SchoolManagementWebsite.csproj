@@ -74,7 +74,9 @@
     <Content Include="Validation\Login.aspx" />
     <Content Include="LoggedIn\RegisterTeacher.aspx" />
     <Content Include="Validation\RegisterUser.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Home.aspx.cs">

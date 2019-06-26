@@ -46,7 +46,7 @@
             </td>
         </tr>
         <tr>
-            <td class="auto-style5">Телефонен Номеsр:
+            <td class="auto-style5">Телефонен Номер:
             </td>
             <td class="auto-style5">
                 <asp:TextBox ID="txtNumber" placeholder="Номер (10 цифри)" runat="server" />

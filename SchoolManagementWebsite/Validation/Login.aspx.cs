@@ -41,7 +41,7 @@ namespace SchoolManagementWebsite.Validation
 
                  if (count == 1)
                  {
-                     Server.Transfer("~/LoggedIn/RegisterTeacher.aspx", false);
+                     FormsAuthentication.RedirectFromLoginPage(txtUserName.Text, true);
                  }
                  else
                  {

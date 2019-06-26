@@ -33,7 +33,7 @@ namespace SchoolManagementWebsite.Validation
                 string cs = ConfigurationManager.ConnectionStrings["SchoolManagementDBConnectionString"].ConnectionString;
                 using (SqlConnection con = new SqlConnection(cs))
                 {
-                    SqlCommand cmd = new SqlCommand("spAddTeacher_tblTeacherInfo",con);
+                    SqlCommand cmd = new SqlCommand("spAddTeacher_tblTeacherInfo", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     SqlParameter firstName = new SqlParameter("@FirstName", txtFirstName.Text);
@@ -61,7 +61,7 @@ namespace SchoolManagementWebsite.Validation
                     else
                     {
                         lblMessage.ForeColor= System.Drawing.Color.Green;
-                        lblMessage.Text ="Успешно регистриране";
+                        lblMessage.Text ="Успешно регистриране.";
                     }
                     con.Close();
                 }

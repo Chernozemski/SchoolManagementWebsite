@@ -56,9 +56,6 @@
 </asp:Content>
 <asp:Content ID="Content3" runat="server" ContentPlaceHolderID="head">
     <style type="text/css">
-        .auto-style1 {
-            width: 34px;
-        }
     </style>
 </asp:Content>
 

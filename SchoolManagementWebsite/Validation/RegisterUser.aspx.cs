@@ -48,7 +48,7 @@ namespace SchoolManagementWebsite.Validation
                     }
                     else if (result == 0)
                     {
-                        lblMessage.Text = "Потребител с това ЕГН вече е записан.";
+                        lblMessage.Text = "Потребител с това ЕГН/Име вече е записан.";
                         lblMessage.ForeColor = System.Drawing.Color.Red;
                     }
                     else if (result == -1)
