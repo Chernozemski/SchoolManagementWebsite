@@ -59,7 +59,9 @@
   <ItemGroup>
     <Content Include="Site.Master" />
     <Content Include="Validation\Web.config" />
-    <Content Include="LoggedIn\Web.config" />
+    <Content Include="LoggedIn\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
