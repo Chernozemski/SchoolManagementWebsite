@@ -14,7 +14,7 @@
         <tr>
             <td>Парола : </td>
             <td>
-                <asp:TextBox ID="txtPassword" placeholder="Парола" runat="server" />
+                <asp:TextBox ID="txtPassword" placeholder="Парола" runat="server" TextMode="Password" />
             </td>
             <td class="hideBorder">
                 <asp:RequiredFieldValidator ControlToValidate="txtPassword" Display="Dynamic" ErrorMessage="Трябва да въведете парола име." ValidationGroup="Login" Text="*" ForeColor="Red" runat="server" />

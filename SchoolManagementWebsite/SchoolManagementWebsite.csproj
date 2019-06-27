@@ -58,6 +58,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FreePages.Master" />
+    <Content Include="Images\Grade.png" />
+    <Content Include="Images\See.png" />
+    <Content Include="Images\AddRemove.png" />
+    <Content Include="Images\Student.png" />
+    <Content Include="Images\Subject.png" />
+    <Content Include="Images\Teacher.png" />
     <Content Include="LoggedIn\Home.aspx" />
     <Content Include="Validation\Web.config" />
     <Content Include="LoggedIn\Web.config">
@@ -134,6 +140,7 @@
       <DependentUpon>RegisterUser.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

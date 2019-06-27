@@ -152,6 +152,17 @@ Select @ResultNum
 End
 Go
 
+Create Procedure spGetTeacherPositionId_tblTeacherAccount
+@UserName nvarchar(20)
+As
+Begin
+	Declare @Id int
+	Set @Id = (Select Id from tblTeacherAccount Where UserName=@UserName)
+
+	Select PositionId from tblTeacherInfo Where Id = @Id
+End
+Go
+
 Create Procedure spLoginTeacher_tblTeacherAccount
 
 @UserName nvarchar(20),

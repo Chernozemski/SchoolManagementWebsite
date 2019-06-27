@@ -14,6 +14,7 @@ namespace SchoolManagementWebsite
         {
             if (Session["UserName"] == null)
             {
+                Session["Rank"] = null;
                 FormsAuthentication.RedirectToLoginPage();
             }
         }
@@ -27,6 +28,8 @@ namespace SchoolManagementWebsite
             }
             else
             {
+                Session["Rank"] = null;
+
                 lblUser.Text = "Моля влезте в профила си.";
                 lblGreeting.Text = null;
                 lblGreeting.Visible = false;
@@ -36,6 +39,7 @@ namespace SchoolManagementWebsite
         protected void linkButtonExit_Click(object sender, EventArgs e)
         {
             Session["UserName"] = null;
+            Session["Rank"] = null;
             FormsAuthentication.RedirectToLoginPage();
         }
     }

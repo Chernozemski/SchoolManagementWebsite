@@ -39,10 +39,18 @@ namespace SchoolManagementWebsite.Validation
                  int count = (int)command.ExecuteScalar();
                  con.Close();
 
+                 command.CommandText = "spGetTeacherPositionId_tblTeacherAccount";
+                 command.CommandType = CommandType.StoredProcedure;
+                 command.Parameters.Clear();
+                 command.Parameters.Add(userName);
+
                  if (count == 1)
                  {
-                     FormsAuthentication.RedirectFromLoginPage(txtUserName.Text, false);
                      Session["UserName"] = txtUserName.Text;
+                     con.Open();
+                     Session["Rank"] = command.ExecuteScalar();
+                     con.Close();
+                     FormsAuthentication.RedirectFromLoginPage(txtUserName.Text, false);
                  }
                  else
                  {

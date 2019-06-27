@@ -14,19 +14,12 @@
     <form id="form1" runat="server">
         <div>
             <header id="Title">
-                <ul class="Sidebar">
                 <h1 style="height: 30px"><b>Система за училищно управление</b></h1>
-                <li><asp:Label ID="lblGreeting" runat="server" OnLoad="lblUser_Load" Visible="false" CssClass="currentUser" /></li>
-                <li><asp:Label ID="lblUser" runat="server" OnLoad="lblUser_Load" CssClass="currentUser" Style="top: 30px;" /></li>
-                <li><asp:LinkButton Text="Изход" ID="linkButtonExit" CssClass="currentUser" ForeColor="Blue" Style="top: 50px;left:95%" OnClick="linkButtonExit_Click" runat="server" /></li>
-            </ul>
-                    </header>
-        </div>
-        <div>
-                <ul id="Sidebar">
-                    <li><a href="~/LoggedIn/Home.aspx" runat="server">Начало</a></li>
-                    <li><a href="~/LoggedIn/RegisterTeacher.aspx" runat="server">Регистрирай учител</a></li>
-                </ul>
+
+                <asp:Label ID="lblGreeting" runat="server" OnLoad="lblUser_Load" Visible="false" CssClass="currentUser" />
+                <asp:Label ID="lblUser" runat="server" OnLoad="lblUser_Load" CssClass="currentUser" Style="top: 30px;" />
+                <asp:LinkButton Text="Изход" ID="linkButtonExit" CssClass="currentUser" ForeColor="Blue" Style="top: 50px; left: 95%;" OnClick="linkButtonExit_Click" runat="server" />
+            </header>
         </div>
         <hr />
         <asp:ContentPlaceHolder ID="MainContent" runat="server">
