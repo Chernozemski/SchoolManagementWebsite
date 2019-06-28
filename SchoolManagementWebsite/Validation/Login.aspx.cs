@@ -9,7 +9,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 
-namespace SchoolManagementWebsite.Validation
+namespace SchoolManagementWebsite.RegisterTeacher
 {
     public partial class Login : System.Web.UI.Page
     {
@@ -39,16 +39,15 @@ namespace SchoolManagementWebsite.Validation
                  int count = (int)command.ExecuteScalar();
                  con.Close();
 
-                 command.CommandText = "spGetTeacherPositionId_tblTeacherAccount";
-                 command.CommandType = CommandType.StoredProcedure;
-                 command.Parameters.Clear();
-                 command.Parameters.Add(userName);
-
                  if (count == 1)
                  {
                      Session["UserName"] = txtUserName.Text;
+                     command.Parameters.Clear();
+                     command.CommandText = "spGetTeacherPositionId_tblTeacherAccount";
+                     command.CommandType = CommandType.StoredProcedure;
+                     command.Parameters.Add(userName);
                      con.Open();
-                     Session["Rank"] = command.ExecuteScalar();
+                     Session["Rank"] = (int)command.ExecuteScalar();
                      con.Close();
                      FormsAuthentication.RedirectFromLoginPage(txtUserName.Text, false);
                  }

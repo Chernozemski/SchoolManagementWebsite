@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/FreePages.Master" AutoEventWireup="true" CodeBehind="RegisterUser.aspx.cs" Inherits="SchoolManagementWebsite.Validation.RegisterUser" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/FreePages.Master" AutoEventWireup="true" CodeBehind="RegisterUser.aspx.cs" Inherits="SchoolManagementWebsite.RegisterTeacher.RegisterUser" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Регистрационна форма:</h2>

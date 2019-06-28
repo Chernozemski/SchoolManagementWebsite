@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="/LoggedIn/Home.aspx" title="Меню">
+    <siteMapNode url="/LoggedIn/TeacherPages/Teacher.aspx" title="Учители">
+      <siteMapNode url="/LoggedIn/TeacherPages/ViewTeacher.aspx" title="Преглед на учителски състав" />
+      <siteMapNode url="/LoggedIn/TeacherPages/RegisterTeacher.aspx" title="Добавяне на учители" />
+      <siteMapNode url="/LoggedIn/TeacherPages/AbsenceTeacher.aspx" title="Отсъстващи учители" />
+      <siteMapNode url="/LoggedIn/TeacherPages/RemoveTeacher.aspx" title="Премахване на учители" />
+    </siteMapNode>
+    <siteMapNode url="/LoggedIn/StudentPages/Student.aspx" title="Ученици"  description="">
+    </siteMapNode>
+    <siteMapNode url="/LoggedIn/ClassPages/Class.aspx" title="Клас">
+      <siteMapNode url="/LoggedIn/ClassPages/RegisterClass.aspx" title="Добавяне на клас"  />
+      <siteMapNode url="/LoggedIn/ClassPages/RemoveClass.aspx" title="Премахване на клас"  />
+    </siteMapNode>
+    <siteMapNode url="/LoggedIn/SubjectPages/Subject.aspx" title="Предмети"  description="">
+    </siteMapNode>
+  </siteMapNode>
+</siteMap>

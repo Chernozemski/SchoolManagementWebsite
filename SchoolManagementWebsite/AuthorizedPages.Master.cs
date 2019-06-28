@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace SchoolManagementWebsite
 {
@@ -28,8 +30,6 @@ namespace SchoolManagementWebsite
             }
             else
             {
-                Session["Rank"] = null;
-
                 lblUser.Text = "Моля влезте в профила си.";
                 lblGreeting.Text = null;
                 lblGreeting.Visible = false;

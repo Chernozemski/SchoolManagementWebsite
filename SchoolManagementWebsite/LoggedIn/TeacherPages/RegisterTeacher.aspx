@@ -1,12 +1,12 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AuthorizedPages.Master" ValidateRequest="true" CodeBehind="RegisterTeacher.aspx.cs" Inherits="SchoolManagementWebsite.Validation.Register" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AuthorizedPages.Master" ValidateRequest="true" CodeBehind="RegisterTeacher.aspx.cs" Inherits="SchoolManagementWebsite.RegisterTeacher.Register" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>Вписване на учител:</h2>
+    <h2>Вписване на учител</h2>
     <table>
         <tr>
             <td>Собствено име :
             </td>
             <td>
-                <asp:TextBox ID="txtFirstName" placeholder="Лично име" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtFirstName" placeholder="Собствено име" runat="server"></asp:TextBox>
             </td>
             <td class="hideBorder">
                 <asp:RequiredFieldValidator ValidationGroup="Register" Text="*" ForeColor="Red" ErrorMessage="Трябва да въведете собствено име." ControlToValidate="txtFirstName" runat="server" Display="Dynamic" />

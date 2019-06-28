@@ -9,7 +9,7 @@ using System.Configuration;
 using System.Data;
 using System.Web.Security;
 
-namespace SchoolManagementWebsite.Validation
+namespace SchoolManagementWebsite.RegisterTeacher
 {
     public partial class RegisterUser : System.Web.UI.Page
     {

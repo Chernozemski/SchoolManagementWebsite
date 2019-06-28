@@ -7,46 +7,82 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SchoolManagementWebsite.RegisterTeacher {
+namespace SchoolManagementWebsite.LoggedIn.ClassPages {
     
     
-    public partial class RegisterUser {
+    public partial class RegisterClass {
         
         /// <summary>
-        /// txtUserName control.
+        /// ddlGrade control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUserName;
+        protected global::System.Web.UI.WebControls.DropDownList ddlGrade;
         
         /// <summary>
-        /// txtPassword control.
+        /// txtClassLetter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPassword;
+        protected global::System.Web.UI.WebControls.TextBox txtClassLetter;
         
         /// <summary>
-        /// txtRepeatPassword control.
+        /// ddlSpecialization control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRepeatPassword;
+        protected global::System.Web.UI.WebControls.DropDownList ddlSpecialization;
         
         /// <summary>
-        /// txtEGN control.
+        /// getSpecialization control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEGN;
+        protected global::System.Web.UI.WebControls.SqlDataSource getSpecialization;
+        
+        /// <summary>
+        /// txtTeacherName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTeacherName;
+        
+        /// <summary>
+        /// btnCheckTeacherId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCheckTeacherId;
+        
+        /// <summary>
+        /// imgValidTeacher control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgValidTeacher;
+        
+        /// <summary>
+        /// isTeacherIdChecked control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton isTeacherIdChecked;
         
         /// <summary>
         /// btnRegister control.

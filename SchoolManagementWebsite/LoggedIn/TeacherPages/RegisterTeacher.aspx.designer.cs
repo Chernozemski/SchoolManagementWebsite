@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SchoolManagementWebsite.Validation {
+namespace SchoolManagementWebsite.RegisterTeacher {
     
     
     public partial class Register {

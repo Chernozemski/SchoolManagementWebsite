@@ -62,3 +62,13 @@ td {
 {
     transform: scale(1.1);
 }
+.resizeImageVerySmall
+{
+    width:25px;
+    height:25px;
+    transition: all .2s ease-in-out;
+}
+.resizeImageVerySmall:hover 
+{
+    transform: scale(1.1);
+}

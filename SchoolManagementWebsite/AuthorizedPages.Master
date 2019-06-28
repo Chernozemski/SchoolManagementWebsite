@@ -22,6 +22,7 @@
             </header>
         </div>
         <hr />
+            <asp:SiteMapPath ID="siteMapPath" runat="server"/>
         <asp:ContentPlaceHolder ID="MainContent" runat="server">
         </asp:ContentPlaceHolder>
     </form>

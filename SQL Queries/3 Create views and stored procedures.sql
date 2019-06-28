@@ -1,4 +1,4 @@
-Use SchoolManagementDB
+﻿Use SchoolManagementDB
 Go
 
 Create View vw_tblTeacherInfo As
@@ -8,7 +8,20 @@ From tblTeacherInfo
 Left join tblSubject
 On SubjectId = tblSubject.Id
 Left join tblPosition
-On tblPosition.Id = tblTeacherInfo.Id
+On tblPosition.Id = tblTeacherInfo.PositionId
+Go
+
+Create View vw_tblClass As
+Select Grade + Letter as FullClassName, tblSpecialization.Specialization, tblTeacherInfo.FirstName + ' ' +tblTeacherInfo.FamilyName As FullTeacherName
+From tblClass
+Inner Join tblSpecialization
+On tblSpecialization.Id = tblClass.SpecializationId
+Inner Join tblTeacherInfo
+On tblTeacherInfo.Id = tblClass.ClassTeacherId
+Go
+
+Create View vwGetSpecialization_tblSpecialization As
+Select Id,Specialization from tblSpecialization
 Go
 
 Create Procedure spAddTeacher_tblTeacherInfo
@@ -119,7 +132,7 @@ As
 Begin
 
 Declare @Id int
-Set @Id = IsNull((select Count(Id) from tblTeacherInfo Where EGN = @EGN),-1)
+Set @Id = IsNull((select Id from tblTeacherInfo Where EGN = @EGN),-1)
 
 Declare @ResultNum int
 	--Check if Id is null and return -1
@@ -131,7 +144,7 @@ If (@Id = -1)
 Else If  ((Select Count(Id) from tblTeacherAccount Where Id = @Id) = 0)
 	Begin
 	--Check if username exist. Return 1 for successful registration.
-	If ((Select Count(Id) from tblTeacherAccount Where UserName=@UserName) = 0)
+	If ((Select Count(UserName) from tblTeacherAccount Where UserName=@UserName) = 0)
 		Begin
 			Insert into tblTeacherAccount
 			Values (@Id,@UserName,@Password)
@@ -179,6 +192,83 @@ Begin
 	Else
 		Begin
 			Select 0
+		End
+End
+Go
+
+Create Procedure spGetTeacherId_tblTeacherInfo
+
+@TeacherName nvarchar(50)
+
+As
+Begin
+	If ((Select COUNT(Id) From tblTeacherInfo Where @TeacherName = (FirstName + ' ' + FamilyName)) > 0)
+		Begin
+			(Select Id From tblTeacherInfo Where @TeacherName = (FirstName + ' ' + FamilyName))
+		End
+	Else
+		Begin
+			Select 0 --Name not found
+		End
+End
+Go
+
+Create Procedure spCreateClass_tblClass
+@ClassGrade int,
+@ClassLetter nvarchar(1),
+@SpecializationId int,
+@ClassTeacherId int
+As
+Begin
+	If (@ClassGrade > 12 Or @ClassGrade < 1)
+		Begin
+			Select -5
+		End
+	Else
+		Begin
+			--Check if class grade is other than capital letter
+			If (@ClassLetter Like N'[А-Я]')
+				Begin
+					--Check if teacher exists
+					If((Select COUNT(Id) From tblTeacherInfo Where Id=@ClassTeacherId) > 0)
+						Begin
+							--Check if class does NOT exits
+							If((Select COUNT(Id) From tblClass Where Grade = @ClassGrade And Letter = @ClassLetter) = 0)
+								Begin
+									--Check if there is specialization matching this id
+									If((Select COUNT(Id) From tblSpecialization Where Id = @SpecializationId) > 0)
+										Begin
+											--Check if teacher has NOT been registered in a class
+											If ((Select COUNT(Id) From tblClass Where ClassTeacherId = @ClassTeacherId) = 0)
+												Begin
+													Insert Into tblClass
+													Values (@ClassGrade,@ClassLetter,@SpecializationId,@ClassTeacherId)
+													Select 1 --Successesful registation
+												End
+											Else
+												Begin
+													Select 0 --Teacher already registered
+												End
+										End
+									Else
+										Begin
+											Select -1 --Wrong specialization id
+										End
+								End
+							Else
+								Begin
+									Select -2 --Class already exists
+								End
+						End
+					Else
+						Begin
+							Select -3 --Teacher dosent exist
+						End
+				End
+			Else
+				Begin
+					Select -4 --No proper letter chosen
+				End
 		End
 End
 Go

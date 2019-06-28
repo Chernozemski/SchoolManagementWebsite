@@ -58,18 +58,33 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FreePages.Master" />
-    <Content Include="Images\Grade.png" />
+    <Content Include="Images\Check.png" />
+    <Content Include="Images\Add.png" />
+    <Content Include="Images\Remove.png" />
+    <Content Include="Images\Grading.png" />
+    <Content Include="Images\Presence.png" />
+    <Content Include="Images\Class.png" />
     <Content Include="Images\See.png" />
-    <Content Include="Images\AddRemove.png" />
     <Content Include="Images\Student.png" />
     <Content Include="Images\Subject.png" />
     <Content Include="Images\Teacher.png" />
+    <Content Include="LoggedIn\ClassPages\Class.aspx" />
+    <Content Include="LoggedIn\ClassPages\RegisterClass.aspx" />
+    <Content Include="LoggedIn\ClassPages\RemoveClass.aspx" />
+    <Content Include="LoggedIn\ClassPages\ViewClass.aspx" />
     <Content Include="LoggedIn\Home.aspx" />
+    <Content Include="LoggedIn\StudentPages\Student.aspx" />
+    <Content Include="LoggedIn\SubjectPages\Subject.aspx" />
+    <Content Include="LoggedIn\TeacherPages\AbsenceTeacher.aspx" />
+    <Content Include="LoggedIn\TeacherPages\RemoveTeacher.aspx" />
+    <Content Include="LoggedIn\TeacherPages\Teacher.aspx" />
+    <Content Include="LoggedIn\TeacherPages\ViewTeacher.aspx" />
     <Content Include="Validation\Web.config" />
     <Content Include="LoggedIn\Web.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="AuthorizedPages.Master" />
+    <Content Include="Web.sitemap" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -82,7 +97,7 @@
     <Content Include="CSS\Text.css" />
     <Content Include="Validation\Home.aspx" />
     <Content Include="Validation\Login.aspx" />
-    <Content Include="LoggedIn\RegisterTeacher.aspx" />
+    <Content Include="LoggedIn\TeacherPages\RegisterTeacher.aspx" />
     <Content Include="Validation\RegisterUser.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -96,12 +111,82 @@
     <Compile Include="AuthorizedPages.Master.designer.cs">
       <DependentUpon>AuthorizedPages.Master</DependentUpon>
     </Compile>
+    <Compile Include="LoggedIn\ClassPages\Class.aspx.cs">
+      <DependentUpon>Class.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoggedIn\ClassPages\Class.aspx.designer.cs">
+      <DependentUpon>Class.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoggedIn\ClassPages\RegisterClass.aspx.cs">
+      <DependentUpon>RegisterClass.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoggedIn\ClassPages\RegisterClass.aspx.designer.cs">
+      <DependentUpon>RegisterClass.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoggedIn\ClassPages\RemoveClass.aspx.cs">
+      <DependentUpon>RemoveClass.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoggedIn\ClassPages\RemoveClass.aspx.designer.cs">
+      <DependentUpon>RemoveClass.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoggedIn\ClassPages\ViewClass.aspx.cs">
+      <DependentUpon>ViewClass.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoggedIn\ClassPages\ViewClass.aspx.designer.cs">
+      <DependentUpon>ViewClass.aspx</DependentUpon>
+    </Compile>
     <Compile Include="LoggedIn\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="LoggedIn\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoggedIn\StudentPages\Student.aspx.cs">
+      <DependentUpon>Student.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoggedIn\StudentPages\Student.aspx.designer.cs">
+      <DependentUpon>Student.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoggedIn\SubjectPages\Subject.aspx.cs">
+      <DependentUpon>Subject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoggedIn\SubjectPages\Subject.aspx.designer.cs">
+      <DependentUpon>Subject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoggedIn\TeacherPages\AbsenceTeacher.aspx.cs">
+      <DependentUpon>AbsenceTeacher.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoggedIn\TeacherPages\AbsenceTeacher.aspx.designer.cs">
+      <DependentUpon>AbsenceTeacher.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoggedIn\TeacherPages\RemoveTeacher.aspx.cs">
+      <DependentUpon>RemoveTeacher.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoggedIn\TeacherPages\RemoveTeacher.aspx.designer.cs">
+      <DependentUpon>RemoveTeacher.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoggedIn\TeacherPages\Teacher.aspx.cs">
+      <DependentUpon>Teacher.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoggedIn\TeacherPages\Teacher.aspx.designer.cs">
+      <DependentUpon>Teacher.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoggedIn\TeacherPages\ViewTeacher.aspx.cs">
+      <DependentUpon>ViewTeacher.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoggedIn\TeacherPages\ViewTeacher.aspx.designer.cs">
+      <DependentUpon>ViewTeacher.aspx</DependentUpon>
     </Compile>
     <Compile Include="Validation\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
@@ -125,11 +210,11 @@
     <Compile Include="Validation\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LoggedIn\RegisterTeacher.aspx.cs">
+    <Compile Include="LoggedIn\TeacherPages\RegisterTeacher.aspx.cs">
       <DependentUpon>RegisterTeacher.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LoggedIn\RegisterTeacher.aspx.designer.cs">
+    <Compile Include="LoggedIn\TeacherPages\RegisterTeacher.aspx.designer.cs">
       <DependentUpon>RegisterTeacher.aspx</DependentUpon>
     </Compile>
     <Compile Include="Validation\RegisterUser.aspx.cs">
