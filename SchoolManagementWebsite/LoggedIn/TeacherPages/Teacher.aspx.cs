@@ -16,7 +16,7 @@ namespace SchoolManagementWebsite.LoggedIn
 
         protected void directorPanel_Load(object sender, EventArgs e)
         {
-            if (Session["Rank"].ToString() == "1")
+            if ((int)Session["Rank"] < 3)
             {
                 directorPanel.Visible = true;
             }

@@ -2,8 +2,8 @@
 Go
 
 Create View vw_tblTeacherInfo As
-Select tblTeacherInfo.Id, FirstName + ' ' + FamilyName 
-As FullName, tblSubject.SubjectName, PhoneNum, Adress, tblPosition.Position
+Select tblTeacherInfo.Id, FirstName + ' ' + MiddleName + ' ' + FamilyName 
+As FullName, tblSubject.SubjectName,  STUFF(STUFF(PhoneNum,7,0,'-'),4,0,'-') as PhoneNum, Adress, tblPosition.Position, Photo
 From tblTeacherInfo
 Left join tblSubject
 On SubjectId = tblSubject.Id
@@ -12,41 +12,59 @@ On tblPosition.Id = tblTeacherInfo.PositionId
 Go
 
 Create View vw_tblClass As
-Select Grade + Letter as FullClassName, tblSpecialization.Specialization, tblTeacherInfo.FirstName + ' ' +tblTeacherInfo.FamilyName As FullTeacherName
+Select (Convert(nvarchar,Grade)) + Letter as FullClassName, tblSpecialization.Specialization, tblTeacherInfo.FirstName + ' ' + tblTeacherInfo.MiddleName + ' ' +tblTeacherInfo.FamilyName As FullTeacherName
 From tblClass
 Inner Join tblSpecialization
 On tblSpecialization.Id = tblClass.SpecializationId
 Inner Join tblTeacherInfo
-On tblTeacherInfo.Id = tblClass.ClassTeacherId
+On tblTeacherInfo.EGN = tblClass.ClassTeacherEGN
 Go
 
 Create View vwGetSpecialization_tblSpecialization As
 Select Id,Specialization from tblSpecialization
 Go
 
+Create view vwGetAbsentTeacherInfo_tblTeacherAbsence As
+SELECT tblTeacherAbsence.Id, a.FirstName + ' ' + a.MiddleName + ' ' + a.FamilyName as FullName,
+OnDate, tblTeacherAbsence.LessonsAbsent,  b.FirstName + ' ' + b.MiddleName + ' ' + b.FamilyName as SubstituteTeacherFullName FROM [tblTeacherAbsence]
+Left Join tblTeacherInfo a
+On a.EGN = tblTeacherAbsence.AbsentTeacherEGN
+Left Join tblTeacherInfo b
+On b.EGN = tblTeacherAbsence.SubstituteTeacherEGN
+Go
+
 Create Procedure spAddTeacher_tblTeacherInfo
 
 @FirstName nvarchar(20),
+@MiddleName nvarchar(20),
 @FamilyName nvarchar(20),
 @SubjectId int,
 @EGN varchar(10),
 @Phonenum varchar(10),
 @Adress nvarchar(50),
-@Position int
+@Position int,
+@Photo varbinary(max) = null
 
 AS
 Begin
 	--Check if director position already established and return 0.
 If ((select COUNT(PositionId) from tblTeacherInfo Where PositionId=1) > 0 And @Position=1)
 		Begin
-			Select 0
+			Select 0 --Director position is taken
 		End
-	--Insert new teacher
 Else
 	Begin
-		Insert into tblTeacherInfo(FirstName,FamilyName,SubjectId,EGN,PhoneNum,Adress,PositionId)
-		Values (@FirstName,@FamilyName,@SubjectId,@EGN,@Phonenum,@Adress,@Position)
-		Select 1
+		--Check if teacher already has registered with the same position
+	If ((Select COUNT(Id) from tblTeacherInfo Where EGN = @EGN And SubjectId = @SubjectId) > 0)
+		Begin
+			Select -1 --Already registered with same EGN and subject
+		End
+	Else
+		Begin
+			Insert into tblTeacherInfo(FirstName,MiddleName,FamilyName,SubjectId,EGN,PhoneNum,Adress,PositionId,Photo)
+			Values (@FirstName,@MiddleName,@FamilyName,@SubjectId,@EGN,@Phonenum,@Adress,@Position,@Photo)
+			Select 1
+		End
 	End
 End
 Go
@@ -55,17 +73,27 @@ Create Procedure spUpdateTeacher_tblTeachers
 (
 @Id int,
 @FirstName nvarchar(20),
+@MiddleName nvarchar(20),
 @FamilyName nvarchar(20),
 @SubjectId int,
 @EGN varchar(10),
 @Phonenum varchar(10),
 @Adress nvarchar(50),
-@Position int
+@Position int,
+@Photo varbinary(max)
 )
 As
 Begin
 	Update tblTeacherInfo
-	Set FirstName = @FirstName, FamilyName = @FamilyName, SubjectId = @SubjectId, EGN = @EGN, PhoneNum = @Phonenum, Adress = @Adress, PositionId=@Position
+	Set FirstName = @FirstName
+	, MiddleName = @MiddleName
+	, FamilyName = @FamilyName
+	, SubjectId = @SubjectId
+	, EGN = @EGN
+	, PhoneNum = @Phonenum
+	, Adress = @Adress
+	, PositionId=@Position
+	, Photo = @Photo
 	Where Id = @Id
 End
 Go
@@ -196,15 +224,13 @@ Begin
 End
 Go
 
-Create Procedure spGetTeacherId_tblTeacherInfo
-
+Create Procedure spGetTeacherEGNByFullName_tblTeacherInfo
 @TeacherName nvarchar(50)
-
 As
 Begin
-	If ((Select COUNT(Id) From tblTeacherInfo Where @TeacherName = (FirstName + ' ' + FamilyName)) > 0)
+	If ((Select COUNT(Id) From tblTeacherInfo Where @TeacherName = (FirstName + ' ' + MiddleName + ' ' + FamilyName)) > 0)
 		Begin
-			(Select Id From tblTeacherInfo Where @TeacherName = (FirstName + ' ' + FamilyName))
+			(Select EGN From tblTeacherInfo Where @TeacherName = (FirstName + ' ' + MiddleName + ' ' + FamilyName))
 		End
 	Else
 		Begin
@@ -217,7 +243,7 @@ Create Procedure spCreateClass_tblClass
 @ClassGrade int,
 @ClassLetter nvarchar(1),
 @SpecializationId int,
-@ClassTeacherId int
+@ClassTeacherEGN varchar(10)
 As
 Begin
 	If (@ClassGrade > 12 Or @ClassGrade < 1)
@@ -230,7 +256,7 @@ Begin
 			If (@ClassLetter Like N'[А-Я]')
 				Begin
 					--Check if teacher exists
-					If((Select COUNT(Id) From tblTeacherInfo Where Id=@ClassTeacherId) > 0)
+					If((Select COUNT(Id) From tblTeacherInfo Where EGN=@ClassTeacherEGN) > 0)
 						Begin
 							--Check if class does NOT exits
 							If((Select COUNT(Id) From tblClass Where Grade = @ClassGrade And Letter = @ClassLetter) = 0)
@@ -239,10 +265,10 @@ Begin
 									If((Select COUNT(Id) From tblSpecialization Where Id = @SpecializationId) > 0)
 										Begin
 											--Check if teacher has NOT been registered in a class
-											If ((Select COUNT(Id) From tblClass Where ClassTeacherId = @ClassTeacherId) = 0)
+											If ((Select COUNT(Id) From tblClass Where ClassTeacherEGN = @ClassTeacherEGN) = 0)
 												Begin
 													Insert Into tblClass
-													Values (@ClassGrade,@ClassLetter,@SpecializationId,@ClassTeacherId)
+													Values (@ClassGrade,@ClassLetter,@SpecializationId,@ClassTeacherEGN)
 													Select 1 --Successesful registation
 												End
 											Else
@@ -270,5 +296,49 @@ Begin
 					Select -4 --No proper letter chosen
 				End
 		End
+End
+Go
+
+Create Procedure spAddAbsentTeacher_tblTeacherAbsence
+@SenderEGN varchar(10),
+@SenderRank int,
+@AbsentTeacherEGN varchar(10),
+@LessonsAbsent nvarchar(100),
+@OnDate date,
+@SubstituteTeacherEGN varchar(10)
+As
+Begin
+	--Check if sender is authorized OR is actually substitute teacher
+	If(@SenderRank < 3 Or @SenderEGN = @SubstituteTeacherEGN)
+		Begin
+			--Check if sender is authorized AND has selected more than 1 lesson
+			--The substitute teacher should NOT be able to select more than 1 hour
+			If ((Len(@LessonsAbsent) >= 1 And @SenderRank < 3) Or (LEN(@LessonsAbsent)=1))
+				Begin
+					Insert into tblTeacherAbsence
+					Values (@AbsentTeacherEGN,@LessonsAbsent,@OnDate,@SubstituteTeacherEGN)
+					Select 1
+				End
+			Else
+				Begin
+					Select -1 --Substitute teacher selected more than 1 column
+				End
+		End
+	Else
+		Begin
+			Select 0 --Not authorized or not actual substitute teacher
+		End
+End
+Go
+
+Create Procedure spGetEGNByUserName_tblTeacherInfo 
+@UserName nvarchar(20)
+As
+Begin
+	Declare @Id int
+	Set @Id = (Select Id From tblTeacherAccount Where UserName = @UserName)
+
+	--Directly return the EGN as BigInt, otherwise int overflow error
+	Select Convert(BigInt,(Select EGN From tblTeacherInfo Where Id = @Id))
 End
 Go

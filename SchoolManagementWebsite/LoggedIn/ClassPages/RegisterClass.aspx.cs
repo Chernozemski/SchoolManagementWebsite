@@ -16,24 +16,24 @@ namespace SchoolManagementWebsite.LoggedIn.ClassPages
 
         }
 
-        protected void btnCheckTeacherId_Click(object sender, EventArgs e)
+        protected void btnCheckTeacherEGN_Click(object sender, EventArgs e)
         {
             string cs = ConfigurationManager.ConnectionStrings["SchoolManagementDBConnectionString"].ConnectionString;
 
             using (SqlConnection con = new SqlConnection(cs))
             {
-                SqlCommand cmd = new SqlCommand("spGetTeacherId_tblTeacherInfo", con);
+                SqlCommand cmd = new SqlCommand("spGetTeacherEGNByFullName_tblTeacherInfo", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@TeacherName", txtTeacherName.Text);
 
                 con.Open();
-               isTeacherIdChecked.Text = cmd.ExecuteScalar().ToString();
+               isTeacherEGNChecked.Text = cmd.ExecuteScalar().ToString();
                 con.Close();
             }
 
             imgValidTeacher.Visible = true;
-            if (isTeacherIdChecked.Text == "0")
+            if (isTeacherEGNChecked.Text == "0")
             {
                 imgValidTeacher.ImageUrl = "/Images/Remove.png";
             }
@@ -45,8 +45,7 @@ namespace SchoolManagementWebsite.LoggedIn.ClassPages
 
         protected void btnRegister_Click(object sender, EventArgs e)
         {
-            if (isTeacherIdChecked.Checked)
-            {
+
                 string cs = ConfigurationManager.ConnectionStrings["SchoolManagementDBConnectionString"].ConnectionString;
                 int result = 0;
 
@@ -58,11 +57,11 @@ namespace SchoolManagementWebsite.LoggedIn.ClassPages
                     SqlParameter ClassGrade = new SqlParameter("@ClassGrade", ddlGrade.SelectedItem.Value);
                     SqlParameter ClassLetter = new SqlParameter("@ClassLetter", txtClassLetter.Text);
                     SqlParameter SpecializationId = new SqlParameter("@SpecializationId", ddlSpecialization.SelectedItem.Value);
-                    SqlParameter ClassTeacherId = new SqlParameter("@ClassTeacherId", isTeacherIdChecked.Text);
+                    SqlParameter ClassTeacherEGN = new SqlParameter("@ClassTeacherEGN", isTeacherEGNChecked.Text);
                     cmd.Parameters.Add(ClassGrade);
                     cmd.Parameters.Add(ClassLetter);
                     cmd.Parameters.Add(SpecializationId);
-                    cmd.Parameters.Add(ClassTeacherId);
+                    cmd.Parameters.Add(ClassTeacherEGN);
 
                     con.Open();
                     result = (int)cmd.ExecuteScalar();
@@ -92,11 +91,6 @@ namespace SchoolManagementWebsite.LoggedIn.ClassPages
                         sendMessage("Трябва да изберете клас 1 до 12.");
                         break;
                 }
-            }
-            else
-            {
-                sendMessage("Моля проверете учителя като натиснете бутона 'провери'.");
-            }
         }
         private void sendMessage(string message,bool isRed = true)
         {

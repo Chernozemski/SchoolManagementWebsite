@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/FreePages.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="SchoolManagementWebsite.Pages.Home" %>
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>Начална примерна страница :
+    <h2>Начална примерна страница
     </h2>
     <p>
         Това е уебсайт, създаден за работа с бази данни без нуждата за сваляне на програми.

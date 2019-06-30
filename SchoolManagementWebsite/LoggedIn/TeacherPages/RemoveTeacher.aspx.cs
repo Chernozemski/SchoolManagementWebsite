@@ -11,7 +11,12 @@ namespace SchoolManagementWebsite.LoggedIn.TeacherPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            BusinessLayer.Teacher.SharedMethods.redirectUser(BusinessLayer.Teacher.SharedMethods.isUserAuthorized());
+        }
 
+        protected void GridView1_DataBound(object sender, EventArgs e)
+        {
+            GridView1.Rows[0].Visible = false;
         }
     }
 }

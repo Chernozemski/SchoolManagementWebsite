@@ -1,0 +1,7 @@
+C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csprojResolveAssemblyReference.cache
+C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.dll
+C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.pdb
+C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\BusinessLogicLayer\bin\Debug\DataAccessLayer.dll
+C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\BusinessLogicLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.dll
+C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.pdb

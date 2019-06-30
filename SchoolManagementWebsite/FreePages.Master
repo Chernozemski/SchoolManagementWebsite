@@ -9,6 +9,7 @@
     </asp:ContentPlaceHolder>
     <link rel="stylesheet" type="text/css" href="CSS/Background.css" runat="server" />
     <link rel="stylesheet" type="text/css" href="CSS/Text.css" runat="server" />
+        <link rel="stylesheet" type="text/css" href="CSS/Position.css" runat="server" />
 </head>
 <body style="background: lightblue;">
     <form id="form1" runat="server">

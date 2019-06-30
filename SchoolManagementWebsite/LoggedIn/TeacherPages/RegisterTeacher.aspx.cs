@@ -15,6 +15,8 @@ namespace SchoolManagementWebsite.RegisterTeacher
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            BusinessLayer.Teacher.SharedMethods.redirectUser(BusinessLayer.Teacher.SharedMethods.isUserAuthorized());
+
             if (!IsPostBack)
             {
                 SetDropDownListDefaultValue();
@@ -30,42 +32,16 @@ namespace SchoolManagementWebsite.RegisterTeacher
         {
             if (Page.IsValid)
             {
-                string cs = ConfigurationManager.ConnectionStrings["SchoolManagementDBConnectionString"].ConnectionString;
-                using (SqlConnection con = new SqlConnection(cs))
-                {
-                    SqlCommand cmd = new SqlCommand("spAddTeacher_tblTeacherInfo", con);
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    SqlParameter firstName = new SqlParameter("@FirstName", txtFirstName.Text);
-                    SqlParameter familyName = new SqlParameter("@FamilyName", txtFamilyName.Text);
-                    SqlParameter subject = new SqlParameter("@SubjectId", ddlSubject.SelectedItem.Value);
-                    SqlParameter EGN = new SqlParameter("@EGN", txtEGN.Text);
-                    SqlParameter phoneNum = new SqlParameter("@Phonenum", txtNumber.Text);
-                    SqlParameter adress = new SqlParameter("@Adress", txtAdress.Text);
-                    SqlParameter position = new SqlParameter("@Position", ddlPosition.SelectedItem.Value);
-
-                    cmd.Parameters.Add(firstName);
-                    cmd.Parameters.Add(familyName);
-                    cmd.Parameters.Add(subject);
-                    cmd.Parameters.Add(EGN);
-                    cmd.Parameters.Add(phoneNum);
-                    cmd.Parameters.Add(adress);
-                    cmd.Parameters.Add(position);
-
-                    con.Open();
-                    if ((int)cmd.ExecuteScalar() == 0)
-                    {
-                        lblMessage.ForeColor= System.Drawing.Color.Red;
-                        lblMessage.Text ="Длъжността директор вече е заета.";
-                    }
-                    else
-                    {
-                        lblMessage.ForeColor= System.Drawing.Color.Green;
-                        lblMessage.Text ="Успешно регистриране.";
-                    }
-                    con.Close();
-                }
+                BusinessLayer.Teacher.RegisterInfo teacher = new BusinessLayer.Teacher.RegisterInfo();
+                object[] result = teacher.Register(txtFirstName.Text,txtMiddleName.Text, txtFamilyName.Text, ddlSubject.SelectedValue,
+                    txtEGN.Text, txtNumber.Text, txtAdress.Text, ddlPosition.SelectedValue,fileUploadPhoto);
+                lblMessage.Text = result[0].ToString();
+                lblMessage.ForeColor = (System.Drawing.Color)result[1];
             }
+        }
+        protected void btnClear_Click(object sender, EventArgs e)
+        {
+            fileUploadPhoto.Attributes.Clear();
         }
     }
 }

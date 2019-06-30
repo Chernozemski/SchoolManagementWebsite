@@ -1,0 +1,6 @@
+C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\DataAccessLayer\bin\Release\DataAccessLayer.dll.config
+C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\DataAccessLayer\bin\Release\DataAccessLayer.dll
+C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\DataAccessLayer\bin\Release\DataAccessLayer.pdb
+C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\DataAccessLayer\obj\Release\DataAccessLayer.dll
+C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\DataAccessLayer\obj\Release\DataAccessLayer.pdb
+C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\DataAccessLayer\obj\Release\DataAccessLayer.csprojResolveAssemblyReference.cache

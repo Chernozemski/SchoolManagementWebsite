@@ -7,13 +7,14 @@
       <siteMapNode url="/LoggedIn/TeacherPages/AbsenceTeacher.aspx" title="Отсъстващи учители" />
       <siteMapNode url="/LoggedIn/TeacherPages/RemoveTeacher.aspx" title="Премахване на учители" />
     </siteMapNode>
-    <siteMapNode url="/LoggedIn/StudentPages/Student.aspx" title="Ученици"  description="">
+    <siteMapNode url="/LoggedIn/StudentPages/Student.aspx" title="Ученици">
     </siteMapNode>
     <siteMapNode url="/LoggedIn/ClassPages/Class.aspx" title="Клас">
+      <siteMapNode url="/LoggedIn/ClassPages/ViewClass.aspx" title="Преглеждане на класовете"  />
       <siteMapNode url="/LoggedIn/ClassPages/RegisterClass.aspx" title="Добавяне на клас"  />
       <siteMapNode url="/LoggedIn/ClassPages/RemoveClass.aspx" title="Премахване на клас"  />
     </siteMapNode>
-    <siteMapNode url="/LoggedIn/SubjectPages/Subject.aspx" title="Предмети"  description="">
+    <siteMapNode url="/LoggedIn/SubjectPages/Subject.aspx" title="Предмети">
     </siteMapNode>
   </siteMapNode>
 </siteMap>

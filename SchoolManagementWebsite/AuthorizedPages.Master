@@ -9,6 +9,7 @@
     </asp:ContentPlaceHolder>
     <link rel="stylesheet" type="text/css" href="CSS/Background.css" runat="server" />
     <link rel="stylesheet" type="text/css" href="CSS/Text.css" runat="server" />
+    <link rel="stylesheet" type="text/css" href="CSS/Position.css" runat="server" />
 </head>
 <body style="background: lightblue;">
     <form id="form1" runat="server">
@@ -21,8 +22,13 @@
                 <asp:LinkButton Text="Изход" ID="linkButtonExit" CssClass="currentUser" ForeColor="Blue" Style="top: 50px; left: 95%;" OnClick="linkButtonExit_Click" runat="server" />
             </header>
         </div>
-        <hr />
-            <asp:SiteMapPath ID="siteMapPath" runat="server"/>
+        <hr/>
+            <asp:SiteMapPath CssClass="BigText" ID="siteMapPath" runat="server" Font-Names="Verdana" PathSeparator=" : ">
+                <CurrentNodeStyle ForeColor="#333333" />
+                <NodeStyle Font-Bold="True" ForeColor="#7C6F57" />
+                <PathSeparatorStyle Font-Bold="True" ForeColor="#5D7B9D" />
+                <RootNodeStyle Font-Bold="True" ForeColor="#5D7B9D" />
+        </asp:SiteMapPath>
         <asp:ContentPlaceHolder ID="MainContent" runat="server">
         </asp:ContentPlaceHolder>
     </form>

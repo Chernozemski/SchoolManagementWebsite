@@ -1,11 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/FreePages.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="SchoolManagementWebsite.RegisterTeacher.Login" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <table>
+    <h2>Вход</h2>
+    <table class="middlePositionTable BigText">
         <tr>
             <td>Потребителско име : </td>
             <td>
-                <asp:TextBox ID="txtUserName" placeholder="Потребителско име" runat="server" />
+                <asp:TextBox ID="txtUserName" placeholder="Потребителско име"  runat="server" />
             </td>
             <td class="hideBorder">
                 <asp:RequiredFieldValidator ControlToValidate="txtUserName" Display="Dynamic" ErrorMessage="Трябва да въведете потребителско име." ValidationGroup="Login" Text="*" ForeColor="Red" runat="server" />
@@ -26,6 +27,6 @@
             </td>
         </tr>
     </table>
-    <asp:ValidationSummary ValidationGroup="Login" HeaderText="Проблеми при вход" ShowSummary="true" ForeColor="DarkRed" DisplayMode="List" runat="server" />
-    <asp:Label ID="lblMessage" runat="server"/>
+    <asp:ValidationSummary ValidationGroup="Login" HeaderText="Проблеми при вход" ShowSummary="true" CssClass="error" DisplayMode="List" runat="server" />
+    <asp:Label CssClass="BigText error" ID="lblMessage" runat="server"/>
 </asp:Content>

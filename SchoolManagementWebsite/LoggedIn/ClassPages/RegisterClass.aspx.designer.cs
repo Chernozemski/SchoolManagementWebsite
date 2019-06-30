@@ -58,13 +58,13 @@ namespace SchoolManagementWebsite.LoggedIn.ClassPages {
         protected global::System.Web.UI.WebControls.TextBox txtTeacherName;
         
         /// <summary>
-        /// btnCheckTeacherId control.
+        /// btnCheckTeacherEGN control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCheckTeacherId;
+        protected global::System.Web.UI.WebControls.Button btnCheckTeacherEGN;
         
         /// <summary>
         /// imgValidTeacher control.
@@ -76,13 +76,13 @@ namespace SchoolManagementWebsite.LoggedIn.ClassPages {
         protected global::System.Web.UI.WebControls.Image imgValidTeacher;
         
         /// <summary>
-        /// isTeacherIdChecked control.
+        /// isTeacherEGNChecked control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton isTeacherIdChecked;
+        protected global::System.Web.UI.WebControls.RadioButton isTeacherEGNChecked;
         
         /// <summary>
         /// btnRegister control.

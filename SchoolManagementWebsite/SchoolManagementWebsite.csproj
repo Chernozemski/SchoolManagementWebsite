@@ -57,9 +57,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CSS\Position.css" />
     <Content Include="FreePages.Master" />
     <Content Include="Images\Check.png" />
     <Content Include="Images\Add.png" />
+    <Content Include="Images\Missing.png" />
     <Content Include="Images\Remove.png" />
     <Content Include="Images\Grading.png" />
     <Content Include="Images\Presence.png" />
@@ -84,7 +86,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="AuthorizedPages.Master" />
-    <Content Include="Web.sitemap" />
+    <Content Include="Web.sitemap">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -225,7 +229,12 @@
       <DependentUpon>RegisterUser.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLogicLayer\BusinessLogicLayer.csproj">
+      <Project>{022ee7eb-eff0-4e57-9b7f-254bb0401e93}</Project>
+      <Name>BusinessLogicLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

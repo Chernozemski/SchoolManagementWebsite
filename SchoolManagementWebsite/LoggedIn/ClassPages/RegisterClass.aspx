@@ -41,9 +41,9 @@
             <td>Име на учителя:</td>
             <td>
                 <asp:TextBox ID="txtTeacherName" placeholder="Името на учителя" runat="server"></asp:TextBox>
-                <asp:Button ID="btnCheckTeacherId" Text="Провери" OnClick="btnCheckTeacherId_Click" runat="server" style="height: 26px" />
+                <asp:Button ID="btnCheckTeacherEGN" Text="Провери" OnClick="btnCheckTeacherEGN_Click" runat="server" style="height: 26px" />
                 <asp:Image ID="imgValidTeacher" CssClass="resizeImageSmall" runat="server" Visible="false" />
-                <asp:RadioButton ID="isTeacherIdChecked" runat="server" Visible="false" />
+                <asp:RadioButton ID="isTeacherEGNChecked" runat="server" Visible="false" />
             </td>
             <td class="hideBorder">
                 <asp:RequiredFieldValidator ValidationGroup="Register" Text="*" ForeColor="Red" ErrorMessage="Трябва да въведете името на учителя." ControlToValidate="txtTeacherName" runat="server" Display="Dynamic" />

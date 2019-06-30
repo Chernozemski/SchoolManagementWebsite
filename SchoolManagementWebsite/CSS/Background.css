@@ -19,11 +19,15 @@ table {
     width: 50%;
     background-color: lightblue;
 }
-
 td {
-    border: 1px solid black;
-}
+    border:1px solid black;
 
+}
+table tr td{
+    border-top:0px;
+    border-left:0px;
+    border-right:0px;
+}
 .hideBorder td {
     border: 0px;
 }
@@ -35,11 +39,7 @@ td {
     width: 150px;
     height: 30px;
 }
-.currentUser {
-    position:absolute;
-    top:10px;
-    left:85%;
-}
+
 .resizeImage
 {
     width:200px;

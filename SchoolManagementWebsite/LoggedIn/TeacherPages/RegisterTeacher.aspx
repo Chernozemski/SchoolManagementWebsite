@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AuthorizedPages.Master" ValidateRequest="true" CodeBehind="RegisterTeacher.aspx.cs" Inherits="SchoolManagementWebsite.RegisterTeacher.Register" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Вписване на учител</h2>
-    <table>
+    <table class="BigText">
         <tr>
             <td>Собствено име :
             </td>
@@ -10,6 +10,16 @@
             </td>
             <td class="hideBorder">
                 <asp:RequiredFieldValidator ValidationGroup="Register" Text="*" ForeColor="Red" ErrorMessage="Трябва да въведете собствено име." ControlToValidate="txtFirstName" runat="server" Display="Dynamic" />
+            </td>
+        </tr>
+                <tr>
+            <td>Бащино име :
+            </td>
+            <td>
+                <asp:TextBox ID="txtMiddleName" placeholder="Бащино име" runat="server"></asp:TextBox>
+            </td>
+            <td class="hideBorder">
+                <asp:RequiredFieldValidator ValidationGroup="Register" Text="*" ForeColor="Red" ErrorMessage="Трябва да въведете бащино име." ControlToValidate="txtMiddleName" runat="server" Display="Dynamic" />
             </td>
         </tr>
         <tr>
@@ -76,6 +86,22 @@
             <td class="hideBorder">
                 <asp:CompareValidator Operator="GreaterThan" ValueToCompare="0" ValidationGroup="Register" Text="*" ForeColor="Red" ErrorMessage="Трябва да въведете длъжност." ControlToValidate="ddlPosition" runat="server" Display="Dynamic" />
             </td>
+        </tr>
+                <tr>
+            <td>Позиция:
+            </td>
+            <td>
+                <asp:FileUpload ID="fileUploadPhoto" runat="server" placeholder="Снимка на учител" accept="image/jpg, image/png, image/jpeg"/>
+                <asp:Button ID="btnClear" runat="server" Text="Изчисти" OnClick="btnClear_Click" />
+            </td>
+                    <td class="hideBorder">
+                        <asp:RegularExpressionValidator runat="server"
+                        ControlToValidate="fileUploadPhoto"
+                        Text="*" ForeColor="Red"
+                        ErrorMessage="Само файлове с .jpg,.png,.jpeg са позволени или празна снимка."
+                         ValidationGroup="Register"
+                        ValidationExpression="((.*?)\.(jpg|jpeg|png|JPG|JPEG|PNG)$)|(^ $)" />
+                    </td>
         </tr>
         <tr>
             <td colspan="2">

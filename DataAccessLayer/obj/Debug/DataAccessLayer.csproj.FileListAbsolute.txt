@@ -1,0 +1,5 @@
+C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\DataAccessLayer\bin\Debug\DataAccessLayer.dll.config
+C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\DataAccessLayer\bin\Debug\DataAccessLayer.dll
+C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\DataAccessLayer\obj\Debug\DataAccessLayer.dll
+C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\DataAccessLayer\obj\Debug\DataAccessLayer.pdb

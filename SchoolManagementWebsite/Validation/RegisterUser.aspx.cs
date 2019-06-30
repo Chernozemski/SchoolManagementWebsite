@@ -22,47 +22,10 @@ namespace SchoolManagementWebsite.RegisterTeacher
         {
             if (Page.IsValid)
             {
-                string cs = ConfigurationManager.ConnectionStrings["SchoolManagementDBConnectionString"].ConnectionString;
-
-                using (SqlConnection con = new SqlConnection(cs))
-                {
-                    SqlCommand cmd = new SqlCommand("spCreateTeacherAccount_tblTeacherAccount", con);
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    string encryptedPassword = FormsAuthentication.HashPasswordForStoringInConfigFile(txtPassword.Text, "SHA1");
-
-                    SqlParameter userName = new SqlParameter("@UserName", txtUserName.Text);
-                    SqlParameter password = new SqlParameter("@Password", encryptedPassword);
-                    SqlParameter EGN = new SqlParameter("@EGN", txtEGN.Text);
-
-                    cmd.Parameters.Add(userName);
-                    cmd.Parameters.Add(password);
-                    cmd.Parameters.Add(EGN);
-
-                    con.Open();
-                    int result = (int)cmd.ExecuteScalar();
-                    if (result == 1)
-                    {
-                        lblMessage.Text = "Успешно регистриране.";
-                        lblMessage.ForeColor = System.Drawing.Color.Green;
-                    }
-                    else if (result == 0)
-                    {
-                        lblMessage.Text = "Потребител с това ЕГН е записан.";
-                        lblMessage.ForeColor = System.Drawing.Color.Red;
-                    }
-                    else if (result == -1)
-                    {
-                        lblMessage.Text = "Грешно въведено ЕГН.";
-                        lblMessage.ForeColor = System.Drawing.Color.Red;
-                    }
-                    else if (result == -2)
-                    {
-                        lblMessage.Text = "Потребител с това име е записан.";
-                        lblMessage.ForeColor = System.Drawing.Color.Red;
-                    }
-                    con.Close();
-                }
+                BusinessLayer.Teacher.RegisterAccount teacher = new BusinessLayer.Teacher.RegisterAccount();
+                object[] result = teacher.register(txtUserName.Text, txtPassword.Text, txtEGN.Text);
+                lblMessage.Text = (string)result[0];
+                lblMessage.ForeColor = (System.Drawing.Color)result[1];
             }
         }
     }

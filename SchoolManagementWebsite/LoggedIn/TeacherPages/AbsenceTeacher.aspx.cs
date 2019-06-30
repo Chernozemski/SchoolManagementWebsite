@@ -13,5 +13,48 @@ namespace SchoolManagementWebsite.LoggedIn.TeacherPages
         {
 
         }
+        protected void btnInsert_Click(object sender, EventArgs e)
+        {
+            BusinessLayer.Teacher.Absent teacher = new BusinessLayer.Teacher.Absent();
+
+            TextBox txtAbsentTeacher = GridView2.FooterRow.FindControl("txtAbsentTeacherName") as TextBox;
+            CheckBoxList checkBoxList = GridView2.FooterRow.FindControl("checkboxListLessonsAbsent") as CheckBoxList;
+            TextBox txtSubstituteTeacher = GridView2.FooterRow.FindControl("txtSubstituteTeacherName") as TextBox;
+
+            List<string> getCheckBoxList = new List<string>();
+            foreach (ListItem li in checkBoxList.Items)
+            {
+                if (li.Selected)
+                {
+                    getCheckBoxList.Add(li.Value);
+                }
+            }
+
+            object[] result = teacher.absent(txtAbsentTeacher.Text, string.Join(" ", getCheckBoxList), txtSubstituteTeacher.Text);
+            lblMessage.Text = result[0].ToString();
+            lblMessage.ForeColor = (System.Drawing.Color)result[1];
+
+            if (lblMessage.ForeColor == System.Drawing.Color.Green)
+            {
+                GridView2.DataBind();
+            }
+        }
+        private void hideFirstRow()
+        {
+            GridView2.Rows[0].Visible = false;
+        }
+
+        protected void GridView2_DataBound(object sender, EventArgs e)
+        {
+            hideFirstRow();
+        }
+
+        protected void GridView2_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow && (int)Session["Rank"] > 2)
+            {
+                e.Row.Visible = false;
+            }
+        }
     }
 }

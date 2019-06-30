@@ -11,16 +11,30 @@ namespace SchoolManagementWebsite.LoggedIn.TeacherPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (BusinessLayer.Teacher.SharedMethods.isUserAuthorized())
+            {
+                //If teacher, then hide additional info
+                gridViewTeacherInfo.Columns[4].Visible = false;
+                gridViewTeacherInfo.Columns[5].Visible = false;
+            }
         }
 
-        protected void GridView1_DataBinding(object sender, EventArgs e)
+        protected void gridViewTeacherInfo_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (Session["Rank"].ToString() == "1" || Session["Rank"].ToString() == "2")
+            //On binding each row get the database value and check 
+            //if the image exists, if not bind it to image from website "Missing.png"
+            System.Data.DataRowView dataRowView = (System.Data.DataRowView)e.Row.DataItem;
+
+            if (dataRowView !=null)
+            if (!Convert.IsDBNull(dataRowView["Photo"]))
             {
-                // adress (3) and position (4) 
-                gridViewTeacherInfo.Columns[3].Visible = true;
-                gridViewTeacherInfo.Columns[4].Visible = true;
+                string url = "data:Image/jpg;base64," + Convert.ToBase64String((byte[])dataRowView["Photo"]);
+
+                (e.Row.FindControl("img") as Image).ImageUrl = url;
+            }
+            else {
+                string url = @"..\..\Images\Missing.png";
+                (e.Row.FindControl("img") as Image).ImageUrl = url;
             }
         }
     }

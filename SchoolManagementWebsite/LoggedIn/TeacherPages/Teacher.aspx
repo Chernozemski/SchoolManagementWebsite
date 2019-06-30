@@ -25,12 +25,12 @@
                 </td>
 
             </tr>
+                    </asp:Panel>
             <tr>
                 <td>
                     <a href="AbsenceTeacher.aspx">
                         <img alt="Отсъствия на учители" class="resizeImageSmall" title="Отсъствия на учители" src="../../Images/Presence.png" /></a>
                 </td>
             </tr>
-        </asp:Panel>
     </table>
 </asp:Content>
