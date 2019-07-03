@@ -16,8 +16,9 @@
                 <asp:BoundField DataField="FullName" HeaderText="Име" ReadOnly="True" SortExpression="FullName" />
                 <asp:BoundField HeaderText="Предмет" DataField="SubjectName" SortExpression="SubjectName"/>
                 <asp:BoundField HeaderText="Тел. номер" DataField="PhoneNum" SortExpression="PhoneNum" ReadOnly="True"/>
-                <asp:BoundField HeaderText="Местоживеене" DataField="Adress" SortExpression="Adress" />
-                <asp:BoundField DataField="Position" HeaderText="Позиция" SortExpression="Position"/>
+                <asp:BoundField HeaderText="Местоживеене" DataField="Adress" SortExpression="Adress" Visible="false" />
+                <asp:BoundField DataField="Position" HeaderText="Позиция" SortExpression="Position" Visible="false"/>
+                <asp:BoundField DataField="Class" HeaderText="Клас" SortExpression="Class" />
 
             </Columns>
             <EditRowStyle BackColor="#999999" />
@@ -32,5 +33,5 @@
             <SortedDescendingCellStyle BackColor="#FFFDF8" />
             <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
         </asp:GridView>
-        <asp:SqlDataSource ID="getTeachers" runat="server" ConnectionString="<%$ ConnectionStrings:SchoolManagementDBConnectionString %>" SelectCommand="SELECT * FROM [vw_tblTeacherInfo]" />
+        <asp:SqlDataSource ID="getTeachers" runat="server" ConnectionString="<%$ ConnectionStrings:SchoolManagementDBConnectionString %>" SelectCommand="SELECT * FROM [vwTeacherInfo_tblTeacherInfo]" />
 </asp:Content>

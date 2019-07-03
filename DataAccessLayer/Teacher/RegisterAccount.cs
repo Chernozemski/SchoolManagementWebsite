@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-using System.Configuration;
 using System.Security;
 using System.Data;
 
@@ -12,11 +11,10 @@ namespace DataAccessLayer.Teacher
 {
     public class RegisterAccount
     {
-        private string connectionString = ConfigurationManager.ConnectionStrings["SchoolManagementDBConnectionString"].ConnectionString;
         public int Register(string username, string encryptedPassword, string EGN)
         {
             int result;
-            using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlConnection con = new SqlConnection(SharedMethods.getConnectionString()))
             {
                 SqlCommand cmd = new SqlCommand("spCreateTeacherAccount_tblTeacherAccount", con);
                 cmd.CommandType = CommandType.StoredProcedure;

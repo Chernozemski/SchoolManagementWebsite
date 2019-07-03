@@ -4,21 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-using System.Configuration;
-using System.Security;
 using System.Data;
 
 namespace DataAccessLayer.Teacher
 {
     public class RegisterInfo
     {
-        private string connectionString = ConfigurationManager.ConnectionStrings["SchoolManagementDBConnectionString"].ConnectionString;
-
         public int register(string firstName,string middleName, string familyName,
             string subjectId, string EGN, string phoneNumber, string adress,
             string positionId,byte[] image = null)
         {
-            using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlConnection con = new SqlConnection(SharedMethods.getConnectionString()))
             {
                 SqlCommand cmd = new SqlCommand("spAddTeacher_tblTeacherInfo", con);
                 cmd.CommandType = CommandType.StoredProcedure;

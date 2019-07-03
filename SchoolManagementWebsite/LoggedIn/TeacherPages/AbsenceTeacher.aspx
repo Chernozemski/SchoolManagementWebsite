@@ -3,12 +3,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-   <h2>Учителски отсъствия
+    <h2>Учителски отсъствия
    </h2>
      <asp:GridView ID="GridView2" runat="server" DataKeyNames="Id" CellPadding="4"  ForeColor="#333333" GridLines="None" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" ShowFooter="True" PageIndex="1" ShowHeaderWhenEmpty="True" OnDataBound="GridView2_DataBound" OnRowDataBound="GridView2_RowDataBound">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
-            <asp:TemplateField ShowHeader="False">
+            <asp:TemplateField ShowHeader="False" HeaderText="Команда">
                 <FooterTemplate>
                     <asp:Button ID="btnInsert" runat="server" OnClick="btnInsert_Click" Text="Вписване" />
                 </FooterTemplate>
@@ -90,8 +90,7 @@
         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
     </asp:GridView>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:SchoolManagementDBConnectionString %>"
-        DeleteCommand="Delete From tblTeacherAbsence Where Id = @Id"
-        SelectCommand="SELECT * FROM [vwGetAbsentTeacherInfo_tblTeacherAbsence]" InsertCommand="spAddAbsentTeacher_tblTeacherAbsence" InsertCommandType="StoredProcedure">
+        SelectCommand="SELECT * FROM [vwAbsentTeacherInfo_tblTeacherAbsence]" DeleteCommand="Delete From tblTeacherAbsence Where Id = @Id" InsertCommand="spAddAbsentTeacher_tblTeacherAbsence" InsertCommandType="StoredProcedure">
         <DeleteParameters>
             <asp:Parameter Name="Id" />
         </DeleteParameters>

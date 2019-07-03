@@ -15,7 +15,7 @@ namespace SchoolManagementWebsite.RegisterTeacher
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            BusinessLayer.Teacher.SharedMethods.redirectUser(BusinessLayer.Teacher.SharedMethods.isUserAuthorized());
+            BusinessLayer.SharedMethods.redirectUser(BusinessLayer.SharedMethods.isUserAuthorized());
 
             if (!IsPostBack)
             {
@@ -24,8 +24,8 @@ namespace SchoolManagementWebsite.RegisterTeacher
         }
         private void SetDropDownListDefaultValue()
         {
-            ddlSubject.Items.Add(new ListItem("Моля изберете предмет", "0"));
-            ddlPosition.Items.Add(new ListItem("Моля изберете длъжност", "0"));
+            ddlSubject.Items.Add(new ListItem("Изберете предмет", "0"));
+            ddlPosition.Items.Add(new ListItem("Изберете длъжност", "0"));
         }
 
         protected void btnRegister_Click(object sender, EventArgs e)
@@ -33,8 +33,10 @@ namespace SchoolManagementWebsite.RegisterTeacher
             if (Page.IsValid)
             {
                 BusinessLayer.Teacher.RegisterInfo teacher = new BusinessLayer.Teacher.RegisterInfo();
+
                 object[] result = teacher.Register(txtFirstName.Text,txtMiddleName.Text, txtFamilyName.Text, ddlSubject.SelectedValue,
                     txtEGN.Text, txtNumber.Text, txtAdress.Text, ddlPosition.SelectedValue,fileUploadPhoto);
+                
                 lblMessage.Text = result[0].ToString();
                 lblMessage.ForeColor = (System.Drawing.Color)result[1];
             }

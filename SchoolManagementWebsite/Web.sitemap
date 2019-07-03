@@ -3,11 +3,14 @@
   <siteMapNode url="/LoggedIn/Home.aspx" title="Меню">
     <siteMapNode url="/LoggedIn/TeacherPages/Teacher.aspx" title="Учители">
       <siteMapNode url="/LoggedIn/TeacherPages/ViewTeacher.aspx" title="Преглед на учителски състав" />
-      <siteMapNode url="/LoggedIn/TeacherPages/RegisterTeacher.aspx" title="Добавяне на учители" />
-      <siteMapNode url="/LoggedIn/TeacherPages/AbsenceTeacher.aspx" title="Отсъстващи учители" />
-      <siteMapNode url="/LoggedIn/TeacherPages/RemoveTeacher.aspx" title="Премахване на учители" />
+      <siteMapNode url="/LoggedIn/TeacherPages/RegisterTeacher.aspx" title="Добавяне на учител" />
+      <siteMapNode url="/LoggedIn/TeacherPages/AbsenceTeacher.aspx" title="Отсъстващ учител" />
+      <siteMapNode url="/LoggedIn/TeacherPages/RemoveTeacher.aspx" title="Премахване на учител" />
     </siteMapNode>
     <siteMapNode url="/LoggedIn/StudentPages/Student.aspx" title="Ученици">
+      <siteMapNode url="/LoggedIn/StudentPages/ViewStudent.aspx" title="Преглеждане на учениците"/>
+      <siteMapNode url="/LoggedIn/StudentPages/RegisterStudent.aspx" title="Добавяне на ученик"/>
+    <siteMapNode url="/LoggedIn/StudentPages/RemoveStudent.aspx" title="Премахване на ученик" />
     </siteMapNode>
     <siteMapNode url="/LoggedIn/ClassPages/Class.aspx" title="Клас">
       <siteMapNode url="/LoggedIn/ClassPages/ViewClass.aspx" title="Преглеждане на класовете"  />
@@ -15,6 +18,7 @@
       <siteMapNode url="/LoggedIn/ClassPages/RemoveClass.aspx" title="Премахване на клас"  />
     </siteMapNode>
     <siteMapNode url="/LoggedIn/SubjectPages/Subject.aspx" title="Предмети">
+      <siteMapNode url="/LoggedIn/SubjectPages/ViewSubject.aspx" title="Преглеждане на предметите"/>
     </siteMapNode>
   </siteMapNode>
 </siteMap>

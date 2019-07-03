@@ -31,7 +31,7 @@ namespace SchoolManagementWebsite
             }
             else
             {
-                lblUser.Text = "Моля влезте в профила си.";
+                lblUser.Text = "Моля, влезте в профила си.";
                 lblGreeting.Text = null;
                 lblGreeting.Visible = false;
             }

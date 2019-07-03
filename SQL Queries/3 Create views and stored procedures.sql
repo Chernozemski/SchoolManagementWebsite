@@ -1,30 +1,52 @@
 ﻿Use SchoolManagementDB
 Go
 
-Create View vw_tblTeacherInfo As
-Select tblTeacherInfo.Id, FirstName + ' ' + MiddleName + ' ' + FamilyName 
-As FullName, tblSubject.SubjectName,  STUFF(STUFF(PhoneNum,7,0,'-'),4,0,'-') as PhoneNum, Adress, tblPosition.Position, Photo
+Create View vwTeacherInfo_tblTeacherInfo As
+Select tblTeacherInfo.Id, FirstName + ' ' + MiddleName + ' ' + FamilyName As FullName
+, tblSubject.SubjectName,  STUFF(STUFF(PhoneNum,7,0,'-'),4,0,'-') as PhoneNum
+, Adress, tblPosition.Position, Photo, Convert(varchar,tblClass.Grade) + ' ' + tblClass.Letter as Class
 From tblTeacherInfo
 Left join tblSubject
 On SubjectId = tblSubject.Id
 Left join tblPosition
 On tblPosition.Id = tblTeacherInfo.PositionId
+Left join tblClass
+On tblClass.ClassTeacherEGN = tblTeacherInfo.EGN
 Go
 
-Create View vw_tblClass As
-Select (Convert(nvarchar,Grade)) + Letter as FullClassName, tblSpecialization.Specialization, tblTeacherInfo.FirstName + ' ' + tblTeacherInfo.MiddleName + ' ' +tblTeacherInfo.FamilyName As FullTeacherName
+Create View vwClass_tblClass As 
+Select tblClass.Id
+,(Convert(nvarchar,Grade)) + ' ' + Letter as FullClassName, tblSpecialization.Specialization
+, tblTeacherInfo.FirstName + ' ' + tblTeacherInfo.MiddleName + ' ' +tblTeacherInfo.FamilyName As FullTeacherName
+
 From tblClass
 Inner Join tblSpecialization
 On tblSpecialization.Id = tblClass.SpecializationId
-Inner Join tblTeacherInfo
+Left Join tblTeacherInfo
 On tblTeacherInfo.EGN = tblClass.ClassTeacherEGN
 Go
 
-Create View vwGetSpecialization_tblSpecialization As
+Create View vwStudentInfo_tblStudentInfo AS
+Select a.Id
+,a.FirstName + ' ' + a.MiddleName + ' ' + a.FamilyName as FullName
+, STUFF(STUFF(a.PhoneNum,7,0,'-'),4,0,'-') as PhoneNum
+, Adress, a.Photo
+, Convert(nvarchar,b.Grade) + ' ' + b.Letter as Grade
+, c.FirstName + ' ' + c.FamilyName as DoctorFullName
+, ParentFullName, ParentPhoneNumber, ParentAdress
+
+From tblStudentInfo a
+Left Join tblClass b
+On b.Id = a.ClassId
+Left Join tblDoctor c
+On c.Id = a.DoctorId
+Go
+
+Create View vwSpecialization_tblSpecialization As
 Select Id,Specialization from tblSpecialization
 Go
 
-Create view vwGetAbsentTeacherInfo_tblTeacherAbsence As
+Create view vwAbsentTeacherInfo_tblTeacherAbsence As
 SELECT tblTeacherAbsence.Id, a.FirstName + ' ' + a.MiddleName + ' ' + a.FamilyName as FullName,
 OnDate, tblTeacherAbsence.LessonsAbsent,  b.FirstName + ' ' + b.MiddleName + ' ' + b.FamilyName as SubstituteTeacherFullName FROM [tblTeacherAbsence]
 Left Join tblTeacherInfo a
@@ -340,5 +362,71 @@ Begin
 
 	--Directly return the EGN as BigInt, otherwise int overflow error
 	Select Convert(BigInt,(Select EGN From tblTeacherInfo Where Id = @Id))
+End
+Go
+
+Create Procedure spAddStudent_tblStudentInfo
+(
+@FirstName nvarchar(20)
+,@MiddleName nvarchar(20)
+,@FamilyName nvarchar(20)
+,@EGN varchar(10)
+,@Phone varchar(10)
+,@Adress nvarchar(50)
+
+,@ClassId int
+,@Photo varbinary(max) = null
+,@DoctorId int
+
+,@ParentFullName nvarchar(60)
+,@ParentPhoneNumber varchar(10)
+,@ParentAdress nvarchar(50)
+)
+AS
+Begin
+	If ((Select Count(Id) From tblClass Where tblClass.Id = @ClassId) = 0)
+		Begin
+			Select -1 --The class does not exist.
+		End
+
+	Else
+		Begin
+			If ((Select Count(Id) From tblDoctor Where tblDoctor.Id = @DoctorId) = 0)
+				Begin
+					Select -2 --The doctor does not exist.
+				End
+			Else
+				Begin
+					If (Len(@EGN) <> 10)
+						Begin
+							Select -3 --EGN is not 10 chars long.
+						End
+					Else
+						If (Len(@Phone) <>10)
+							Begin
+								Select -4 --Student phone is not 10 chars long.
+							End
+						Else
+							Begin
+								If (LEN(@ParentPhoneNumber) <> 10)
+									Begin
+										Select -5 --The parent phone number is not 10 chars long.
+									End
+								Else
+									Begin
+										If((Select Count(Id) From tblStudentInfo Where EGN = @EGN) = 0)
+											Begin
+												Insert Into tblStudentInfo
+												Values (@FirstName,@MiddleName,@FamilyName,@Egn,@Phone,@Adress,@Photo,@ClassId,@DoctorId,@ParentFullName,@ParentPhoneNumber,@ParentAdress)
+												Select 1 --Successes.
+											End
+										Else
+											Begin
+												Select -6 --Student already registered
+											End
+									End
+							End
+				End
+		End
 End
 Go

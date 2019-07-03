@@ -15,10 +15,7 @@ namespace SchoolManagementWebsite.LoggedIn.Class
         }
         protected void directorPanel_Load(object sender, EventArgs e)
         {
-            if (Session["Rank"].ToString() == "1")
-            {
-                directorPanel.Visible = true;
-            }
+           BusinessLayer.SharedMethods.showPanel(BusinessLayer.SharedMethods.isUserAuthorized(), ref directorPanel);
         }
     }
 }

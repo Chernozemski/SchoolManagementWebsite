@@ -9,7 +9,7 @@
                 <asp:TextBox ID="txtUserName" placeholder="Потребителско име"  runat="server" />
             </td>
             <td class="hideBorder">
-                <asp:RequiredFieldValidator ControlToValidate="txtUserName" Display="Dynamic" ErrorMessage="Трябва да въведете потребителско име." ValidationGroup="Login" Text="*" ForeColor="Red" runat="server" />
+                <asp:RequiredFieldValidator ControlToValidate="txtUserName" Display="Dynamic" ErrorMessage="Трябва да въведете потребителско име." ValidationGroup="Login" Text="*" CssClass="error" runat="server" />
             </td>
         </tr>
         <tr>
@@ -18,7 +18,7 @@
                 <asp:TextBox ID="txtPassword" placeholder="Парола" runat="server" TextMode="Password" />
             </td>
             <td class="hideBorder">
-                <asp:RequiredFieldValidator ControlToValidate="txtPassword" Display="Dynamic" ErrorMessage="Трябва да въведете парола име." ValidationGroup="Login" Text="*" ForeColor="Red" runat="server" />
+                <asp:RequiredFieldValidator ControlToValidate="txtPassword" Display="Dynamic" ErrorMessage="Трябва да въведете парола име." ValidationGroup="Login" Text="*" CssClass="error" runat="server" />
             </td>
         </tr>
         <tr>

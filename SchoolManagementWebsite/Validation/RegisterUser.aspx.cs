@@ -20,13 +20,14 @@ namespace SchoolManagementWebsite.RegisterTeacher
 
         protected void btnRegister_Click(object sender, EventArgs e)
         {
+            object[] result = new object[2];
             if (Page.IsValid)
             {
                 BusinessLayer.Teacher.RegisterAccount teacher = new BusinessLayer.Teacher.RegisterAccount();
-                object[] result = teacher.register(txtUserName.Text, txtPassword.Text, txtEGN.Text);
-                lblMessage.Text = (string)result[0];
-                lblMessage.ForeColor = (System.Drawing.Color)result[1];
+                result = teacher.register(txtUserName.Text, txtPassword.Text, txtEGN.Text);
             }
+            lblMessage.Text = (string)result[0];
+            lblMessage.ForeColor = (System.Drawing.Color)result[1];
         }
     }
 }

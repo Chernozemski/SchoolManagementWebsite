@@ -16,7 +16,7 @@ namespace SchoolManagementWebsite.LoggedIn
 
         protected void directorPanel_Load(object sender, EventArgs e)
         {
-            if ((int)Session["Rank"] < 3)
+            if (BusinessLayer.SharedMethods.isUserAuthorized())
             {
                 directorPanel.Visible = true;
             }

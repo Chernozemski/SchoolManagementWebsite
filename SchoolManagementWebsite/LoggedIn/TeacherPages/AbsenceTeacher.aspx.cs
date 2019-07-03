@@ -17,6 +17,7 @@ namespace SchoolManagementWebsite.LoggedIn.TeacherPages
         {
             BusinessLayer.Teacher.Absent teacher = new BusinessLayer.Teacher.Absent();
 
+            //Get footer elements that are used in insert
             TextBox txtAbsentTeacher = GridView2.FooterRow.FindControl("txtAbsentTeacherName") as TextBox;
             CheckBoxList checkBoxList = GridView2.FooterRow.FindControl("checkboxListLessonsAbsent") as CheckBoxList;
             TextBox txtSubstituteTeacher = GridView2.FooterRow.FindControl("txtSubstituteTeacherName") as TextBox;
@@ -39,18 +40,15 @@ namespace SchoolManagementWebsite.LoggedIn.TeacherPages
                 GridView2.DataBind();
             }
         }
-        private void hideFirstRow()
-        {
-            GridView2.Rows[0].Visible = false;
-        }
-
         protected void GridView2_DataBound(object sender, EventArgs e)
         {
-            hideFirstRow();
+            //Hide first row (dummy row)
+            BusinessLayer.SharedMethods.hideFirstRow(ref GridView2);
         }
 
         protected void GridView2_RowDataBound(object sender, GridViewRowEventArgs e)
         {
+            //Hide all rows if is a teacher
             if (e.Row.RowType == DataControlRowType.DataRow && (int)Session["Rank"] > 2)
             {
                 e.Row.Visible = false;

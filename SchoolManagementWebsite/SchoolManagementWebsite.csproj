@@ -75,7 +75,10 @@
     <Content Include="LoggedIn\ClassPages\RemoveClass.aspx" />
     <Content Include="LoggedIn\ClassPages\ViewClass.aspx" />
     <Content Include="LoggedIn\Home.aspx" />
+    <Content Include="LoggedIn\StudentPages\RegisterStudent.aspx" />
+    <Content Include="LoggedIn\StudentPages\RemoveStudent.aspx" />
     <Content Include="LoggedIn\StudentPages\Student.aspx" />
+    <Content Include="LoggedIn\StudentPages\ViewStudent.aspx" />
     <Content Include="LoggedIn\SubjectPages\Subject.aspx" />
     <Content Include="LoggedIn\TeacherPages\AbsenceTeacher.aspx" />
     <Content Include="LoggedIn\TeacherPages\RemoveTeacher.aspx" />
@@ -150,12 +153,33 @@
     <Compile Include="LoggedIn\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="LoggedIn\StudentPages\RegisterStudent.aspx.cs">
+      <DependentUpon>RegisterStudent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoggedIn\StudentPages\RegisterStudent.aspx.designer.cs">
+      <DependentUpon>RegisterStudent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoggedIn\StudentPages\RemoveStudent.aspx.cs">
+      <DependentUpon>RemoveStudent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoggedIn\StudentPages\RemoveStudent.aspx.designer.cs">
+      <DependentUpon>RemoveStudent.aspx</DependentUpon>
+    </Compile>
     <Compile Include="LoggedIn\StudentPages\Student.aspx.cs">
       <DependentUpon>Student.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="LoggedIn\StudentPages\Student.aspx.designer.cs">
       <DependentUpon>Student.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoggedIn\StudentPages\ViewStudent.aspx.cs">
+      <DependentUpon>ViewStudent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoggedIn\StudentPages\ViewStudent.aspx.designer.cs">
+      <DependentUpon>ViewStudent.aspx</DependentUpon>
     </Compile>
     <Compile Include="LoggedIn\SubjectPages\Subject.aspx.cs">
       <DependentUpon>Subject.aspx</DependentUpon>
@@ -230,9 +254,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BusinessLogicLayer\BusinessLogicLayer.csproj">
+    <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj">
       <Project>{022ee7eb-eff0-4e57-9b7f-254bb0401e93}</Project>
-      <Name>BusinessLogicLayer</Name>
+      <Name>BusinessLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

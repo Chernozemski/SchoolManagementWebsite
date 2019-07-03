@@ -3,18 +3,18 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Премахване на клас</h2>
-    <asp:GridView ID="gridView" runat="server" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="Id" DataSourceID="getClasses" ForeColor="#333333" GridLines="None" ShowHeaderWhenEmpty="True">
+    <asp:GridView ID="gridView" runat="server" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="Id" DataSourceID="getClasses" ForeColor="#333333" GridLines="None" ShowHeaderWhenEmpty="True" AllowSorting="True">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
-            <asp:TemplateField InsertVisible="False" ShowHeader="False">
+            <asp:TemplateField HeaderText="Команда">
                 <ItemTemplate>
-                    <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" OnClientClick="return confirm('Сигурни ли сте че искате да изтриете този клас ?');"  Text="Премахване"></asp:LinkButton>
+                    <asp:Button ID="Button1" runat="server" CommandName="Delete" Text="Изтриване" OnClientClick="return confirm('Сигурни ли сте че искате да изтриете този клас от базата данни ?')" />
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField DataField="Grade" HeaderText="Клас" SortExpression="Grade" />
-            <asp:BoundField DataField="Letter" HeaderText="Група" SortExpression="Letter" />
-            <asp:BoundField DataField="FullName" HeaderText="Класен ръководител" SortExpression="FullName" />
-            <asp:BoundField DataField="SpecializationName" HeaderText="Паралелка" SortExpression="SpecializationName" />
+            <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id" ReadOnly="True" Visible="False" />
+            <asp:BoundField DataField="FullClassName" HeaderText="Клас" SortExpression="FullClassName" ReadOnly="True" />
+            <asp:BoundField DataField="Specialization" HeaderText="Паралелка" SortExpression="Specialization" />
+            <asp:BoundField DataField="FullTeacherName" HeaderText="Класен ръководител" SortExpression="FullTeacherName" ReadOnly="True" />
         </Columns>
         <EditRowStyle BackColor="#999999" />
         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -27,12 +27,8 @@
         <SortedDescendingCellStyle BackColor="#FFFDF8" />
         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
     </asp:GridView>
-    <asp:SqlDataSource ID="getClasses" runat="server" ConnectionString="<%$ ConnectionStrings:SchoolManagementDBConnectionString %>" DeleteCommand="DELETE FROM [tblClass] WHERE [Id] = @Id"
-         SelectCommand="SELECT [tblClass].[Id], [Grade], [Letter], [tblTeacherInfo].[FirstName] + ' ' + [tblTeacherInfo].[FamilyName] As [FullName], [tblSpecialization].[Specialization] As [SpecializationName] FROM [tblClass]
-        Inner Join [tblTeacherInfo] On [tblTeacherInfo].[Id] = [tblClass].[Id]
-        Inner Join [tblSpecialization] On [tblSpecialization].[Id] = [tblClass].[SpecializationId]">
-        <DeleteParameters>
-            <asp:Parameter Name="Id" Type="Int32" />
-        </DeleteParameters>
+    <asp:SqlDataSource ID="getClasses" runat="server" ConnectionString="<%$ ConnectionStrings:SchoolManagementDBConnectionString %>"
+         SelectCommand="SELECT * FROM [vwClass_tblClass]"
+        DeleteCommand="Delete From tblClass Where Id = @Id">
     </asp:SqlDataSource>
 </asp:Content>

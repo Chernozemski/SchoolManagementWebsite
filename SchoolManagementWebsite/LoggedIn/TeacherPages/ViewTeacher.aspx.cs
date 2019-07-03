@@ -11,11 +11,10 @@ namespace SchoolManagementWebsite.LoggedIn.TeacherPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (BusinessLayer.Teacher.SharedMethods.isUserAuthorized())
+            if (BusinessLayer.SharedMethods.isUserAuthorized())
             {
-                //If teacher, then hide additional info
-                gridViewTeacherInfo.Columns[4].Visible = false;
-                gridViewTeacherInfo.Columns[5].Visible = false;
+                //If teacher, then show additional info
+                BusinessLayer.SharedMethods.showColumns(new int[]{4,5},ref gridViewTeacherInfo);
             }
         }
 

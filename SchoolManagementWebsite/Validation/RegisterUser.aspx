@@ -11,7 +11,8 @@
             </td>
             <td class="hideBorder">
                 <asp:RequiredFieldValidator ValidationGroup="Register" Text="*" CssClass="error" ErrorMessage="Трябва да въведете потребителско име." ControlToValidate="txtUserName" runat="server" Display="Dynamic" />
-            </td>
+           <asp:RegularExpressionValidator ValidationGroup ="Register" Text="*" CssClass ="error" ErrorMessage ="Потребителското име може да съдържа само букви(кирилица,латиница),цифри(0-9) и долна черта( _ )" ControlToValidate="txtUserName" ValidationExpression="^[a-zA-Z0-9_а-яА-Я]+$" runat="server" Display="Dynamic" />
+                 </td>
         </tr>
         <tr>
             <td>Парола :
