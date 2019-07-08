@@ -40,22 +40,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Author\Register.cs" />
     <Compile Include="Class\Register.cs" />
     <Compile Include="Doctor\HelperMethods.cs" />
     <Compile Include="Doctor\Register.cs" />
+    <Compile Include="Position\CRUD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SharedMethods.cs" />
     <Compile Include="Student\Register.cs" />
+    <Compile Include="Subject\CRUD.cs" />
     <Compile Include="Teacher\Absent.cs" />
+    <Compile Include="Teacher\CRUDAccount.cs" />
+    <Compile Include="Teacher\CRUDInfo.cs" />
     <Compile Include="Teacher\HelperMethods.cs" />
     <Compile Include="Teacher\LoginAccount.cs" />
     <Compile Include="Teacher\RegisterAccount.cs" />
-    <Compile Include="Teacher\RegisterInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Object.cs\Object.csproj">
+      <Project>{84aa36f7-7f4f-4c84-9e84-19fc50f03987}</Project>
+      <Name>Object</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

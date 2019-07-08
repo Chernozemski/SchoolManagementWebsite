@@ -29,6 +29,7 @@ namespace DataAccessLayer.Teacher
                 con.Open();
                 int result = (int)cmd.ExecuteScalar();
                 con.Close();
+
                 return result;
             }
         }

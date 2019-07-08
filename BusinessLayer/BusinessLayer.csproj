@@ -43,21 +43,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Author\Register.cs" />
+    <Compile Include="Author\Update.cs" />
     <Compile Include="Class\Register.cs" />
+    <Compile Include="Doctor\Register.cs" />
+    <Compile Include="Position\CRUD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SharedMethods.cs" />
+    <Compile Include="Student\Message.cs" />
     <Compile Include="Student\Register.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Subject\CRUD.cs" />
+    <Compile Include="Subject\Message.cs" />
     <Compile Include="Teacher\Absent.cs" />
     <Compile Include="Teacher\Login.cs" />
+    <Compile Include="Teacher\Message.cs" />
     <Compile Include="Teacher\Register.cs" />
-    <Compile Include="Teacher\RegisterInfo.cs" />
+    <Compile Include="Teacher\CRUDInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
       <Project>{1ef167a1-1338-44e9-a021-71395dcd9901}</Project>
       <Name>DataAccessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Object.cs\Object.csproj">
+      <Project>{84aa36f7-7f4f-4c84-9e84-19fc50f03987}</Project>
+      <Name>Object</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

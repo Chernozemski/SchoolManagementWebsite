@@ -58,11 +58,11 @@ table tr td{
 
 .resizeImage
 {
-    width:200px;
-    height:200px;
+    width:170px;
+    height:170px;
     transition: all .2s ease-in-out;
-    padding: 10px 10px;
-    margin:10px 10px;
+    padding: 5px 5px;
+    margin:5px 5px;
 }
 .resizeImage:hover 
 {
@@ -70,8 +70,8 @@ table tr td{
 }
 .resizeImageSmall
 {
-    width:50px;
-    height:50px;
+    width:60px;
+    height:60px;
     transition: all .2s ease-in-out;
 }
 .resizeImageSmall:hover 
@@ -90,4 +90,8 @@ table tr td{
 }
 .error{
     color:darkred;
+}
+.MenuText{
+    color:white;
+    text-decoration:none;
 }

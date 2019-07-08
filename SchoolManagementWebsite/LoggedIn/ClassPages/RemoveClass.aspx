@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>Премахване на клас</h2>
+    <h2>Отписване на клас</h2>
     <asp:GridView ID="gridView" runat="server" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="Id" DataSourceID="getClasses" ForeColor="#333333" GridLines="None" ShowHeaderWhenEmpty="True" AllowSorting="True">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>

@@ -63,7 +63,7 @@
         </tr>
         <tr>
             <td colspan="2">
-                <asp:Button ID="btnRegister" runat="server" Text="Вписване" OnClick="btnRegister_Click" CssClass="bigButton" ValidationGroup="Register" />
+                <asp:Button ID="btnRegister" runat="server" Text="Вписване" OnClick="btnRegister_Click"  CssClass="bigButton BigText" ValidationGroup="Register" />
             </td>
         </tr>
     </table>

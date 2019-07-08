@@ -4,7 +4,7 @@ Go
 Create Table tblSubject
 (
 Id int identity(1,1) primary key,
-SubjectName nvarchar(50)
+SubjectName nvarchar(50) unique not null
 )
 
 Create Table tblPosition
@@ -24,18 +24,18 @@ MiddleName nvarchar(20) Not null,
 FamilyName nvarchar(20) Not null,
 
 SubjectId int not null,
---Check EGN and PhoneNum if valid
-EGN varchar(10) check (Len(EGN)=10 and IsNumeric(EGN) = 1),
-PhoneNum varchar(10) check (Len(PhoneNum)=10 and IsNumeric(PhoneNum) = 1),
+--Check EGN and PhoneNumber if valid
+EGN varchar(10) Not null check (Len(EGN)=10 and IsNumeric(EGN) = 1),
+PhoneNumber varchar(10) check (Len(PhoneNumber)=10 and IsNumeric(PhoneNumber) = 1),
 Adress nvarchar(50) Not null,
 
 PositionId int not null,
 Photo varbinary(max) null Default null,
 
 --Connect teacherInfo to subject and position
-Constraint FK_SubjectId Foreign Key (SubjectId)
-References tblSubject(Id) On Delete Cascade,
-Constraint FK_PositionId Foreign Key (PositionId)
+Constraint FK_SubjectId_tblSubject Foreign Key (SubjectId)
+References tblSubject(Id) On Delete No Action,
+Constraint FK_PositionId_tblPosition Foreign Key (PositionId)
 References tblPosition(Id) On Delete Cascade
 
 )
@@ -47,18 +47,22 @@ Id int primary key,
 UserName nvarchar(20) not null,
 PasswordKey nvarchar(max) not null,
 
-Constraint FK_Id Foreign Key (Id)
+Constraint FK_Id_tblTeacherInfo Foreign Key (Id)
 References tblTeacherInfo(Id) On Delete Cascade
+On Update Cascade
 )
 
 Create Table tblTeacherAbsence(
 Id int primary key identity(1,1),
 
-AbsentTeacherEGN varchar(10) check (Len(AbsentTeacherEGN) = 10),
+AbsentTeacherId int not null,
 LessonsAbsent varchar(50),
 OnDate date,
 
-SubstituteTeacherEGN varchar(10) check (Len(SubstituteTeacherEGN) = 10)
+SubstituteTeacherId int not null
+
+,Constraint FK_AbsentTeacher_tblTeacherInfo Foreign Key (AbsentTeacherId)
+References tblTeacherInfo(Id) On Delete Cascade
 )
 
 
@@ -76,8 +80,8 @@ SpecializationId int not null,
 
 ClassTeacherEGN varchar(10) unique not null
 
-Constraint FK_SpecializationId Foreign Key (SpecializationId)
-References tblSpecialization(Id) On Delete Cascade
+Constraint FK_SpecializationId_tblSpecialization Foreign Key (SpecializationId)
+References tblSpecialization(Id) On Delete No Action
 )
 
 Create Table tblDoctor(
@@ -85,7 +89,7 @@ Id int primary key identity(1,1),
 
 FirstName nvarchar(20),
 FamilyName nvarchar(20),
-PhoneNum varchar(10) check (Len(PhoneNum)=10 and IsNumeric(PhoneNum) = 1)
+PhoneNumber varchar(10) check (Len(PhoneNumber)=10 and IsNumeric(PhoneNumber) = 1)
 
 )
 
@@ -98,7 +102,7 @@ MiddleName nvarchar(20) Not null,
 FamilyName nvarchar(20) Not null,
 
 EGN varchar(10) check (Len(EGN)=10 and IsNumeric(EGN) = 1),
-PhoneNum varchar(10) check (Len(PhoneNum)=10 and IsNumeric(PhoneNum) = 1),
+PhoneNumber varchar(10) check (Len(PhoneNumber)=10 and IsNumeric(PhoneNumber) = 1),
 Adress nvarchar(50) Not null,
 Photo varbinary(max) null Default null,
 
@@ -109,30 +113,58 @@ ParentFullName nvarchar(60) not null,
 ParentPhoneNumber nvarchar(50) not null,
 ParentAdress nvarchar(50) null
 
-Constraint Fk_ClassId Foreign Key (ClassId)
+Constraint Fk_ClassId_tblClass Foreign Key (ClassId)
 References tblClass (Id) On Delete Set Null,
-Constraint Fk_DoctorId Foreign Key (DoctorId)
+Constraint Fk_DoctorId_tblDoctor Foreign Key (DoctorId)
 References tblDoctor (Id) On Delete Set Null
 )
 
 Create Table tblTeacherLesson(
-LessonId int primary key identity(1,1),
-TeacherId int,
+LessonId int primary key identity(1,1)
+,TeacherId int,
 
-LessonName nvarchar(50),
-LessonDate smalldatetime,
+LessonName nvarchar(50)
+,LessonDate smalldatetime
 
-SubjectId int,
-ClassId int,
+,SubjectId int
+,ClassId int
 
-MissingStudentId varchar(150),
-LateStudentId varchar(150),
+,MissingStudentId varchar(150)
+,LateStudentId varchar(150)
 
-Constraint FK_TeacherId Foreign Key (TeacherId)
-References tblTeacherInfo(Id) On Delete Cascade,
-Constraint FK_CurrentClassId Foreign Key (ClassId)
+Constraint FK_TeacherId_tblTeacherInfo Foreign Key (TeacherId)
+References tblTeacherInfo(Id) On Delete Cascade
+,Constraint FK_CurrentClassId_tblClass Foreign Key (ClassId)
 References tblClass(Id) On Delete Cascade
 )
+
+Create Table tblAuthor(
+Id int primary key identity(1,1)
+,Publisher nvarchar(20)
+)
+
+Create Table tblBook(
+Id int primary key identity(1,1)
+,Name nvarchar(20)
+,PublisherId int
+,Grade int check (Grade > 0 And Grade < 13)
+,SubjectId int
+,PublishedYear int check (PublishedYear > 1950 And PublishedYear <= GetDate())
+,Quantity int
+
+,Constraint FK_Subject_tblSubject Foreign Key (SubjectId)
+References tblSubject(Id) 
+On Delete Cascade
+,Constraint Fk_PublisherId_tblAuthor Foreign Key (PublisherId)
+References tblAuthor(Id)
+)
+
+Insert into tblAuthor
+Values (N'Просвета')
+Insert into tblAuthor
+Values (N'Екстрем')
+Insert into tblAuthor
+Values (N'Анубис')
 
 Insert into tblDoctor
 Values (N'Ивана',N'Дамянова','0494953955')
@@ -184,9 +216,6 @@ Values (N'Хуманитарна')
 
 Insert into tblClass
 Values (12,N'Б',1,1234567890)
-
-Insert into tblTeacherAbsence
-Values ('0987654321','1, 2, 3, 4',SYSDATETIME(),'2345678901')
 
 Insert into tblStudentInfo
 Values (N'Иван',N'Иванов',N'Иванов','0035673567','0035673567',N'ул.Княгиня Мона Лиза №20',null,1,1,N'Иво Иванов','0493499596',N'ул. Княгиня Мона Лиза №20')

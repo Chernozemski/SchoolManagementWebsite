@@ -16,10 +16,7 @@ namespace SchoolManagementWebsite.LoggedIn
 
         protected void directorPanel_Load(object sender, EventArgs e)
         {
-            if (BusinessLayer.SharedMethods.isUserAuthorized())
-            {
-                directorPanel.Visible = true;
-            }
+            directorPanel.Visible = BusinessLayer.SharedMethods.isUserAuthorized(2);
         }
     }
 }

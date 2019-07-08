@@ -13,5 +13,10 @@ namespace SchoolManagementWebsite.LoggedIn.Subject
         {
 
         }
+
+        protected void directorPanel_Load(object sender, EventArgs e)
+        {
+            directorPanel.Visible = BusinessLayer.SharedMethods.isUserAuthorized(2);
+        }
     }
 }
