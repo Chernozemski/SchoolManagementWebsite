@@ -43,14 +43,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Author\Register.cs" />
-    <Compile Include="Author\Update.cs" />
-    <Compile Include="Class\Register.cs" />
-    <Compile Include="Doctor\Register.cs" />
+    <Compile Include="Author\CRUD.cs" />
+    <Compile Include="Author\Message.cs" />
+    <Compile Include="Book\CRUD.cs" />
+    <Compile Include="Book\Message.cs" />
+    <Compile Include="Budget\CRUDBudget.cs" />
+    <Compile Include="Budget\CRUDBudgetType.cs" />
+    <Compile Include="Budget\CRUDOperationLength.cs" />
+    <Compile Include="Budget\CRUDOPerationType.cs" />
+    <Compile Include="Budget\MessageBudget.cs" />
+    <Compile Include="Budget\MessageBudgetType.cs" />
+    <Compile Include="Class\CRUD.cs" />
+    <Compile Include="Class\Message.cs" />
+    <Compile Include="Doctor\CRUD.cs" />
+    <Compile Include="Doctor\Message.cs" />
     <Compile Include="Position\CRUD.cs" />
+    <Compile Include="Position\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SharedMethods.cs" />
-    <Compile Include="Student\Message.cs" />
+    <Compile Include="Specialization\CRUD.cs" />
+    <Compile Include="Specialization\Message.cs" />
+    <Compile Include="Student\CRUDInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Student\Message.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Student\Register.cs">
       <SubType>Code</SubType>
     </Compile>

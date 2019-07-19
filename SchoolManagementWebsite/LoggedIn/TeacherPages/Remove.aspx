@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Отписване на учител</h2>
-    <asp:GridView ID="gridViewTeacher" runat="server" CellPadding="4" ForeColor="#333333" DataKeyNames="Id" GridLines="None" AllowPaging="True" AllowSorting="True" DataSourceID="deleteTeacher" AutoGenerateColumns="False" OnRowDataBound="gridViewTeacher_RowDataBound">
+    <asp:GridView ID="gridViewTeacher" runat="server" CellPadding="4" ForeColor="#333333" DataKeyNames="Id" GridLines="None" AllowPaging="True" AllowSorting="True" DataSourceID="deleteTeacher" AutoGenerateColumns="False" OnRowDataBound="gridViewTeacher_RowDataBound" PageSize="5">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:TemplateField ShowHeader="False">
@@ -25,7 +25,7 @@
         </Columns>
         <EditRowStyle BackColor="#999999" />
         <EmptyDataTemplate>
-            Няма записи в базата данни.
+            Няма записан(и) учител(и).
         </EmptyDataTemplate>
         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
         <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />

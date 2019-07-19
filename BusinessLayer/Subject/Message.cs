@@ -14,11 +14,11 @@ namespace BusinessLayer.Subject
             switch (resultNumber)
             {
                 case 1:
-                    message = "Успешно вписване в базата данни.";
+                    message = "Успешно записване.";
                     color = Color.Green;
                     break;
                 case 0:
-                    message = "Предмет с това име вече е записан в базата данни.";
+                    message = "Предмет с това име вече е записан.";
                     color = Color.DarkRed;
                     break;
                 default:
@@ -32,7 +32,7 @@ namespace BusinessLayer.Subject
             switch (resultNumber)
             {
                 case 1:
-                    message = "Успешно променяне в базата данни.";
+                    message = "Успешна промяна.";
                     color = Color.Green;
                     break;
                 case 0:
@@ -40,7 +40,7 @@ namespace BusinessLayer.Subject
                     color = Color.DarkRed;
                     break;
                 case -1:
-                    message = "Предмет с това име вече е записан в базата данни.";
+                    message = "Предмет с това име вече е записан.";
                     color = Color.DarkRed;
                     break;
                 default:
@@ -54,11 +54,11 @@ namespace BusinessLayer.Subject
             switch (resultNumber)
             {
                 case 1:
-                    message = "Успешно отписване от базата данни.";
+                    message = "Успешно отписване.";
                     color = Color.Green;
                     break;
                 case 0:
-                    message = "Не е изтрит този запис, няма промяна в базата данни.";
+                    message = "Не е изтрит този запис.";
                     color = Color.DarkRed;
                     break;
                 default:

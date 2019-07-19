@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Object
 {
-    class Budget
+    public class Budget
     {
+      public int Id { get; set; }
+      public int ItemId { get; set; }
+      public string DescriptionForItem { get; set; }
+      public decimal Amount { get; set; }
+      public DateTime OnDate { get; set; }
     }
 }

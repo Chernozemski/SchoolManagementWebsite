@@ -2,4 +2,3 @@ C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\Object
 C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\Object.cs\bin\Debug\Object.cs.pdb
 C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\Object.cs\obj\Debug\Object.cs.dll
 C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\Object.cs\obj\Debug\Object.cs.pdb
-C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\Object.cs\obj\Debug\Object.csprojResolveAssemblyReference.cache

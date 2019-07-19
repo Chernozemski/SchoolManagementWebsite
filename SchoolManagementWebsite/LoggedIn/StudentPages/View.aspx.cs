@@ -13,7 +13,7 @@ namespace SchoolManagementWebsite.LoggedIn.StudentPages
         {
             if (!BusinessLayer.SharedMethods.isUserAuthorized(3))
             {
-                BusinessLayer.SharedMethods.hideColumns(new int[]{3,5,7},ref viewStudent);
+                BusinessLayer.SharedMethods.hideColumns(new int[]{3,5,8},ref viewStudent);
             }
         }
 

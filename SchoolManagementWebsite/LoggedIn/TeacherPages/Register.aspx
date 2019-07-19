@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AuthorizedPages.Master" ValidateRequest="true" CodeBehind="Register.aspx.cs" Inherits="SchoolManagementWebsite.RegisterTeacher.Register" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>Вписване на учител</h2>
+    <h2>Записване на учител</h2>
     <table class="BigText">
         <tr>
             <td>Собствено име :
@@ -46,8 +46,8 @@
             <td>Предмет:
             </td>
             <td>
-                <asp:DropDownList ID="ddlSubject" AppendDataBoundItems="true" runat="server" DataSourceID="GetSubject" DataTextField="SubjectName" DataValueField="Id" />
-                <asp:SqlDataSource ID="GetSubject" runat="server" ConnectionString="<%$ ConnectionStrings:SchoolManagementDBConnectionString %>" SelectCommand="spGetSubjects_tblSubject" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
+                <asp:DropDownList ID="ddlSubject" AppendDataBoundItems="True" runat="server" DataSourceID="getSubject" DataTextField="SubjectName" DataValueField="Id" />
+                <asp:ObjectDataSource ID="getSubject" runat="server" SelectMethod="ReadWithId" TypeName="BusinessLayer.Subject.CRUD"></asp:ObjectDataSource>
             </td>
             <td class="hideBorder">
                 <asp:CompareValidator Operator="GreaterThan" ValueToCompare="0" ValidationGroup="Register" Text="*" CssClass="error" ErrorMessage="Трябва да изберете предмет." ControlToValidate="ddlSubject" runat="server" Display="Dynamic" />
@@ -90,8 +90,8 @@
             <td>Позиция:
             </td>
             <td>
-                <asp:DropDownList ID="ddlPosition" AppendDataBoundItems="True" runat="server" DataSourceID="GetPosition" DataTextField="Position" DataValueField="Id" />
-                <asp:SqlDataSource ID="GetPosition" runat="server" ConnectionString="<%$ ConnectionStrings:SchoolManagementDBConnectionString %>" SelectCommand="spGetPosition_tblPosition" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
+                <asp:DropDownList ID="ddlPosition" AppendDataBoundItems="True" runat="server" DataSourceID="getPosition" DataTextField="Position" DataValueField="Id" />
+                <asp:ObjectDataSource ID="getPosition" runat="server" SelectMethod="Read" TypeName="BusinessLayer.Position.CRUD"></asp:ObjectDataSource>
             </td>
             <td class="hideBorder">
                 <asp:CompareValidator Operator="GreaterThan" ValueToCompare="0" ValidationGroup="Register" Text="*" CssClass="error" ErrorMessage="Трябва да въведете длъжност." ControlToValidate="ddlPosition" runat="server" Display="Dynamic" />
@@ -115,7 +115,7 @@
         </tr>
         <tr>
             <td colspan="2">
-                <asp:Button ID="btnRegister" runat="server" Text="Вписване" OnClick="btnRegister_Click" CssClass="bigButton BigText" ValidationGroup="Register" />
+                <asp:Button ID="btnRegister" runat="server" Text="Записване" OnClick="btnRegister_Click" CssClass="bigButton" CausesValidation="true" ValidationGroup="Register" />
             </td>
         </tr>
     </table>

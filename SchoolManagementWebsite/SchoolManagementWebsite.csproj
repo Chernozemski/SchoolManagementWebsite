@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Specialization.png" />
     <Content Include="Images\Update.png" />
     <Content Include="Images\New.png" />
     <Content Include="CSS\Position.css" />
@@ -78,32 +79,40 @@
     <Content Include="Images\Subject.png" />
     <Content Include="Images\Teacher.png" />
     <Content Include="LoggedIn\AuthorPages\Author.aspx" />
-    <Content Include="LoggedIn\AuthorPages\RegisterAuthor.aspx" />
-    <Content Include="LoggedIn\AuthorPages\RemoveAuthor.aspx" />
-    <Content Include="LoggedIn\AuthorPages\UpdateAuthor.aspx" />
-    <Content Include="LoggedIn\AuthorPages\ViewAuthor.aspx" />
+    <Content Include="LoggedIn\AuthorPages\Register.aspx" />
+    <Content Include="LoggedIn\AuthorPages\Remove.aspx" />
+    <Content Include="LoggedIn\AuthorPages\Update.aspx" />
+    <Content Include="LoggedIn\AuthorPages\View.aspx" />
     <Content Include="LoggedIn\BookPages\Book.aspx" />
-    <Content Include="LoggedIn\BookPages\RegisterBook.aspx" />
-    <Content Include="LoggedIn\BookPages\RemoveAuthor.aspx" />
-    <Content Include="LoggedIn\BookPages\RemoveBook.aspx" />
-    <Content Include="LoggedIn\BookPages\UpdateBook.aspx" />
+    <Content Include="LoggedIn\BookPages\Register.aspx" />
+    <Content Include="LoggedIn\BookPages\Remove.aspx" />
+    <Content Include="LoggedIn\BookPages\Update.aspx" />
+    <Content Include="LoggedIn\BookPages\View.aspx" />
     <Content Include="LoggedIn\BudgetPages\Budget.aspx" />
-    <Content Include="LoggedIn\BudgetPages\RegisterBudget.aspx" />
-    <Content Include="LoggedIn\BudgetPages\ViewBudget.aspx" />
+    <Content Include="LoggedIn\BudgetPages\Register.aspx" />
+    <Content Include="LoggedIn\BudgetPages\Remove.aspx" />
+    <Content Include="LoggedIn\BudgetPages\Update.aspx" />
+    <Content Include="LoggedIn\BudgetPages\View.aspx" />
     <Content Include="LoggedIn\ClassPages\Class.aspx" />
-    <Content Include="LoggedIn\ClassPages\RegisterClass.aspx" />
-    <Content Include="LoggedIn\ClassPages\RemoveClass.aspx" />
-    <Content Include="LoggedIn\ClassPages\UpdateClass.aspx" />
-    <Content Include="LoggedIn\ClassPages\ViewClass.aspx" />
+    <Content Include="LoggedIn\ClassPages\Register.aspx" />
+    <Content Include="LoggedIn\ClassPages\Remove.aspx" />
+    <Content Include="LoggedIn\ClassPages\Update.aspx" />
+    <Content Include="LoggedIn\ClassPages\View.aspx" />
     <Content Include="LoggedIn\DoctorPages\Doctor.aspx" />
-    <Content Include="LoggedIn\DoctorPages\RegisterDoctor.aspx" />
-    <Content Include="LoggedIn\DoctorPages\RemoveDoctor.aspx" />
-    <Content Include="LoggedIn\DoctorPages\ViewDoctor.aspx" />
+    <Content Include="LoggedIn\DoctorPages\Register.aspx" />
+    <Content Include="LoggedIn\DoctorPages\Remove.aspx" />
+    <Content Include="LoggedIn\DoctorPages\Update.aspx" />
+    <Content Include="LoggedIn\DoctorPages\View.aspx" />
     <Content Include="LoggedIn\Home.aspx" />
     <Content Include="LoggedIn\PositionPages\Position.aspx" />
-    <Content Include="LoggedIn\PositionPages\RegisterPosition.aspx" />
-    <Content Include="LoggedIn\PositionPages\RemovePosition.aspx" />
-    <Content Include="LoggedIn\PositionPages\ViewPosition.aspx" />
+    <Content Include="LoggedIn\PositionPages\Register.aspx" />
+    <Content Include="LoggedIn\PositionPages\Update.aspx" />
+    <Content Include="LoggedIn\PositionPages\View.aspx" />
+    <Content Include="LoggedIn\SpecializationPages\Register.aspx" />
+    <Content Include="LoggedIn\SpecializationPages\Remove.aspx" />
+    <Content Include="LoggedIn\SpecializationPages\Specialization.aspx" />
+    <Content Include="LoggedIn\SpecializationPages\Update.aspx" />
+    <Content Include="LoggedIn\SpecializationPages\View.aspx" />
     <Content Include="LoggedIn\StudentPages\Register.aspx" />
     <Content Include="LoggedIn\StudentPages\Remove.aspx" />
     <Content Include="LoggedIn\StudentPages\Student.aspx" />
@@ -160,33 +169,33 @@
     <Compile Include="LoggedIn\AuthorPages\Author.aspx.designer.cs">
       <DependentUpon>Author.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LoggedIn\AuthorPages\RegisterAuthor.aspx.cs">
-      <DependentUpon>RegisterAuthor.aspx</DependentUpon>
+    <Compile Include="LoggedIn\AuthorPages\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LoggedIn\AuthorPages\RegisterAuthor.aspx.designer.cs">
-      <DependentUpon>RegisterAuthor.aspx</DependentUpon>
+    <Compile Include="LoggedIn\AuthorPages\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LoggedIn\AuthorPages\RemoveAuthor.aspx.cs">
-      <DependentUpon>RemoveAuthor.aspx</DependentUpon>
+    <Compile Include="LoggedIn\AuthorPages\Remove.aspx.cs">
+      <DependentUpon>Remove.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LoggedIn\AuthorPages\RemoveAuthor.aspx.designer.cs">
-      <DependentUpon>RemoveAuthor.aspx</DependentUpon>
+    <Compile Include="LoggedIn\AuthorPages\Remove.aspx.designer.cs">
+      <DependentUpon>Remove.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LoggedIn\AuthorPages\UpdateAuthor.aspx.cs">
-      <DependentUpon>UpdateAuthor.aspx</DependentUpon>
+    <Compile Include="LoggedIn\AuthorPages\Update.aspx.cs">
+      <DependentUpon>Update.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LoggedIn\AuthorPages\UpdateAuthor.aspx.designer.cs">
-      <DependentUpon>UpdateAuthor.aspx</DependentUpon>
+    <Compile Include="LoggedIn\AuthorPages\Update.aspx.designer.cs">
+      <DependentUpon>Update.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LoggedIn\AuthorPages\ViewAuthor.aspx.cs">
-      <DependentUpon>ViewAuthor.aspx</DependentUpon>
+    <Compile Include="LoggedIn\AuthorPages\View.aspx.cs">
+      <DependentUpon>View.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LoggedIn\AuthorPages\ViewAuthor.aspx.designer.cs">
-      <DependentUpon>ViewAuthor.aspx</DependentUpon>
+    <Compile Include="LoggedIn\AuthorPages\View.aspx.designer.cs">
+      <DependentUpon>View.aspx</DependentUpon>
     </Compile>
     <Compile Include="LoggedIn\BookPages\Book.aspx.cs">
       <DependentUpon>Book.aspx</DependentUpon>
@@ -195,33 +204,33 @@
     <Compile Include="LoggedIn\BookPages\Book.aspx.designer.cs">
       <DependentUpon>Book.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LoggedIn\BookPages\RegisterBook.aspx.cs">
-      <DependentUpon>RegisterBook.aspx</DependentUpon>
+    <Compile Include="LoggedIn\BookPages\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LoggedIn\BookPages\RegisterBook.aspx.designer.cs">
-      <DependentUpon>RegisterBook.aspx</DependentUpon>
+    <Compile Include="LoggedIn\BookPages\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LoggedIn\BookPages\RemoveAuthor.aspx.cs">
-      <DependentUpon>RemoveAuthor.aspx</DependentUpon>
+    <Compile Include="LoggedIn\BookPages\Remove.aspx.cs">
+      <DependentUpon>Remove.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LoggedIn\BookPages\RemoveAuthor.aspx.designer.cs">
-      <DependentUpon>RemoveAuthor.aspx</DependentUpon>
+    <Compile Include="LoggedIn\BookPages\Remove.aspx.designer.cs">
+      <DependentUpon>Remove.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LoggedIn\BookPages\RemoveBook.aspx.cs">
-      <DependentUpon>RemoveBook.aspx</DependentUpon>
+    <Compile Include="LoggedIn\BookPages\Update.aspx.cs">
+      <DependentUpon>Update.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LoggedIn\BookPages\RemoveBook.aspx.designer.cs">
-      <DependentUpon>RemoveBook.aspx</DependentUpon>
+    <Compile Include="LoggedIn\BookPages\Update.aspx.designer.cs">
+      <DependentUpon>Update.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LoggedIn\BookPages\UpdateBook.aspx.cs">
-      <DependentUpon>UpdateBook.aspx</DependentUpon>
+    <Compile Include="LoggedIn\BookPages\View.aspx.cs">
+      <DependentUpon>View.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LoggedIn\BookPages\UpdateBook.aspx.designer.cs">
-      <DependentUpon>UpdateBook.aspx</DependentUpon>
+    <Compile Include="LoggedIn\BookPages\View.aspx.designer.cs">
+      <DependentUpon>View.aspx</DependentUpon>
     </Compile>
     <Compile Include="LoggedIn\BudgetPages\Budget.aspx.cs">
       <DependentUpon>Budget.aspx</DependentUpon>
@@ -230,19 +239,33 @@
     <Compile Include="LoggedIn\BudgetPages\Budget.aspx.designer.cs">
       <DependentUpon>Budget.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LoggedIn\BudgetPages\RegisterBudget.aspx.cs">
-      <DependentUpon>RegisterBudget.aspx</DependentUpon>
+    <Compile Include="LoggedIn\BudgetPages\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LoggedIn\BudgetPages\RegisterBudget.aspx.designer.cs">
-      <DependentUpon>RegisterBudget.aspx</DependentUpon>
+    <Compile Include="LoggedIn\BudgetPages\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LoggedIn\BudgetPages\ViewBudget.aspx.cs">
-      <DependentUpon>ViewBudget.aspx</DependentUpon>
+    <Compile Include="LoggedIn\BudgetPages\Remove.aspx.cs">
+      <DependentUpon>Remove.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LoggedIn\BudgetPages\ViewBudget.aspx.designer.cs">
-      <DependentUpon>ViewBudget.aspx</DependentUpon>
+    <Compile Include="LoggedIn\BudgetPages\Remove.aspx.designer.cs">
+      <DependentUpon>Remove.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoggedIn\BudgetPages\Update.aspx.cs">
+      <DependentUpon>Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoggedIn\BudgetPages\Update.aspx.designer.cs">
+      <DependentUpon>Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoggedIn\BudgetPages\View.aspx.cs">
+      <DependentUpon>View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoggedIn\BudgetPages\View.aspx.designer.cs">
+      <DependentUpon>View.aspx</DependentUpon>
     </Compile>
     <Compile Include="LoggedIn\ClassPages\Class.aspx.cs">
       <DependentUpon>Class.aspx</DependentUpon>
@@ -251,33 +274,33 @@
     <Compile Include="LoggedIn\ClassPages\Class.aspx.designer.cs">
       <DependentUpon>Class.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LoggedIn\ClassPages\RegisterClass.aspx.cs">
-      <DependentUpon>RegisterClass.aspx</DependentUpon>
+    <Compile Include="LoggedIn\ClassPages\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LoggedIn\ClassPages\RegisterClass.aspx.designer.cs">
-      <DependentUpon>RegisterClass.aspx</DependentUpon>
+    <Compile Include="LoggedIn\ClassPages\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LoggedIn\ClassPages\RemoveClass.aspx.cs">
-      <DependentUpon>RemoveClass.aspx</DependentUpon>
+    <Compile Include="LoggedIn\ClassPages\Remove.aspx.cs">
+      <DependentUpon>Remove.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LoggedIn\ClassPages\RemoveClass.aspx.designer.cs">
-      <DependentUpon>RemoveClass.aspx</DependentUpon>
+    <Compile Include="LoggedIn\ClassPages\Remove.aspx.designer.cs">
+      <DependentUpon>Remove.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LoggedIn\ClassPages\UpdateClass.aspx.cs">
-      <DependentUpon>UpdateClass.aspx</DependentUpon>
+    <Compile Include="LoggedIn\ClassPages\Update.aspx.cs">
+      <DependentUpon>Update.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LoggedIn\ClassPages\UpdateClass.aspx.designer.cs">
-      <DependentUpon>UpdateClass.aspx</DependentUpon>
+    <Compile Include="LoggedIn\ClassPages\Update.aspx.designer.cs">
+      <DependentUpon>Update.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LoggedIn\ClassPages\ViewClass.aspx.cs">
-      <DependentUpon>ViewClass.aspx</DependentUpon>
+    <Compile Include="LoggedIn\ClassPages\View.aspx.cs">
+      <DependentUpon>View.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LoggedIn\ClassPages\ViewClass.aspx.designer.cs">
-      <DependentUpon>ViewClass.aspx</DependentUpon>
+    <Compile Include="LoggedIn\ClassPages\View.aspx.designer.cs">
+      <DependentUpon>View.aspx</DependentUpon>
     </Compile>
     <Compile Include="LoggedIn\DoctorPages\Doctor.aspx.cs">
       <DependentUpon>Doctor.aspx</DependentUpon>
@@ -286,26 +309,33 @@
     <Compile Include="LoggedIn\DoctorPages\Doctor.aspx.designer.cs">
       <DependentUpon>Doctor.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LoggedIn\DoctorPages\RegisterDoctor.aspx.cs">
-      <DependentUpon>RegisterDoctor.aspx</DependentUpon>
+    <Compile Include="LoggedIn\DoctorPages\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LoggedIn\DoctorPages\RegisterDoctor.aspx.designer.cs">
-      <DependentUpon>RegisterDoctor.aspx</DependentUpon>
+    <Compile Include="LoggedIn\DoctorPages\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LoggedIn\DoctorPages\RemoveDoctor.aspx.cs">
-      <DependentUpon>RemoveDoctor.aspx</DependentUpon>
+    <Compile Include="LoggedIn\DoctorPages\Remove.aspx.cs">
+      <DependentUpon>Remove.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LoggedIn\DoctorPages\RemoveDoctor.aspx.designer.cs">
-      <DependentUpon>RemoveDoctor.aspx</DependentUpon>
+    <Compile Include="LoggedIn\DoctorPages\Remove.aspx.designer.cs">
+      <DependentUpon>Remove.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LoggedIn\DoctorPages\ViewDoctor.aspx.cs">
-      <DependentUpon>ViewDoctor.aspx</DependentUpon>
+    <Compile Include="LoggedIn\DoctorPages\Update.aspx.cs">
+      <DependentUpon>Update.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LoggedIn\DoctorPages\ViewDoctor.aspx.designer.cs">
-      <DependentUpon>ViewDoctor.aspx</DependentUpon>
+    <Compile Include="LoggedIn\DoctorPages\Update.aspx.designer.cs">
+      <DependentUpon>Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoggedIn\DoctorPages\View.aspx.cs">
+      <DependentUpon>View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoggedIn\DoctorPages\View.aspx.designer.cs">
+      <DependentUpon>View.aspx</DependentUpon>
     </Compile>
     <Compile Include="LoggedIn\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
@@ -321,26 +351,61 @@
     <Compile Include="LoggedIn\PositionPages\Position.aspx.designer.cs">
       <DependentUpon>Position.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LoggedIn\PositionPages\RegisterPosition.aspx.cs">
-      <DependentUpon>RegisterPosition.aspx</DependentUpon>
+    <Compile Include="LoggedIn\PositionPages\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LoggedIn\PositionPages\RegisterPosition.aspx.designer.cs">
-      <DependentUpon>RegisterPosition.aspx</DependentUpon>
+    <Compile Include="LoggedIn\PositionPages\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LoggedIn\PositionPages\RemovePosition.aspx.cs">
-      <DependentUpon>RemovePosition.aspx</DependentUpon>
+    <Compile Include="LoggedIn\PositionPages\Update.aspx.cs">
+      <DependentUpon>Update.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LoggedIn\PositionPages\RemovePosition.aspx.designer.cs">
-      <DependentUpon>RemovePosition.aspx</DependentUpon>
+    <Compile Include="LoggedIn\PositionPages\Update.aspx.designer.cs">
+      <DependentUpon>Update.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LoggedIn\PositionPages\ViewPosition.aspx.cs">
-      <DependentUpon>ViewPosition.aspx</DependentUpon>
+    <Compile Include="LoggedIn\PositionPages\View.aspx.cs">
+      <DependentUpon>View.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LoggedIn\PositionPages\ViewPosition.aspx.designer.cs">
-      <DependentUpon>ViewPosition.aspx</DependentUpon>
+    <Compile Include="LoggedIn\PositionPages\View.aspx.designer.cs">
+      <DependentUpon>View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoggedIn\SpecializationPages\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoggedIn\SpecializationPages\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoggedIn\SpecializationPages\Remove.aspx.cs">
+      <DependentUpon>Remove.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoggedIn\SpecializationPages\Remove.aspx.designer.cs">
+      <DependentUpon>Remove.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoggedIn\SpecializationPages\Specialization.aspx.cs">
+      <DependentUpon>Specialization.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoggedIn\SpecializationPages\Specialization.aspx.designer.cs">
+      <DependentUpon>Specialization.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoggedIn\SpecializationPages\Update.aspx.cs">
+      <DependentUpon>Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoggedIn\SpecializationPages\Update.aspx.designer.cs">
+      <DependentUpon>Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoggedIn\SpecializationPages\View.aspx.cs">
+      <DependentUpon>View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoggedIn\SpecializationPages\View.aspx.designer.cs">
+      <DependentUpon>View.aspx</DependentUpon>
     </Compile>
     <Compile Include="LoggedIn\StudentPages\Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>

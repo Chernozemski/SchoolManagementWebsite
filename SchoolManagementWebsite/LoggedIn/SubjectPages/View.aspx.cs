@@ -16,6 +16,7 @@ namespace SchoolManagementWebsite.LoggedIn.SubjectPages
 
         protected void teacherList_DataBound(object sender, EventArgs e)
         {
+            //Set the subject name to the teacher gridview
             if (viewSubject.SelectedIndex >= 0)
             teacherList.HeaderRow.Cells[0].Text = viewSubject.SelectedRow.Cells[1].Text;
         }

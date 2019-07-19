@@ -32,14 +32,18 @@ namespace BusinessLayer
             else
                 return false;
         }
+        public static void resetSessionInfo()
+        {
+            HttpContext.Current.Session["UserName"] = null;
+            HttpContext.Current.Session["Rank"] = null;
+            HttpContext.Current.Session["EGN"] = null;
+        }
         public static void redirectUser(bool isUserAuthorized,string toPage)
         {
             if (!isUserAuthorized)
             {
+                resetSessionInfo();
                 HttpContext.Current.Server.Transfer(toPage+".aspx", false);
-                HttpContext.Current.Session["Rank"] = 10;
-                HttpContext.Current.Session["EGN"] = null;
-                HttpContext.Current.Session["UserName"] = null;
             }
         }
         public static void hideFirstRow(ref System.Web.UI.WebControls.GridView gridView)
@@ -69,9 +73,8 @@ namespace BusinessLayer
             //Get the row.
             System.Data.DataRowView dataRowView = (System.Data.DataRowView)e.Row.DataItem;
 
-            //Check if the row is a datarow AND it is NOT edit row.
-                //The database can have null photos, so every null photo is set to Missing.png from the project folder.
-                if (!Convert.IsDBNull(dataRowView["Photo"]))
+            //The database can have null photos, so every null photo is set to Missing.png from the project folder.
+            if (!Convert.IsDBNull(dataRowView["Photo"]))
                 {
                     //Convert the array to a readable image.
                     return "data:Image/jpg;base64," + Convert.ToBase64String((byte[])dataRowView["Photo"]);
@@ -81,13 +84,32 @@ namespace BusinessLayer
                     return @"..\..\Images\Missing.png";
                 }
         }
-        public static Label SetMessage(ObjectDataSourceStatusEventArgs e,Label lblMessage)
+        public static void SetMessage(ObjectDataSourceStatusEventArgs e, ref Label lblMessage)
         {
+            //get output parameters and assing to label
             lblMessage.Text = e.OutputParameters["Message"].ToString();
             lblMessage.ForeColor = (System.Drawing.Color)e.OutputParameters["Color"];
-            //get output parameters and assing to label
+        }
+        public static void getAndUpdateImage(GridViewUpdateEventArgs e,ref GridView gridView,ref ObjectDataSource getAndUpdate)
+        {
+            //Find the uploaded image and convert it to array, then to string and store it.
+            FileUpload fileUpload = gridView.Rows[e.RowIndex].FindControl("fileUploadPhoto") as FileUpload;
+            if (fileUpload.HasFile)
+            {
+                byte[] img = BusinessLayer.SharedMethods.getImage(fileUpload);
+                string base64 = Convert.ToBase64String(img);
 
-            return lblMessage;
+                getAndUpdate.UpdateParameters["Photo"].DefaultValue = base64;
+            }
+        }
+        public static void setPhotoPerRowOnUpdate(GridViewRowEventArgs e, ref GridView gridView)
+        {
+            //Check if the row is a datarow AND it is NOT edit row.
+            if (e.Row.RowType == DataControlRowType.DataRow && gridView.EditIndex != e.Row.RowIndex)
+            {
+                //Call method to get url, return either Missing.png or string image
+                (e.Row.FindControl("Photo") as Image).ImageUrl = BusinessLayer.SharedMethods.loadImage(e);
+            }
         }
     }
 }

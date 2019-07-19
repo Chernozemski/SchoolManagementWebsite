@@ -19,7 +19,7 @@ namespace BusinessLayer.Student
 
             if (DoctorId == 0)
             {
-                return new object[] { "Доктор с това име не е записан в базата данни.", Color.DarkRed };
+                return new object[] { "Доктор с това име не е записан.", Color.DarkRed };
             }
             else if (image.Length == 0)
             {
@@ -45,11 +45,11 @@ namespace BusinessLayer.Student
             switch (result)
             {
                 case 1 :
-                    return new object[] { "Успешно вписване.", Color.Green };
+                    return new object[] { "Успешно записване.", Color.Green };
                 case -1 :
                     return new object[] {"Класът не съществува.",Color.DarkRed};
                 case -2 :
-                    return new object[] {"Доктор с това име не е вписан в базата данни.",Color.DarkRed};
+                    return new object[] { "Доктор с това име не е записване.", Color.DarkRed };
                 case -3 :
                     return new object[] { "ЕГН - то на ученика трябва да е 10 цифри.", Color.DarkRed };
                 case -4 :
@@ -57,7 +57,7 @@ namespace BusinessLayer.Student
                 case -5 :
                     return new object[] { "Телефонният номер на родителя трябва да е 10 цифри", Color.DarkRed };
                 case -6:
-                    return new object[] { "Ученикът вече е вписан в базата данни.", Color.DarkRed };
+                    return new object[] { "Ученикът вече е записване.", Color.DarkRed };
                 default :
                     return new object[] { "Възникна проблем, който не е разпознат от системата.", Color.DarkRed };
             }

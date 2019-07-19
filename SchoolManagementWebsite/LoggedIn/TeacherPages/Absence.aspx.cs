@@ -42,8 +42,7 @@ namespace SchoolManagementWebsite.LoggedIn.TeacherPages
         }
         protected void GridView2_DataBound(object sender, EventArgs e)
         {
-            //Hide first row (dummy row)
-            BusinessLayer.SharedMethods.hideFirstRow(ref GridView2);
+
         }
 
         protected void GridView2_RowDataBound(object sender, GridViewRowEventArgs e)

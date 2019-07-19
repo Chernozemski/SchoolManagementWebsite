@@ -10,7 +10,7 @@
         <Columns>
             <asp:TemplateField ShowHeader="False" HeaderText="Команда">
                 <FooterTemplate>
-                    <asp:Button ID="btnInsert" runat="server" OnClick="btnInsert_Click" Text="Вписване" />
+                    <asp:Button ID="btnInsert" runat="server" OnClick="btnInsert_Click" Text="Записване" />
                 </FooterTemplate>
                 <ItemTemplate>
                     <asp:Button ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" Text="Изтриване" OnClientClick="return confirm('Сигурни ли сте че искате да изтриете този запис ?')"></asp:Button>

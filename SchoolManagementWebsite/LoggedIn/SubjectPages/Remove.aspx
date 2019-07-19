@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Отписване на предмет</h2>
-    <asp:GridView ID="subject" runat="server" AllowPaging="True" DataKeyNames="Id" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataSourceID="getAndDeleteSubject" ForeColor="#333333" GridLines="None" >
+    <asp:GridView ID="subject" runat="server" AllowPaging="True" DataKeyNames="Id" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataSourceID="getAndDeleteSubject" ForeColor="#333333" GridLines="None" PageSize="5" >
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:TemplateField HeaderText="Команда" ShowHeader="False">

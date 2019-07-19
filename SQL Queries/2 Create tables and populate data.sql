@@ -12,7 +12,7 @@ Create Table tblPosition
 Id int identity(1,1) primary key,
 
 Position nvarchar(50) not null,
-Salary int not null
+Salary decimal(9,2) not null
 )
 
 Create Table tblTeacherInfo
@@ -36,7 +36,7 @@ Photo varbinary(max) null Default null,
 Constraint FK_SubjectId_tblSubject Foreign Key (SubjectId)
 References tblSubject(Id) On Delete No Action,
 Constraint FK_PositionId_tblPosition Foreign Key (PositionId)
-References tblPosition(Id) On Delete Cascade
+References tblPosition(Id) On Delete No Action
 
 )
 
@@ -101,7 +101,7 @@ FirstName nvarchar(20) Not null,
 MiddleName nvarchar(20) Not null,
 FamilyName nvarchar(20) Not null,
 
-EGN varchar(10) check (Len(EGN)=10 and IsNumeric(EGN) = 1),
+EGN varchar(10) unique check (Len(EGN)=10 and IsNumeric(EGN) = 1),
 PhoneNumber varchar(10) check (Len(PhoneNumber)=10 and IsNumeric(PhoneNumber) = 1),
 Adress nvarchar(50) Not null,
 Photo varbinary(max) null Default null,
@@ -110,7 +110,7 @@ ClassId int null,
 DoctorId int null,
 
 ParentFullName nvarchar(60) not null,
-ParentPhoneNumber nvarchar(50) not null,
+ParentPhoneNumber varchar(10) not null,
 ParentAdress nvarchar(50) null
 
 Constraint Fk_ClassId_tblClass Foreign Key (ClassId)
@@ -145,19 +145,75 @@ Id int primary key identity(1,1)
 
 Create Table tblBook(
 Id int primary key identity(1,1)
-,Name nvarchar(20)
-,PublisherId int
-,Grade int check (Grade > 0 And Grade < 13)
-,SubjectId int
-,PublishedYear int check (PublishedYear > 1950 And PublishedYear <= GetDate())
-,Quantity int
+,Name nvarchar(20) not null
+,PublisherId int  not null
+,Grade int check (Grade > 0 And Grade < 13)  not null
+,SubjectId int not null
+,PublishedYear int check (PublishedYear > 1950 And PublishedYear <= GetDate())  not null
+,Quantity int not null
 
 ,Constraint FK_Subject_tblSubject Foreign Key (SubjectId)
 References tblSubject(Id) 
 On Delete Cascade
 ,Constraint Fk_PublisherId_tblAuthor Foreign Key (PublisherId)
 References tblAuthor(Id)
+On Delete No Action 
 )
+
+Create Table tblOperationType(
+Id int primary key identity(1,1)
+,Operation nvarchar(10) unique not null
+)
+
+Create Table tblOperationLength(
+Id int primary key identity(1,1)
+,Payment nvarchar(20) unique not null
+)
+
+Create Table tblBudgetType(
+Id int primary key identity(1,1)
+,Item nvarchar(50) unique not null
+,OperationTypeId int not null
+,OperationLengthId int not null
+
+Constraint FK_OperationTypeId_tblOperationType Foreign Key (OperationTypeId)
+References tblOperationType(Id)
+,Constraint FK_OperationLengthId_tblOperationLength Foreign Key (OperationLengthId)
+References tblOperationLength(Id)
+)
+
+Create Table tblBudget(
+Id int primary key identity(1,1)
+,BudgetTypeId int not null
+,DescriptionForItem nvarchar(500) null
+,Amount decimal(9,2) not null
+,OnDate smalldatetime null
+
+Constraint FK_BudgetTypeId Foreign Key (BudgetTypeId)
+References tblBudgetType(Id)
+)
+
+Insert into tblOperationType
+Values (N'Приход')
+Insert into tblOperationType
+Values (N'Разход')
+
+Insert into tblOperationLength
+Values (N'Един път')
+Insert into tblOperationLength
+Values (N'Седмичен')
+Insert into tblOperationLength
+Values (N'Месечен')
+Insert into tblOperationLength
+Values (N'Годишен')
+
+Insert into tblBudgetType
+Values (N'Дарение',1,1)
+Insert into tblBudgetType
+Values (N'Канцеларски материали',2,3)
+
+Insert into tblBudget
+Values (1,N'Дарение от гн.Петров за построяването на физкултурен салон.',10000.00,SYSDATETIME())
 
 Insert into tblAuthor
 Values (N'Просвета')

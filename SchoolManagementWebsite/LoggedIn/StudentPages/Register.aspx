@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-        <h2>Вписване на ученик</h2>
+        <h2>Записване на ученик</h2>
     <table class="BigText">
         <tr>
             <td>Собствено име :
@@ -152,7 +152,7 @@
         </tr>
         <tr>
             <td colspan="2">
-              <asp:Button ID="btnRegister" runat="server" Text="Вписване"  CssClass="bigButton BigText" ValidationGroup="Register" OnClick="btnRegister_Click" />
+              <asp:Button ID="btnRegister" runat="server" Text="Записване"  CssClass="bigButton BigText" ValidationGroup="Register" OnClick="btnRegister_Click" />
             </td>
         </tr>
     </table>

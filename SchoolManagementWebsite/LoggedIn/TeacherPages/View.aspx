@@ -4,13 +4,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Преглед на учителският състав</h2>
-    <asp:GridView ID="getTeacher" runat="server" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataSourceID="getTeacherView" ForeColor="#333333" GridLines="None" OnRowDataBound="getTeacher_RowDataBound" AllowSorting="True">
+    <asp:GridView ID="getTeacher" runat="server" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataSourceID="getTeacherView" ForeColor="#333333" GridLines="None" OnRowDataBound="getTeacher_RowDataBound" AllowSorting="True" OnLoad="getTeacher_Load" PageSize="5">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:TemplateField HeaderText="Снимка">
-                <EditItemTemplate>
-                    <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-                </EditItemTemplate>
                 <ItemTemplate>
                     <asp:Image ID="Photo" runat="server" CssClass="resizeImageSmall" />
                 </ItemTemplate>

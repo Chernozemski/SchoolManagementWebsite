@@ -1,23 +1,10 @@
 ﻿Use SchoolManagementDB
 Go
 
-Create view vwTeacherInfoId_tblTeacherInfo As
+Create view vwTeacherInfo_tblTeacherInfo As
 	Select tblTeacherInfo.Id,FirstName + ' ' + MiddleName + ' ' + FamilyName As FullName
-	, tblSubject.SubjectName,  STUFF(STUFF(PhoneNumber,7,0,'-'),4,0,'-') as PhoneNumber
-	, Adress, tblPosition.Position, Photo, Convert(varchar,tblClass.Grade) + ' ' + tblClass.Letter as Class
-	From tblTeacherInfo
-	Left join tblSubject
-	On SubjectId = tblSubject.Id
-	Left join tblPosition
-	On tblPosition.Id = tblTeacherInfo.PositionId
-	Left join tblClass
-	On tblClass.ClassTeacherEGN = tblTeacherInfo.EGN
-Go
-
-Create View vwTeacherInfo_tblTeacherInfo As
-	Select FirstName + ' ' + MiddleName + ' ' + FamilyName As FullName
-	, tblSubject.SubjectName,  STUFF(STUFF(PhoneNumber,7,0,'-'),4,0,'-') as PhoneNumber
-	, Adress, tblPosition.Position, Photo, Convert(varchar,tblClass.Grade) + ' ' + tblClass.Letter as Class
+	,tblSubject.Id As SubjectId, tblSubject.SubjectName,  STUFF(STUFF(PhoneNumber,7,0,'-'),4,0,'-') as PhoneNumber
+	, Adress,tblPosition.Id As PositionId, tblPosition.Position, Photo, Convert(varchar,tblClass.Grade) + ' ' + tblClass.Letter as Class
 	From tblTeacherInfo
 	Left join tblSubject
 	On SubjectId = tblSubject.Id
@@ -28,7 +15,7 @@ Create View vwTeacherInfo_tblTeacherInfo As
 Go
 
 Create View vwTeacherInfoFull_tblteacherInfo As
-Select a.Id,FirstName,MiddleName,FamilyName,b.SubjectName,EGN,PhoneNumber,Adress,c.Position,Photo
+Select a.Id,FirstName,MiddleName,FamilyName,a.SubjectId,b.SubjectName,EGN,PhoneNumber,Adress,a.PositionId,c.Position,Photo
 From tblTeacherInfo a
 
 Left Join tblSubject b
@@ -37,16 +24,32 @@ Left Join tblPosition c
 On c.Id = a.PositionId
 Go
 
-Create View vwTeacherInfoNameAndSubjectId_tblTeacherInfo As
-	Select SubjectId,tblSubject.SubjectName,FirstName + ' ' + MiddleName + ' ' + FamilyName As FullName From tblTeacherInfo
-	Inner Join tblSubject
-	On tblSubject.Id = tblTeacherInfo.SubjectId
+Create View vwBudgetTypeFull_tblBudgetType As
+	Select a.Id,a.Item,a.OperationTypeId,b.Operation as OperationType,a.OperationLengthId,c.Payment as OperationLength
+	From tblBudgetType a
+	Left Join tblOperationType b
+	On a.OperationTypeId = b.Id
+	Left Join tblOperationLength c
+	On a.OperationLengthId = c.Id
 Go
 
-Create View vwClass_tblClass As 
+Create View vwBudgetFull_tblBudget As
+	Select a.Id,b.Id as ItemId,b.Item,c.Operation,d.Payment,a.DescriptionForItem,a.Amount,a.OnDate
+	From tblBudget a
+	Left Join tblBudgetType b
+	On a.BudgetTypeId = b.Id
+	Left Join tblOperationType c
+	On b.OperationTypeId = c.Id
+	Left Join tblOperationLength d
+	On b.OperationLengthId = d.Id
+Go
+
+
+Create View vwClassFull_tblClass As 
 	Select tblClass.Id
-	,(Convert(nvarchar,Grade)) + ' ' + Letter as FullClassName, tblSpecialization.Specialization
-	, tblTeacherInfo.FirstName + ' ' + tblTeacherInfo.MiddleName + ' ' +tblTeacherInfo.FamilyName As FullTeacherName
+	,Grade, Letter
+	,tblSpecialization.Id As SpecializationId, tblSpecialization.Specialization
+	,tblTeacherInfo.EGN As ClassTeacherEGN, tblTeacherInfo.FirstName + ' ' + tblTeacherInfo.MiddleName + ' ' +tblTeacherInfo.FamilyName As FullTeacherName
 
 	From tblClass
 	Inner Join tblSpecialization
@@ -55,6 +58,17 @@ Create View vwClass_tblClass As
 	On tblTeacherInfo.EGN = tblClass.ClassTeacherEGN
 Go
 
+Create View vwClassWithId_tblClass As
+Select Id,Convert(nvarchar,Grade) + ' ' + Letter As FullClassName From tblClass
+Go
+
+Create View vwSpecializationWithClassCount_tblSpecialization As
+	Select a.Id,a.Specialization, Count(b.Id) As NumberOfClasses From tblSpecialization a
+	Left Join tblClass b
+	On a.Id = b.SpecializationId
+	Group By a.Id,a.Specialization
+ Go
+
 Create View vwSubject_tblSubject As
 	Select a.Id,SubjectName, Count(b.SubjectId) As NumberOfTeachers From tblSubject a
 	Left Join tblTeacherInfo b
@@ -62,11 +76,27 @@ Create View vwSubject_tblSubject As
 	Group By a.Id,SubjectName
 Go
 
-Create View vwStudentInfo_tblStudentInfo AS
+Create View vwStudentInfoWithId_tblStudentInfo AS
 	Select a.Id
 	,a.FirstName + ' ' + a.MiddleName + ' ' + a.FamilyName as FullName
 	, STUFF(STUFF(a.PhoneNumber,7,0,'-'),4,0,'-') as PhoneNumber
 	, Adress, a.Photo
+	, Convert(nvarchar,b.Grade) + ' ' + b.Letter as Grade
+	, c.FirstName + ' ' + c.FamilyName as DoctorFullName
+	, ParentFullName, ParentPhoneNumber, ParentAdress
+
+	From tblStudentInfo a
+	Left Join tblClass b
+	On b.Id = a.ClassId
+	Left Join tblDoctor c
+	On c.Id = a.DoctorId
+Go
+
+Create View vwStudentInfoFull_tblStudentInfo AS
+	Select a.Id
+	,a.FirstName,a.MiddleName,a.FamilyName
+	,a.PhoneNumber
+	, Adress,EGN, a.Photo, a.ClassId, a.DoctorId
 	, Convert(nvarchar,b.Grade) + ' ' + b.Letter as Grade
 	, c.FirstName + ' ' + c.FamilyName as DoctorFullName
 	, ParentFullName, ParentPhoneNumber, ParentAdress
@@ -93,10 +123,53 @@ Create view vwPublisherInfo_tblAuthor As
 	From tblAuthor a
 Go
 
-Create View vwDoctor_tblDoctor As
-	SELECT [Id], [FirstName]+ ' ' + [FamilyName] As FullName
+Create View vwDoctorFull_tblDoctor As
+	SELECT [Id], [FirstName], [FamilyName]
 	,  STUFF(STUFF([PhoneNumber],7,0,'-'),4,0,'-') As PhoneNumber 
 	FROM [tblDoctor]
+Go
+
+Create View vwDoctorWithId_tblDoctor As
+	SELECT [Id], [FirstName]+ ' ' + [FamilyName] As FullDoctorName
+	FROM [tblDoctor]
+Go
+
+Create View vwPositionWithStaffCount_tblPosition As
+	Select a.Id,Position,Salary,Count(b.Id) as StaffCount
+	From tblPosition a
+	Left Join tblTeacherInfo b
+	On a.Id = b.PositionId
+	Group By a.Id,Position,Salary
+Go
+
+Create View vwAuthorWithBookCount_tblAuthor As
+	Select a.Id,a.Publisher,Count(b.Id) as BookCount
+	From tblAuthor a
+	Left Join tblBook b
+	On a.Id = b.PublisherId
+	Group by a.Id,a.Publisher
+Go
+
+Create View vwBook_tblBook As
+	Select a.Id,a.Name
+	,b.Publisher,a.Grade,c.SubjectName
+	,a.PublishedYear,a.Quantity
+	From tblBook a
+	Left Join tblAuthor b
+	On a.PublisherId = b.Id
+	Left Join tblSubject c
+	On a.SubjectId = c.Id
+Go
+
+Create View vwBookFull_tblBook As
+	Select a.Id,a.Name,a.PublisherId
+	,b.Publisher,a.Grade,a.SubjectId,c.SubjectName
+	,a.PublishedYear,a.Quantity
+	From tblBook a
+	Left Join tblAuthor b
+	On a.PublisherId = b.Id
+	Left Join tblSubject c
+	On a.SubjectId = c.Id
 Go
 
 Create Procedure spAddTeacher_tblTeacherInfo
@@ -113,15 +186,13 @@ Create Procedure spAddTeacher_tblTeacherInfo
 
 AS
 Begin
-	--Check if director position already established and return 0.
-If ((select COUNT(PositionId) from tblTeacherInfo Where PositionId=1) > 0 And @Position=1)
+If ((@Position=1) And Exists (Select PositionId from tblTeacherInfo Where PositionId=1))
 		Begin
 			Select 0 --Director position is taken
 		End
 Else
 	Begin
-		--Check if teacher already has registered with the same position.
-	If ((Select COUNT(Id) from tblTeacherInfo Where EGN = @EGN And SubjectId = @SubjectId) > 0)
+	If Exists  (Select Id from tblTeacherInfo Where EGN = @EGN And SubjectId = @SubjectId)
 		Begin
 			Select -1 --Already registered with same EGN and subject.
 		End
@@ -151,19 +222,19 @@ Create Procedure spUpdateTeacherInfo_tblTeacherInfo
 )
 As
 Begin
-	If ((Select Count(Id) From tblSubject Where Id = @SubjectId) < 1)
+	If Not Exists (Select Id From tblSubject Where Id = @SubjectId)
 		Begin
 			Set @ResultNumber = 0 --Subject ID is not valid.
 		End
 	Else
 		Begin
-			If ((Select Count(Id) From tblPosition Where Id = @PositionId) < 1)
+			If Not Exists (Select Id From tblPosition Where Id = @PositionId)
 				Begin
 					Set @ResultNumber = -1 --Position does not exist.
 				End
 			Else
 				Begin
-					If (@PositionId = 1 And (Select Count(Id) From tblTeacherInfo Where PositionId = 1) > 1)
+					If ((@PositionId = 1) And Exists (Select Id From tblTeacherInfo Where PositionId = 1))
 						Begin
 							Set @ResultNumber = -2 --Director position already taken.
 						End
@@ -175,7 +246,7 @@ Begin
 									Set FirstName = @FirstName,MiddleName=@MiddleName,FamilyName = @FamilyName,SubjectId=@SubjectId,EGN =@EGN,Adress=@Adress,PositionId=@PositionId
 									Where Id = @Id
 
-									Set @ResultNumber = 2 --Successes !without! changed photo.
+									Set @ResultNumber = 2 --Successes WITHOUT changed photo.
 								End
 							Else
 								Begin
@@ -193,31 +264,50 @@ Go
 
 
 Create Procedure spAddPosition_tblPosition
-@Position nvarchar(20),
-@Salary int
-As
-Begin
-	Insert into tblPosition 
-	Values (@Position,@Salary)
-End
-Go 
+(
+@Position nvarchar(20)
+,@Salary decimal(9,2)
 
-Create Procedure spGetPosition_tblPosition
+,@ResultNumber int Output
+)
 As
 Begin
-	Select Id,Position From tblPosition
+If Exists (Select Id From tblPosition Where Lower(Replace(Position,' ','')) = Lower(Replace(@Position,' ','')))
+	Begin
+		Set @ResultNumber = 0 --Position already exists.
+	End
+	Else
+		Begin
+			Insert into tblPosition 
+			Values (@Position,@Salary)
+
+			Set @ResultNumber = 1 --Success.
+		End
 End
-Go 
+Go
 
 Create Procedure spUpdatePosition_tblPosition
-@Id int,
-@Position nvarchar(20),
-@Salary int
+(
+@Id int
+,@Position nvarchar(20)
+,@Salary decimal(9,2)
+
+,@ResultNumber int Output
+)
 As
 Begin
-	Update tblPosition
-	Set Position = @Position, Salary = @Salary
-	Where Id = @Id
+If Exists (Select Id From tblPosition Where Lower(Replace(Position,' ','')) = Lower(Replace(@Position,' ','')) And Id <> @Id)
+	Begin
+		Set @ResultNumber = 0 --This position already exists.
+	End
+Else
+	Begin
+		Update tblPosition
+		Set Position = @Position, Salary = @Salary
+		Where Id = @Id
+
+		Set @ResultNumber = 1 --Success.
+	End
 End
 Go 
 
@@ -238,10 +328,10 @@ If (@Id = -1)
 		Set @ResultNum = -1
 	End
 	--Check if Id has an account.
-Else If  ((Select Count(Id) from tblTeacherAccount Where Id = @Id) = 0)
+Else If Not Exists  (Select Id from tblTeacherAccount Where Id = @Id)
 	Begin
 	--Check if username exist. Return 1 for successful registration.
-	If ((Select Count(UserName) from tblTeacherAccount Where UserName=@UserName) = 0)
+	If Not Exists (Select UserName from tblTeacherAccount Where UserName=@UserName)
 		Begin
 			Insert into tblTeacherAccount
 			Values (@Id,@UserName,@Password)
@@ -281,7 +371,7 @@ Create Procedure spLoginTeacher_tblTeacherAccount
 As
 Begin
 	--Check if user exists and return 1 for yes.
-	If ((Select Count(UserName) From tblTeacherAccount Where @UserName = UserName and @Password = PasswordKey) = 1)
+	If Exists (Select Id From tblTeacherAccount Where @UserName = UserName and @Password = PasswordKey)
 		Begin
 			Select 1 --Successes.
 		End
@@ -296,7 +386,7 @@ Create Procedure spGetTeacherEGNByFullName_tblTeacherInfo
 @TeacherName nvarchar(50)
 As
 Begin
-	If ((Select COUNT(Id) From tblTeacherInfo Where @TeacherName = (FirstName + ' ' + MiddleName + ' ' + FamilyName)) > 0)
+	If Exists (Select Id From tblTeacherInfo Where @TeacherName = (FirstName + ' ' + MiddleName + ' ' + FamilyName))
 		Begin
 			(Select Top 1 EGN From tblTeacherInfo Where @TeacherName = (FirstName + ' ' + MiddleName + ' ' + FamilyName))
 		End
@@ -307,16 +397,17 @@ Begin
 End
 Go
 
-Create Procedure spCreateClass_tblClass
-@ClassGrade int,
-@ClassLetter nvarchar(1),
-@SpecializationId int,
-@ClassTeacherEGN varchar(10)
+Create Procedure spAddClass_tblClass
+@ClassGrade int
+,@ClassLetter nvarchar(1)
+,@SpecializationId int
+,@ClassTeacherEGN varchar(10)
+,@ResultNumber int Output
 As
 Begin
 	If (@ClassGrade > 12 Or @ClassGrade < 1)
 		Begin
-			Select -5
+			Set @ResultNumber = -5
 		End
 	Else
 		Begin
@@ -324,44 +415,44 @@ Begin
 			If (@ClassLetter Like N'[А-Я]')
 				Begin
 					--Check if teacher exists
-					If((Select COUNT(Id) From tblTeacherInfo Where EGN=@ClassTeacherEGN) > 0)
+					If Exists (Select Id From tblTeacherInfo Where EGN=@ClassTeacherEGN)
 						Begin
 							--Check if class does NOT exits
-							If((Select COUNT(Id) From tblClass Where Grade = @ClassGrade And Letter = @ClassLetter) = 0)
+							If Not Exists (Select Id From tblClass Where Grade = @ClassGrade And Letter = @ClassLetter)
 								Begin
 									--Check if there is specialization matching this id
-									If((Select COUNT(Id) From tblSpecialization Where Id = @SpecializationId) > 0)
+									If Exists (Select Id From tblSpecialization Where Id = @SpecializationId)
 										Begin
 											--Check if teacher has NOT been registered in a class
-											If ((Select COUNT(Id) From tblClass Where ClassTeacherEGN = @ClassTeacherEGN) = 0)
+											If Not Exists (Select Id From tblClass Where ClassTeacherEGN = @ClassTeacherEGN)
 												Begin
 													Insert Into tblClass
 													Values (@ClassGrade,@ClassLetter,@SpecializationId,@ClassTeacherEGN)
-													Select 1 --Successesful registation
+													Set @ResultNumber =  1 --Successesful registation
 												End
 											Else
 												Begin
-													Select 0 --Teacher already registered
+													Set @ResultNumber =  0 --Teacher already registered
 												End
 										End
 									Else
 										Begin
-											Select -1 --Wrong specialization id
+											Set @ResultNumber =  -1 --Wrong specialization id
 										End
 								End
 							Else
 								Begin
-									Select -2 --Class already exists
+									Set @ResultNumber =  -2 --Class already exists
 								End
 						End
 					Else
 						Begin
-							Select -3 --Teacher dosent exist
+							Set @ResultNumber =  -3 --Teacher dosent exist
 						End
 				End
 			Else
 				Begin
-					Select -4 --No proper letter chosen
+					Set @ResultNumber =  -4 --No proper letter chosen
 				End
 		End
 End
@@ -432,51 +523,33 @@ Create Procedure spAddStudent_tblStudentInfo
 )
 AS
 Begin
-	If ((Select Count(Id) From tblClass Where tblClass.Id = @ClassId) = 0)
+	If Not Exists (Select Id From tblClass Where tblClass.Id = @ClassId)
 		Begin
 			Set @ResultNumber = -1 --The class does not exist.
 		End
 
 	Else
 		Begin
-			If ((Select Count(Id) From tblDoctor Where tblDoctor.Id = @DoctorId) = 0)
+			If Not Exists (Select Id From tblDoctor Where tblDoctor.Id = @DoctorId)
 				Begin
 					Set @ResultNumber =  -2 --The doctor does not exist.
 				End
 			Else
 				Begin
-					If (Len(@EGN) <> 10)
-						Begin
-							Set @ResultNumber =  -3 --EGN is not 10 chars long.
+							If Not Exists (Select Id From tblStudentInfo Where EGN = @EGN)
+								Begin
+									Insert Into tblStudentInfo
+									Values (@FirstName,@MiddleName,@FamilyName,@Egn,@Phone,@Adress,@Photo,@ClassId,@DoctorId,@ParentFullName,@ParentPhoneNumber,@ParentAdress)
+					
+									Set @ResultNumber =  1 --Successes.
+								End
+							Else
+								Begin
+									Set @ResultNumber =  0 --Student already registered
+								End
 						End
-					Else
-						If (Len(@Phone) <>10)
-							Begin
-								Set @ResultNumber =  -4 --Student phone is not 10 chars long.
-							End
-						Else
-							Begin
-								If (LEN(@ParentPhoneNumber) <> 10)
-									Begin
-										Set @ResultNumber =  -5 --The parent phone number is not 10 chars long.
-									End
-								Else
-									Begin
-										If((Select Count(Id) From tblStudentInfo Where EGN = @EGN) = 0)
-											Begin
-												Insert Into tblStudentInfo
-												Values (@FirstName,@MiddleName,@FamilyName,@Egn,@Phone,@Adress,@Photo,@ClassId,@DoctorId,@ParentFullName,@ParentPhoneNumber,@ParentAdress)
-												Set @ResultNumber =  1 --Successes.
-											End
-										Else
-											Begin
-												Set @ResultNumber =  -6 --Student already registered
-											End
-									End
-							End
 				End
 		End
-End
 Go
 
 Create Procedure spAddDoctor_tblDoctor
@@ -484,38 +557,21 @@ Create Procedure spAddDoctor_tblDoctor
 @FirstName nvarchar(20)
 ,@FamilyName nvarchar(20)
 ,@PhoneNumber varchar(10)
-)
-As
-Begin
-	If(Len(@PhoneNumber) <> 10)
-		Begin
-			Select 0 --Number not 10 digits
-		End
-	Else
-		Begin
-			Insert Into tblDoctor
-			values (@FirstName,@FamilyName,@PhoneNumber)
-			Select 1 -- Success
-		End
-End
-Go
 
-Create Procedure spAddAuthor_tblAuthor
-(
-@Name nvarchar(20)
+,@ResultNumber int Output
 )
 As
 Begin
-	If ((Select Count(Id) From tblAuthor Where Publisher = @Name) > 0)
-		Begin
-			Select 0 --Already exist with this name
-		End
-	Else
-		Begin
-			Insert into tblAuthor
-			Values (@Name)
-			Select 1 --Success
-		End
+If Exists (Select Id From tblDoctor Where FirstName = @FirstName And FamilyName = @FamilyName And PhoneNumber = @PhoneNumber)
+	Begin
+		Set @ResultNumber = 0 --Doctor already exists
+	End
+		Else
+			Begin
+				Insert Into tblDoctor
+				values (@FirstName,@FamilyName,@PhoneNumber)
+				Set @ResultNumber = 1 -- Success
+			End
 End
 Go
 
@@ -527,13 +583,13 @@ Create Procedure spUpdateSubject_tblSubject
 )
 As
 Begin
-	If ((Select COUNT(Id) From tblSubject Where Id=@Id) = 0)
+	If Not Exists (Select Id From tblSubject Where Id=@Id)
 		Begin
 			Set @ResultNumber = 0 --Id dosen't exist.
 		End
 	Else
 		Begin
-			If ((Select Count(Id) From tblSubject Where SubjectName= @SubjectName) > 0 )
+			If Exists (Select Id From tblSubject Where SubjectName= @SubjectName)
 				Begin
 					Set @ResultNumber = -1 --Subject already exist.
 				End
@@ -556,7 +612,7 @@ Create Procedure spAddSubject_tblSubject
 )
 As
 Begin
-	If ((Select Count(Id) From tblSubject Where Lower(Replace(SubjectName,' ','')) = Lower(Replace(@SubjectName,' ',''))) > 0)
+	If Exists (Select Id From tblSubject Where Lower(Replace(SubjectName,' ','')) = Lower(Replace(@SubjectName,' ','')))
 		Begin
 			Set @ResultNumber = 0 --Subject with this name exist.
 		End
@@ -568,3 +624,481 @@ Begin
 			Set @ResultNumber = 1 --Success.
 		End
 End
+Go
+
+Create Procedure spUpdateStudentInfo_tblStudentInfo
+(
+@Id int
+
+,@FirstName nvarchar(20)
+,@MiddleName nvarchar(20)
+,@FamilyName nvarchar(20)
+
+,@EGN varchar(10)
+,@PhoneNumber varchar(10)
+,@Adress nvarchar(50)
+,@Photo varbinary(max) = null
+
+,@ClassId int
+,@DoctorId int
+
+,@ParentFullName nvarchar(60)
+,@ParentPhoneNumber varchar(10)
+,@ParentAdress nvarchar(50) = null
+
+,@ResultNumber int Output
+)
+As
+Begin
+	If ((Select Count(EGN) From tblStudentInfo Where EGN = @EGN) > 1)
+		Begin
+			Set @ResultNumber = 0 -- Student with this EGN exists (more than 1 record with this EGN)
+		End
+	Else
+		Begin
+			If Not Exists (Select Id From tblDoctor Where Id = @DoctorId)
+				Begin
+					Set @ResultNumber = -1 --The input doctor id does NOT exist.
+				End
+			Else
+				Begin
+					If Not Exists (Select Id From tblClass Where Id = @ClassId)
+						Begin
+							Set @ResultNumber = -2  --The input class id does NOT exist.
+						End
+					Else
+						Begin
+							If (IsNull(DATALENGTH(@Photo),0) = 0)
+								Begin
+									Update tblStudentInfo
+									Set FirstName = @FirstName, MiddleName = @MiddleName, FamilyName = @FamilyName, EGN = @EGN, PhoneNumber = @PhoneNumber, Adress = @Adress, ClassId = @ClassId, DoctorId = @DoctorId, ParentFullName = @ParentFullName, ParentPhoneNumber = @ParentPhoneNumber, ParentAdress = @ParentAdress
+									Where Id = @Id
+
+									Set @ResultNumber = 2 --Success WITHOUT changing photo.
+								End
+							Else
+								Begin
+									Update tblStudentInfo
+									Set FirstName = @FirstName, MiddleName = @MiddleName, FamilyName = @FamilyName, EGN = @EGN, PhoneNumber = @PhoneNumber, Adress = @Adress, Photo = @Photo, ClassId = @ClassId, DoctorId = @DoctorId, ParentFullName = @ParentFullName, ParentPhoneNumber = @ParentPhoneNumber, ParentAdress = @ParentAdress
+									Where Id = @Id
+
+									Set @ResultNumber = 1 --Success with changing photo.
+								End
+						End
+				End
+		End
+End
+Go
+
+Create Procedure spAddSpecialization_tblSpecialization
+(
+@Id int
+,@Specialization nvarchar(50)
+,@ResultNumber int Output
+)
+As
+Begin
+	If Exists (Select Id From tblSpecialization Where Lower(Replace(Specialization,' ','')) = Lower(Replace(@Specialization,' ','')))
+		Begin
+			Set @ResultNumber = 0 --Specialization with this name exists. 
+		End
+	Else
+		Begin
+			Insert into tblSpecialization
+			Values (@Specialization)
+
+			Set @ResultNumber = 1 --Success.
+		End
+
+End
+Go
+
+Create Procedure spUpdateSpecialization_tblSpecialization
+(
+@Id int
+,@Specialization nvarchar(50)
+,@ResultNumber int Output
+)
+As
+Begin
+	If Exists (Select Id From tblSpecialization Where Lower(Replace(Specialization,' ','')) = Lower(Replace(@Specialization,' ','')))
+		Begin
+			Set @ResultNumber = 0 --Specialization with this name exists. 
+		End
+	Else
+		Begin
+			Update tblSpecialization
+			Set Specialization = @Specialization
+			Where Id = @Id
+
+			Set @ResultNumber = 1 --Success.
+		End
+
+End
+Go
+
+Create Procedure spDeleteSpecialization_tblSpecialization
+(
+@Id int
+,@ResultNumber int Output
+)
+As
+Begin
+	Begin Try 
+		Delete From tblSpecialization
+		Where Id = @Id
+		
+		Set @ResultNumber = 1 -- Success.
+	End Try
+	Begin Catch
+		Set @ResultNumber = 0 --There are classes that are bound to this id.
+	End Catch
+End
+Go
+
+Create Procedure spUpdateClass_tblClass
+(
+@Id int
+,@Grade int
+,@Letter nvarchar(1)
+,@SpecializationId int
+,@ClassTeacherEGN varchar(10)
+
+,@ResultNumber int Output
+)
+As
+Begin
+If Exists (Select Id From tblClass Where Grade = @Grade And Letter=@Letter And Id<>@ID)
+	Begin
+		Set @ResultNumber = 0 -- Class already exists other than this class
+	End
+Else
+	Begin
+		If Not Exists (Select Id From tblTeacherInfo Where EGN = @ClassTeacherEGN)
+			Begin
+				Set @ResultNumber = -1 --Teacher with this EGN does not exist
+			End
+		Else
+			Begin
+				If ((Select Count(Id) From tblClass Where ClassTeacherEGN = @ClassTeacherEGN) > 1)
+					Begin
+						Set @ResultNumber = -2 --Teacher is already assigned to a class
+					End 
+				Else 
+					Begin
+						Update tblClass
+						Set Grade = @Grade, Letter = @Letter, SpecializationId = @SpecializationId,ClassTeacherEGN = @ClassTeacherEGN
+						Where Id = @Id
+
+						Set @ResultNumber = 1 --Success.
+					End
+			End
+	End
+End
+Go
+
+Create Procedure spUpdateDoctor_tblDoctor
+(
+@Id int
+,@FirstName nvarchar(20)
+,@FamilyName nvarchar(20)
+,@PhoneNumber nvarchar(20)
+
+,@ResultNumber int Output
+)
+As
+Begin
+If Exists (Select Id From tblDoctor Where FirstName = @FirstName And FamilyName = @FamilyName And Id <> @ID)
+	Begin
+		Set @ResultNumber = 0 --Doctor with same info exists.
+	End
+Else
+	Begin
+		If Exists (Select Id From tblDoctor Where PhoneNumber = @PhoneNumber And Id <> @Id)
+			Begin
+				Set @ResultNumber = -1 --Doctor with this phone number exists
+			End
+		Else
+			Begin
+				Update tblDoctor
+				Set FirstName = @FirstName, FamilyName = @FamilyName, PhoneNumber = @PhoneNumber
+				Where Id = @Id
+
+				Set @ResultNumber = 1 --Success.
+			End
+	End
+End
+Go
+
+Create Procedure spAddAuthor_tblAuthor
+(
+@Publisher nvarchar(20)
+
+,@ResultNumber int Output
+)
+As
+Begin
+IF Exists (Select Id From tblAuthor Where Lower(Replace(Publisher,' ','')) = Lower(Replace(@Publisher,' ','')))
+	Begin
+		Set @ResultNumber =  0 --Author already exists
+	End
+Else
+	Begin
+		Insert into tblAuthor
+		Values (@Publisher)
+
+		Set @ResultNumber = 1 --Success.
+	End
+End
+Go
+
+Create Procedure spUpdateAuthor_tblAuthor
+(
+@Id int
+,@Publisher nvarchar(20)
+
+,@ResultNumber int Output
+)
+As
+Begin
+If Exists (Select Id From tblAuthor Where Lower(Replace(Publisher,' ','')) = Lower(Replace(@Publisher,' ','')) And Id <> @Id)
+	Begin
+		Set @ResultNumber = 0 --Author already exists.
+	End
+Else 
+	Begin
+		Update tblAuthor
+		Set Publisher = @Publisher
+		Where Id = @Id
+
+		Set @ResultNumber = 1 --Success.
+	End
+End
+Go
+
+Create Procedure spAddBook_tblBook
+(
+@Name nvarchar(20)
+,@PublisherId int
+,@Grade int
+,@SubjectId int
+,@PublishedYear int
+,@Quantity int
+
+,@ResultNumber int Output
+)
+As
+Begin
+If Exists (Select Id From tblBook Where Lower(Replace(Name,' ','')) = Lower(Replace(@Name,' ','')))
+	Begin
+		Set @ResultNumber = 0 --This book already exists
+	End
+Else
+	Begin
+		If Not Exists (Select Id From tblAuthor Where Id = @PublisherId)
+			Begin
+				Set @ResultNumber = -1 --This publisher does not exist.
+			End
+		Else
+			Begin
+				If Not Exists (Select Id From tblSubject Where Id = @SubjectId)
+					Begin
+						Set @ResultNumber = -2 --This subject does not exist.
+					End
+				Else
+					Begin
+						If (@Quantity < 0)
+							Begin
+								Set @ResultNumber = -3 --Quantity cannot be negative.
+							End
+						Else
+							Begin
+								Insert into tblBook
+								Values (@Name,@PublisherId,@Grade,@SubjectId,@PublishedYear,@Quantity)
+
+								Set @ResultNumber = 1 --Success.
+							End
+					End
+			End
+	End
+End
+Go
+
+Create Procedure spUpdateBook_tblBook
+(
+@Id int
+,@Name nvarchar(20)
+,@PublisherId int
+,@Grade int
+,@SubjectId int
+,@PublishedYear int
+,@Quantity int
+
+,@ResultNumber int Output
+)
+As
+Begin
+If Exists (Select Id From tblBook Where Lower(Replace(Name,' ','')) = Lower(Replace(@Name,' ','')) And Id <> @Id)
+	Begin
+		Set @ResultNumber = 0 --This book already exists
+	End
+Else
+	Begin
+		If Not Exists (Select Id From tblAuthor Where Id = @PublisherId)
+			Begin
+				Set @ResultNumber = -1 --This publisher does not exist.
+			End
+		Else
+			Begin
+				If Not Exists (Select Id From tblSubject Where Id = @SubjectId)
+					Begin
+						Set @ResultNumber = -2 --This subject does not exist.
+					End
+				Else
+					Begin
+						If (@Quantity < 0)
+							Begin
+								Set @ResultNumber = -3 --Quantity cannot be negative.
+							End
+						Else
+							Begin
+								Update tblBook
+								Set Name = @Name, PublisherId=@PublisherId,Quantity = @Quantity,SubjectId = @SubjectId,Grade = @Grade,PublishedYear = @PublishedYear
+
+								Set @ResultNumber = 1 --Success.
+							End
+					End
+			End
+	End
+End
+Go
+
+Create Procedure spAddBudgetType_tblBudgetType
+(
+@Item nvarchar(50)
+,@OperationTypeId int
+,@OperationLengthId int
+
+,@ResultNumber int Output
+)
+As
+Begin
+	If Exists (Select Id From tblBudgetType Where Lower(Replace(Item,' ','')) = Lower(Replace(@Item,' ','')))	
+		Begin
+			Set @ResultNumber = 0 -- This item already exists.
+		End
+	Else
+		Begin
+			If Not Exists (Select Id From tblOperationType Where Id = @OperationTypeId)
+				Begin
+					Set @ResultNumber = -1 -- this operation does NOT exist.
+				End
+			Else
+				Begin
+					If Not Exists (Select Id From tblOperationLength Where Id = @OperationLengthId)
+						Begin
+							Set @ResultNumber = -2 --This length does NOT exist.
+						ENd
+					Else
+						Begin
+							Insert into tblBudgetType
+							Values (@Item,@OperationTypeId,@OperationLengthId)
+
+							Set @ResultNumber = 1 --Success.
+						End
+				End
+		End
+End
+Go
+
+Create Procedure spUpdateBudgetType_tblBudgetType
+(
+@Id int
+,@Item nvarchar(50)
+,@OperationTypeId int
+,@OperationLengthId int
+
+,@ResultNumber int Output
+)
+As
+Begin
+	If Exists (Select Id From tblBudgetType Where Lower(Replace(Item,' ','')) = Lower(Replace(@Item,' ',''))And Id <> @Id)	
+		Begin
+			Set @ResultNumber = 0 -- This item already exists.
+		End
+	Else
+		Begin
+			If Not Exists (Select Id From tblOperationType Where Id = @OperationTypeId)
+				Begin
+					Set @ResultNumber = -1 -- this operation does NOT exist.
+				End
+			Else
+				Begin
+					If Not Exists (Select Id From tblOperationLength Where Id = @OperationLengthId)
+						Begin
+							Set @ResultNumber = -2 --This length does NOT exist.
+						ENd
+					Else
+						Begin
+							Update tblBudgetType
+							Set Item=@Item,OperationTypeId = @OperationTypeId,OperationLengthId = @OperationLengthId
+							Where Id = @Id
+							
+							Set @ResultNumber = 1 --Success.
+						End
+				End
+		End
+End
+Go
+
+Create Procedure spAddBudgetItem_tblBudget
+(
+@ItemId int
+,@DescriptionForItem nvarchar(500)
+,@Amount decimal(9,2)
+,@OnDate smallDateTime
+
+,@ResultNumber int Output
+)
+As
+Begin
+	If Not Exists (Select Id From tblBudgetType Where Id=@ItemId)	
+		Begin
+			Set @ResultNumber = 0 -- This item does NOT exist.
+		End
+	Else
+		Begin
+			Insert into tblBudget
+			Values (@ItemId,@DescriptionForItem,@Amount,@OnDate)
+
+			Set @ResultNumber = 1 --Success.
+		End
+End
+Go
+
+Create Procedure spUpdateBudgetItem_tblBudget
+(
+@Id int
+,@ItemId int
+,@DescriptionForItem nvarchar(500)
+,@Amount decimal(9,2)
+,@OnDate smallDateTime
+
+,@ResultNumber int Output
+)
+As
+Begin
+	If Not Exists (Select Id From tblBudgetType Where Id=@ItemId)	
+		Begin
+			Set @ResultNumber = 0 -- This item does NOT exist.
+		End
+	Else
+		Begin
+			Update tblBudget
+			Set BudgetTypeId=@ItemId,DescriptionForItem=@DescriptionForItem,Amount =@Amount,OnDate = @OnDate
+			Where Id = @Id
+
+			Set @ResultNumber = 1 --Success.
+		End
+End
+Go

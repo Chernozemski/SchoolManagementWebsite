@@ -34,7 +34,7 @@ namespace DataAccessLayer.Subject
         {
             using (SqlConnection con = new SqlConnection(SharedMethods.getConnectionString()))
             {
-                SqlCommand cmd = new SqlCommand("Select * From vwSubject_tblSubject", con);
+                SqlCommand cmd = new SqlCommand("Select Id,SubjectName,NumberOfTeachers From vwSubject_tblSubject", con);
                 cmd.CommandType = CommandType.Text;
 
                 con.Open();
@@ -58,7 +58,7 @@ namespace DataAccessLayer.Subject
         {
             using (SqlConnection con = new SqlConnection(SharedMethods.getConnectionString()))
             {
-                SqlCommand cmd = new SqlCommand("Select * From tblSubject", con);
+                SqlCommand cmd = new SqlCommand("Select Id,SubjectName From tblSubject", con);
                 cmd.CommandType = CommandType.Text;
 
                 con.Open();

@@ -16,7 +16,7 @@ namespace SchoolManagementWebsite.LoggedIn.SubjectPages
 
         protected void getAndUpdateSubject_Updated(object sender, ObjectDataSourceStatusEventArgs e)
         {
-            BusinessLayer.SharedMethods.SetMessage(e, lblMessage);
+            BusinessLayer.SharedMethods.SetMessage(e, ref lblMessage);
         }
     }
 }

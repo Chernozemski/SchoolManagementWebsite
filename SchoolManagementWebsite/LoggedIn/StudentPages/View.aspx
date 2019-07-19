@@ -5,7 +5,7 @@
     <h2>Преглед на ученическият състав
     </h2>
     <asp:GridView ID="viewStudent" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" 
-        DataSourceID="getView" ForeColor="#333333" GridLines="None" OnRowDataBound="viewStudent_RowDataBound">
+        DataSourceID="getStudent" ForeColor="#333333" GridLines="None" OnRowDataBound="viewStudent_RowDataBound" PageSize="5">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:TemplateField HeaderText="Снимка" SortExpression="Photo">
@@ -18,7 +18,7 @@
             </asp:TemplateField>
             <asp:BoundField DataField="FullName" HeaderText="Ученик" ReadOnly="True" SortExpression="FullName" />
             <asp:BoundField DataField="PhoneNumber" HeaderText="Тел. номер" ReadOnly="True" SortExpression="PhoneNumber" />
-            <asp:BoundField DataField="Местоживеене" HeaderText="Местоживеене" SortExpression="Местоживеене" />
+            <asp:BoundField DataField="Adress" HeaderText="Местоживеене" SortExpression="Adress" />
             <asp:BoundField DataField="Grade" HeaderText="Клас" ReadOnly="True" SortExpression="Grade" />
             <asp:BoundField DataField="DoctorFullName" HeaderText="Доктор" ReadOnly="True" SortExpression="DoctorFullName" />
             <asp:BoundField DataField="ParentFullName" HeaderText="Родител" SortExpression="ParentFullName" />
@@ -36,7 +36,6 @@
         <SortedDescendingCellStyle BackColor="#FFFDF8" />
         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
     </asp:GridView>
-    <asp:SqlDataSource ID="getView" runat="server" ConnectionString="<%$ ConnectionStrings:SchoolManagementDBConnectionString %>" 
-        SelectCommand="SELECT * FROM [vwStudentInfo_tblStudentInfo]" />
+    <asp:ObjectDataSource ID="getStudent" runat="server" SelectMethod="ReadWithId" TypeName="BusinessLayer.Student.CRUDInfo"></asp:ObjectDataSource>
 </asp:Content>
 

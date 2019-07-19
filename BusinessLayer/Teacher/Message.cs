@@ -9,16 +9,16 @@ namespace BusinessLayer.Teacher
 {
     internal class Message
     {
-        public void Register(int resultNum,out string message,out Color color)
+        public void Create(int resultNum,out string message,out Color color)
         {
             switch (resultNum)
             {
                 case 1:
-                    message="Успешно вписване.";
+                    message = "Успешно записване.";
                     color =Color.Green;
                     break;
                 case -1:
-                    message="Учителят вече е вписван.";
+                    message = "Учителят вече е записан.";
                     color =Color.DarkRed;
                     break;
                 case 0:
@@ -48,7 +48,7 @@ namespace BusinessLayer.Teacher
                     color=Color.DarkRed;
                     break;
                 case -1:
-                    message="Избраният предмет не съществува."               ;   
+                    message="Избраният предмет не съществува.";   
                     color=Color.DarkRed;
                     break;
                 case -2:

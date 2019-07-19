@@ -42,7 +42,11 @@
     <Compile Include="Author.cs" />
     <Compile Include="Book.cs" />
     <Compile Include="Budget.cs" />
+    <Compile Include="BudgetType.cs" />
     <Compile Include="Doctor.cs" />
+    <Compile Include="Class.cs" />
+    <Compile Include="Position.cs" />
+    <Compile Include="Specialization.cs" />
     <Compile Include="StudentInfo.cs" />
     <Compile Include="Subject.cs" />
     <Compile Include="TeacherInfo.cs" />

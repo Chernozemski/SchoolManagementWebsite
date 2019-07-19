@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>Вписване на предмет</h2>
+    <h2>Записване на предмет</h2>
     <table class="BigText">
         <tr>
             <td>Името на предмета:
@@ -20,7 +20,7 @@
         </tr>
         <tr>
             <td colspan="2">
-                <asp:Button ID="btnRegister" Text="Вписване" CssClass="bigButton" OnClick="btnRegister_Click" CausesValidation="true" ValidationGroup="Register" runat="server" />
+                <asp:Button ID="btnRegister" Text="Записване" CssClass="bigButton" OnClick="btnRegister_Click" CausesValidation="true" ValidationGroup="Register" runat="server" />
             </td>
         </tr>
     </table>

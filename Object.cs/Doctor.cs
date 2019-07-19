@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Object
 {
-    class Doctor
+    public class Doctor
     {
+      public int Id { get; set; }
+      public string FirstName { get; set; }
+      public string FamilyName { get; set; }
+      public string PhoneNumber { get; set; }
     }
 }

@@ -40,7 +40,32 @@ namespace BusinessLayer.Student
 
             int resultNumber = crud.Create(student);
 
-            message.Register(resultNumber, out Message, out Color);
+            message.Create(resultNumber, out Message, out Color);
+        }
+        public DataTable ReadFull()
+        {
+            DataTable table = new DataTable();
+            table.Columns.Add("Id");
+
+            table.Columns.Add("FirstName");
+            table.Columns.Add("MiddleName");
+            table.Columns.Add("FamilyName");
+
+            table.Columns.Add("PhoneNumber");
+            table.Columns.Add("Adress");
+            table.Columns.Add("EGN");
+            table.Columns.Add("Photo", typeof(byte[]));
+
+            table.Columns.Add("ClassId");
+            table.Columns.Add("Grade");
+            table.Columns.Add("DoctorId");
+            table.Columns.Add("DoctorFullName");
+
+            table.Columns.Add("ParentFullName");
+            table.Columns.Add("ParentPhoneNumber");
+            table.Columns.Add("ParentAdress");
+
+            return crud.ReadFull(table);
         }
         public DataTable ReadWithId()
         {
@@ -70,6 +95,7 @@ namespace BusinessLayer.Student
             Object.StudentInfo student = new Object.StudentInfo();
 
             student.Id = Id;
+
             student.FirstName = firstName;
             student.MiddleName = middleName;
             student.FamilyName = familyName;

@@ -49,13 +49,13 @@ namespace SchoolManagementWebsite.RegisterTeacher {
         protected global::System.Web.UI.WebControls.DropDownList ddlSubject;
         
         /// <summary>
-        /// GetSubject control.
+        /// getSubject control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource GetSubject;
+        protected global::System.Web.UI.WebControls.ObjectDataSource getSubject;
         
         /// <summary>
         /// txtEGN control.
@@ -94,13 +94,13 @@ namespace SchoolManagementWebsite.RegisterTeacher {
         protected global::System.Web.UI.WebControls.DropDownList ddlPosition;
         
         /// <summary>
-        /// GetPosition control.
+        /// getPosition control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource GetPosition;
+        protected global::System.Web.UI.WebControls.ObjectDataSource getPosition;
         
         /// <summary>
         /// fileUploadPhoto control.

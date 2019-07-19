@@ -16,9 +16,9 @@ namespace SchoolManagementWebsite
         {
             if (Session["UserName"] == null)
             {
-                Session["Rank"] = 10;
-                Session["EGN"] = null;
+                BusinessLayer.SharedMethods.resetSessionInfo();
                 FormsAuthentication.RedirectToLoginPage();
+                Response.End();
             }
         }
         protected void lblUser_Load(object sender, EventArgs e)
@@ -36,13 +36,10 @@ namespace SchoolManagementWebsite
                 lblGreeting.Visible = false;
             }
         }
-
         protected void linkButtonExit_Click(object sender, EventArgs e)
         {
             //On exit erase all account info.
-            Session["UserName"] = null;
-            Session["Rank"] = null;
-            Session["EGN"] = null;
+            BusinessLayer.SharedMethods.resetSessionInfo();
             FormsAuthentication.RedirectToLoginPage();
         }
     }

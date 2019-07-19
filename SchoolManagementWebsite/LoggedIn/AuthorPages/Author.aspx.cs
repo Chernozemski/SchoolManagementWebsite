@@ -11,7 +11,12 @@ namespace SchoolManagementWebsite.LoggedIn.AuthorPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            BusinessLayer.SharedMethods.redirectUser(BusinessLayer.SharedMethods.isUserAuthorized(10), "../Home");
+            BusinessLayer.SharedMethods.redirectUser(BusinessLayer.SharedMethods.isUserAuthorized(3), "../Home");
+        }
+
+        protected void directorPanel_Load(object sender, EventArgs e)
+        {
+            directorPanel.Visible = BusinessLayer.SharedMethods.isUserAuthorized(2);
         }
     }
 }

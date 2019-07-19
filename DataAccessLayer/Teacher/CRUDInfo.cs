@@ -42,13 +42,12 @@ namespace DataAccessLayer.Teacher
        {
            using (SqlConnection con = new SqlConnection(DataAccessLayer.SharedMethods.getConnectionString()))
            {
-               SqlCommand cmd = new SqlCommand("Select * From vwTeacherInfo_tblTeacherInfo", con);
+               SqlCommand cmd = new SqlCommand("Select FullName,SubjectName,PhoneNumber,Adress,Position,Photo,Class From vwTeacherInfo_tblTeacherInfo", con);
                cmd.CommandType = CommandType.Text;
 
                con.Open();
                using (SqlDataReader rdr = cmd.ExecuteReader())
                {
-
                    while (rdr.Read())
                    {
                        DataRow row = table.NewRow();
@@ -63,7 +62,6 @@ namespace DataAccessLayer.Teacher
 
                        table.Rows.Add(row);
                    }
-
                    return table;
                }
            }
@@ -72,7 +70,7 @@ namespace DataAccessLayer.Teacher
        {
            using (SqlConnection con = new SqlConnection(DataAccessLayer.SharedMethods.getConnectionString()))
            {
-               SqlCommand cmd = new SqlCommand("Select * From vwTeacherInfoId_tblTeacherInfo", con);
+               SqlCommand cmd = new SqlCommand("Select Id,FullName,SubjectName,PhoneNumber,Adress,Position,Photo,Class From vwTeacherInfo_tblTeacherInfo", con);
                cmd.CommandType = CommandType.Text;
 
                con.Open();
@@ -93,19 +91,18 @@ namespace DataAccessLayer.Teacher
 
                        table.Rows.Add(row);
                    }
-
                    return table;
                }
            }
        }
-       public DataTable ReadWithSelectId(DataTable table, Object.TeacherInfo teacher)
+       public DataTable ReadWithSelectSubjectId(DataTable table, Object.Subject subject)
        {
-           using (SqlConnection con = new SqlConnection(DataAccessLayer.SharedMethods.getConnectionString()))
+           using (SqlConnection con = new SqlConnection(SharedMethods.getConnectionString()))
            {
-               SqlCommand cmd = new SqlCommand("Select * From vwTeacherInfoNameAndSubjectId_tblTeacherInfo Where SubjectId = @SubjectId", con);
+               SqlCommand cmd = new SqlCommand("Select FullName From vwTeacherInfo_tblTeacherInfo Where SubjectId = @SubjectId", con);
                cmd.CommandType = CommandType.Text;
 
-               cmd.Parameters.AddWithValue("@SubjectId", teacher.Id);
+               cmd.Parameters.AddWithValue("@SubjectId", subject.Id);
                con.Open();
                using (SqlDataReader rdr = cmd.ExecuteReader())
                {
@@ -113,12 +110,33 @@ namespace DataAccessLayer.Teacher
                    {
                        DataRow row = table.NewRow();
 
-                       row["SubjectName"] = rdr["SubjectName"];
                        row["FullName"] = rdr["FullName"];
 
                        table.Rows.Add(row);
                    }
+                   return table;
+               }
+           }
+       }
+       public DataTable ReadWithSelectedPositionId(DataTable table, Object.Position position)
+       {
+           using (SqlConnection con = new SqlConnection(SharedMethods.getConnectionString()))
+           {
+               SqlCommand cmd = new SqlCommand("Select FullName From vwTeacherInfo_tblTeacherInfo Where PositionId = @PositionId", con);
+               cmd.CommandType = CommandType.Text;
 
+               cmd.Parameters.AddWithValue("@PositionId", position.Id);
+               con.Open();
+               using (SqlDataReader rdr = cmd.ExecuteReader())
+               {
+                   while (rdr.Read())
+                   {
+                       DataRow row = table.NewRow();
+
+                       row["FullName"] = rdr["FullName"];
+
+                       table.Rows.Add(row);
+                   }
                    return table;
                }
            }
@@ -127,7 +145,7 @@ namespace DataAccessLayer.Teacher
        {
            using (SqlConnection con = new SqlConnection(DataAccessLayer.SharedMethods.getConnectionString()))
            {
-               SqlCommand cmd = new SqlCommand("Select * From tblTeacherInfo", con);
+               SqlCommand cmd = new SqlCommand("Select * From vwTeacherInfoFull_tblteacherInfo", con);
                cmd.CommandType = CommandType.Text;
 
                con.Open();
@@ -143,15 +161,40 @@ namespace DataAccessLayer.Teacher
                        row["MiddleName"] = rdr["MiddleName"];
                        row["FamilyName"] = rdr["FamilyName"];
                        row["SubjectId"] = rdr["SubjectId"];
+                       row["SubjectName"] = rdr["SubjectName"];
                        row["EGN"] = rdr["EGN"];
                        row["PhoneNumber"] = rdr["PhoneNumber"];
                        row["Adress"] = rdr["Adress"];
                        row["PositionId"] = rdr["PositionId"];
+                       row["Position"] = rdr["Position"];
                        row["Photo"] = rdr["Photo"];
 
                        table.Rows.Add(row);
                    }
+                   return table;
+               }
+           }
+       }
+       public DataTable ReadWithFullNameAndEGN(DataTable table)
+       {
+           using (SqlConnection con = new SqlConnection(DataAccessLayer.SharedMethods.getConnectionString()))
+           {
+               SqlCommand cmd = new SqlCommand("Select FirstName + ' ' + MiddleName + ' ' + FamilyName As FullTeacherName,EGN  From vwTeacherInfoFull_tblteacherInfo", con);
+               cmd.CommandType = CommandType.Text;
 
+               con.Open();
+               using (SqlDataReader rdr = cmd.ExecuteReader())
+               {
+
+                   while (rdr.Read())
+                   {
+                       DataRow row = table.NewRow();
+
+                       row["FullTeacherName"] = rdr["FullTeacherName"];
+                       row["EGN"] = rdr["EGN"];
+
+                       table.Rows.Add(row);
+                   }
                    return table;
                }
            }

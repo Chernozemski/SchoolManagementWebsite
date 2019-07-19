@@ -20,7 +20,7 @@
             <tr>
                 <td>
                     <a href="Register.aspx">
-                        <img alt="Вписване на учител" class="resizeImageSmall" title="Вписване на учител" src="../../Images/Add.png" /></a>
+                        <img alt="Записване на учител" class="resizeImageSmall" title="Записване на учител" src="../../Images/Add.png" /></a>
                     <a href="Update.aspx">
                         <img alt="Промяна на учителски запис" class="resizeImageSmall" title="Промяна на учителски запис" src="../../Images/Update.png" /></a>
                     <a href="Remove.aspx">

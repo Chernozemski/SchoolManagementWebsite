@@ -53,7 +53,7 @@ namespace BusinessLayer.Teacher
             switch (result)
             {
                 case 1:
-                    return new object[] { "Вписано.", Color.Green };
+                    return new object[] { "Записано.", Color.Green };
                 case 0:
                     return new object[] { "Вие не се заместващият учител.", Color.DarkRed };
                 //-1

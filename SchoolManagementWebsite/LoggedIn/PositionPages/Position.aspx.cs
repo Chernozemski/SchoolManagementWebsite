@@ -11,7 +11,12 @@ namespace SchoolManagementWebsite.LoggedIn.PositionPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            BusinessLayer.SharedMethods.redirectUser(BusinessLayer.SharedMethods.isUserAuthorized(2), "../Home");
+        }
 
+        protected void directorPanel_Load(object sender, EventArgs e)
+        {
+            directorPanel.Visible = BusinessLayer.SharedMethods.isUserAuthorized(2);
         }
     }
 }

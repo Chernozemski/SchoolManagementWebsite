@@ -6,10 +6,10 @@
     <table>
         <tr>
             <td class="hideBorder">
-    <asp:GridView ID="viewSubject" runat="server" AllowPaging="True" DataKeyNames="Id" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataSourceID="getSubject" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="viewSubject_SelectedIndexChanged">
+    <asp:GridView ID="viewSubject" runat="server" AllowPaging="True" DataKeyNames="Id" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataSourceID="getSubject" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="viewSubject_SelectedIndexChanged" PageSize="5">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
-            <asp:TemplateField ShowHeader="False" HeaderText="Команда">
+            <asp:TemplateField HeaderText="Команда">
                 <ItemTemplate>
                     <asp:Button ID="Button1" runat="server" CausesValidation="False" CommandName="Select" Text="Преглед на учителите" />
                 </ItemTemplate>
@@ -53,7 +53,7 @@
             </tr>
             </table>
     <asp:ObjectDataSource ID="getSubject" runat="server" SelectMethod="ReadWithTeacherNumber" TypeName="BusinessLayer.Subject.CRUD" />
-    <asp:ObjectDataSource ID="getTeacherList" runat="server" SelectMethod="ReadWithSelectedId" TypeName="BusinessLayer.Teacher.CRUDInfo">
+    <asp:ObjectDataSource ID="getTeacherList" runat="server" SelectMethod="ReadWithSelectSubjectId" TypeName="BusinessLayer.Teacher.CRUDInfo">
         <SelectParameters>
             <asp:ControlParameter ControlID="viewSubject" Name="Id" PropertyName="SelectedValue" Type="Int32" />
         </SelectParameters>

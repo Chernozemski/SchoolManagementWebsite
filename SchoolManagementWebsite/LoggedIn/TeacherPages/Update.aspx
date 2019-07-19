@@ -4,10 +4,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Промяна на учителският състав</h2>
-    <asp:GridView ID="gridViewUpdateTeacher" runat="server" AllowPaging="True" DataKeyNames="Id" AllowSorting="True" CellPadding="4" DataSourceID="getAndUpdateTeacher" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" OnRowUpdating="gridViewUpdateTeacher_RowUpdating" OnRowDataBound="gridViewUpdateTeacher_RowDataBound">
+    <asp:GridView ID="gridViewUpdateTeacher" runat="server" AllowPaging="True" DataKeyNames="Id" AllowSorting="True" CellPadding="4" DataSourceID="getAndUpdateTeacher" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" OnRowUpdating="gridViewUpdateTeacher_RowUpdating" OnRowDataBound="gridViewUpdateTeacher_RowDataBound" PageSize="5">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <EmptyDataTemplate>
-            Няма записи в базата данни.
+            Няма записан(и) учител(и).
         </EmptyDataTemplate>
         <Columns>
             <asp:TemplateField ShowHeader="False">
@@ -83,7 +83,8 @@
                         DataSourceID="getSubject" DataTextField="SubjectName" DataValueField="Id" />
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label6" runat="server" Text='<%# Bind("SubjectId") %>'></asp:Label>
+                    <asp:Label ID="Label6" runat="server"  Visible ="False" Text='<%# Bind("SubjectId") %>'></asp:Label>
+                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("SubjectName") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Телефонен номер" SortExpression="PhoneNumber">
@@ -104,7 +105,8 @@
                         DataSourceID="getPosition" DataTextField="Position" DataValueField="Id" />
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label8" runat="server" Text='<%# Bind("PositionId") %>'></asp:Label>
+                    <asp:Label ID="Label8" runat="server" Visible="false" Text='<%# Bind("PositionId") %>'></asp:Label>
+                    <asp:Label ID="Label9" runat="server" Text='<%# Bind("Position") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>

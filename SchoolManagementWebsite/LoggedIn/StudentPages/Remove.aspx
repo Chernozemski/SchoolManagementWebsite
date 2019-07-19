@@ -4,22 +4,21 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Отписване на ученик</h2>
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" AllowPaging="True" AllowSorting="True" DataKeyNames="Id" DataSourceID="DeleteStudent">
+    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" AllowPaging="True" AllowSorting="True" DataKeyNames="Id" DataSourceID="DeleteStudent" PageSize="5">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:TemplateField HeaderText="Команда">
                 <ItemTemplate>
-                    <asp:Button ID="deleteStudent" CommandName="Delete" Text="Изтриване" OnClientClick="return confirm('Сигурни ли сте че искате да изтриете този ученик от базата данни ?')" runat="server" />
+                    <asp:Button ID="deleteStudent" CommandName="Delete" Text="Изтриване" OnClientClick="return confirm('Сигурни ли сте че искате да изтриете този ученик ?')" runat="server" />
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" SortExpression="Id" Visible="False" />
             <asp:BoundField DataField="FullName" HeaderText="Име" ReadOnly="True" SortExpression="FullName" />
             <asp:BoundField DataField="Grade" HeaderText="Клас" ReadOnly="True" SortExpression="Grade" />
             <asp:BoundField DataField="ParentFullName" HeaderText="Родител" SortExpression="ParentFullName" />
         </Columns>
         <EditRowStyle BackColor="#999999" />
         <EmptyDataTemplate>
-            Няма записи в базата данни.
+            Няма записан(и) учени(к/ци).
         </EmptyDataTemplate>
         <EditRowStyle BackColor="#999999" />
         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />

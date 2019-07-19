@@ -3,10 +3,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Промяна на предмет</h2>
-    <asp:GridView ID="subject" runat="server" AllowPaging="True" AllowSorting="True" DataKeyNames="Id" DataSourceID="getAndUpdateSubject" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" >
+    <asp:GridView ID="subject" runat="server" AllowPaging="True" AllowSorting="True" DataKeyNames="Id" DataSourceID="getAndUpdateSubject" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" PageSize="5" >
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
-                        <asp:TemplateField ShowHeader="False" HeaderText="Команда">
+                        <asp:TemplateField HeaderText="Команда">
                 <EditItemTemplate>
                     <asp:Button ID="Button1" runat="server" CausesValidation="True" ValidationGroup="Update" CommandName="Update" OnClientClick="return confirm('Сигурни ли сте че искате да промените този запис ?')" Text="Обновяване" />
                     <asp:Button ID="Button2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Отмяна" />

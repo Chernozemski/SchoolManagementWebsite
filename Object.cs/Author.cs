@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Object
 {
-    class Author
+    public class Author
     {
+        public int Id { get; set; }
+        public string Publisher {get;set;}
     }
 }

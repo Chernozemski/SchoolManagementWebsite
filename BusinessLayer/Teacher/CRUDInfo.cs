@@ -32,7 +32,7 @@ namespace BusinessLayer.Teacher
 
             int resultNumber = crud.Create(teacher);
 
-            message.Register(resultNumber,out Message,out Color);
+            message.Create(resultNumber,out Message,out Color);
         }
 
         public DataTable Read()
@@ -70,26 +70,47 @@ namespace BusinessLayer.Teacher
             table.Columns.Add("MiddleName");
             table.Columns.Add("FamilyName");
             table.Columns.Add("SubjectId");
+            table.Columns.Add("SubjectName");
             table.Columns.Add("EGN");
             table.Columns.Add("PhoneNumber");
             table.Columns.Add("Adress");
             table.Columns.Add("PositionId");
+            table.Columns.Add("Position");
             table.Columns.Add("Photo", typeof(byte[]));
 
             return crud.ReadFull(table);
         }
-        public DataTable ReadWithSelectedId(int Id)
+        public DataTable ReadWithFullNameAndEGN()
         {
-            //Gets the selected value from gridview and displays teacher full name
+            DataTable table = new DataTable();
+            table.Columns.Add("FullTeacherName");
+            table.Columns.Add("EGN");
+
+            return crud.ReadWithFullNameAndEGN(table);
+        }
+        public DataTable ReadWithSelectSubjectId(int Id)
+        {
+            //Gets the selected subject id value from gridview and displays teacher full name gridview
             DataTable table = new DataTable();
 
-            table.Columns.Add("SubjectName");
             table.Columns.Add("FullName");
 
-            Object.TeacherInfo teacher = new Object.TeacherInfo();
-            teacher.Id = Id;
+            Object.Subject subject = new Object.Subject();
+            subject.Id = Id;
 
-            return crud.ReadWithSelectId(table,teacher);
+            return crud.ReadWithSelectSubjectId(table, subject);
+        }
+        public DataTable ReadWithSelectedPositionId(int Id)
+        {
+            //Gets the selected subject id value from gridview and displays teacher full name gridview
+            DataTable table = new DataTable();
+
+            table.Columns.Add("FullName");
+
+            Object.Position position = new Object.Position();
+            position.Id = Id;
+
+            return crud.ReadWithSelectedPositionId(table, position);
         }
         public void Update(int Id, string FirstName, string MiddleName, string FamilyName, string EGN, int SubjectId
             , string PhoneNumber, string Adress, int PositionId, string Photo,out string Message,out System.Drawing.Color Color)

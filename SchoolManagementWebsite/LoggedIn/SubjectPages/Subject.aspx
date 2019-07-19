@@ -19,7 +19,7 @@
             <tr>
                 <td>
                     <a href="Register.aspx">
-                        <img alt="Вписване на предмет" class="resizeImageSmall" title="Вписване на предмет" src="../../Images/Add.png" /></a>
+                        <img alt="Записване на предмет" class="resizeImageSmall" title="Записване на предмет" src="../../Images/Add.png" /></a>
                     <a href="Update.aspx">
                         <img alt="Промяна на предмет" class="resizeImageSmall" title="Промяна на предмет" src="../../Images/Update.png" /></a>
                     <a href="Remove.aspx">

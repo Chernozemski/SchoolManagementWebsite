@@ -11,17 +11,18 @@
         </tr>
         <tr>
             <td>
-                <a href="ViewAuthor.aspx">
+                <a href="View.aspx">
                     <img alt="Преглед на издателите" class="resizeImageSmall" title="Преглед на издателите" src="../../Images/See.png" /></a>
             </td>
         </tr>
+        <asp:Panel ID="directorPanel" runat="server" OnLoad="directorPanel_Load" />
             <tr>
                 <td>
-                    <a href="RegisterAuthor.aspx">
+                    <a href="Register.aspx">
                         <img alt="Прибавяне на издател" class="resizeImageSmall" title="Прибавяне на издател" src="../../Images/Add.png" /></a>
-                                        <a href="UpdateAuthor.aspx">
+                    <a href="Update.aspx">
                         <img alt="Обновяване на издател" class="resizeImageSmall" title="Обновяване на издател" src="../../Images/Update.png" /></a>
-                    <a href="RemoveAuthor.aspx">
+                    <a href="Remove.aspx">
                         <img alt="Премахване на издател" class="resizeImageSmall" title="Премахване на издател" src="../../Images/Remove.png" /></a>
                 </td>
             </tr>

@@ -16,7 +16,7 @@ namespace SchoolManagementWebsite.LoggedIn.TeacherPages
 
         protected void getTeacher_Load(object sender, EventArgs e)
         {
-            if (!BusinessLayer.SharedMethods.isUserAuthorized(10))
+            if (!BusinessLayer.SharedMethods.isUserAuthorized(3))
             {
                 BusinessLayer.SharedMethods.hideColumns(new int[] { 4, 5 }, ref getTeacher);
             }
@@ -24,22 +24,8 @@ namespace SchoolManagementWebsite.LoggedIn.TeacherPages
 
         protected void getTeacher_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            //On binding each row get the database value and check 
-            //if the image exists, if not bind it to image from website "Missing.png"
-            System.Data.DataRowView dataRowView = (System.Data.DataRowView)e.Row.DataItem;
-
-            if (dataRowView != null)
-                if (!Convert.IsDBNull(dataRowView["Photo"]))
-                {
-                    string url = "data:Image/jpg;base64," + Convert.ToBase64String((byte[])dataRowView["Photo"]);
-
-                    (e.Row.FindControl("Photo") as Image).ImageUrl = url;
-                }
-                else
-                {
-                    string url = @"..\..\Images\Missing.png";
-                    (e.Row.FindControl("Photo") as Image).ImageUrl = url;
-                }
+            if (e.Row.DataItem != null)
+                (e.Row.FindControl("Photo") as Image).ImageUrl = BusinessLayer.SharedMethods.loadImage(e);
         }
     }
 }
