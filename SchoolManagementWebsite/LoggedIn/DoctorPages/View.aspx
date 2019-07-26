@@ -3,7 +3,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Преглеждане на докторският състав</h2>
-    <asp:GridView ID="doctors" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataSourceID="getDoctor" ForeColor="#333333" GridLines="None" >
+    <asp:Label ID="lblDoctorCount" runat="server" />
+    <asp:GridView ID="doctors" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataSourceID="getDoctor" ForeColor="#333333" GridLines="None" OnDataBound="doctors_DataBound" >
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <EmptyDataTemplate>
             Няма записан(и) доктор(и).

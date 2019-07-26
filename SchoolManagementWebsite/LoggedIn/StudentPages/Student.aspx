@@ -22,7 +22,7 @@
                     <a href="Register.aspx">
                         <img alt="Прибавяне на ученик" class="resizeImageSmall" title="Прибавяне на ученик" src="../../Images/Add.png" /></a>
                     <a href="Update.aspx">
-                        <img alt="Промяна на ученически запис" class="resizeImageSmall" title="Промяна на учителски запис" src="../../Images/Update.png" /></a>
+                        <img alt="Промяна на ученик" class="resizeImageSmall" title="Промяна на ученик" src="../../Images/Update.png" /></a>
                     <a href="Remove.aspx">
                         <img alt="Премахване на ученик" class="resizeImageSmall" title="Премахване на ученик" src="../../Images/Remove.png" /></a>
                 </td>

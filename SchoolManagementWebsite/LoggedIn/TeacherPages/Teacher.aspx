@@ -29,11 +29,5 @@
 
             </tr>
         </asp:Panel>
-        <tr>
-            <td>
-                <a href="Absence.aspx">
-                    <img alt="Отсъствия на учители" class="resizeImageSmall" title="Отсъствия на учители" src="../../Images/Presence.png" /></a>
-            </td>
-        </tr>
     </table>
 </asp:Content>

@@ -1,3 +1,5 @@
+C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\SchoolManagementWebsite\obj\Release\SchoolManagementWebsite.pdb
+C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\SchoolManagementWebsite\obj\Release\SchoolManagementWebsite.csprojResolveAssemblyReference.cache
 C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\SchoolManagementWebsite\bin\SchoolManagementWebsite.dll.config
 C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\SchoolManagementWebsite\bin\SchoolManagementWebsite.dll
 C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\SchoolManagementWebsite\bin\SchoolManagementWebsite.pdb
@@ -7,6 +9,4 @@ C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\School
 C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\SchoolManagementWebsite\bin\BusinessLogicLayer.pdb
 C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\SchoolManagementWebsite\bin\DataAccessLayer.pdb
 C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\SchoolManagementWebsite\bin\Object.cs.pdb
-C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\SchoolManagementWebsite\obj\Release\SchoolManagementWebsite.csprojResolveAssemblyReference.cache
 C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\SchoolManagementWebsite\obj\Release\SchoolManagementWebsite.dll
-C:\Users\PC\Documents\Visual Studio 2013\Projects\SchoolManagementWebsite\SchoolManagementWebsite\obj\Release\SchoolManagementWebsite.pdb

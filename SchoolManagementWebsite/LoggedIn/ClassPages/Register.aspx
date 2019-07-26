@@ -1,6 +1,17 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AuthorizedPages.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="SchoolManagementWebsite.LoggedIn.ClassPages.Register" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+        .auto-style1 {
+            height: 62px;
+        }
+        .auto-style2 {
+            border-style: none;
+            border-color: inherit;
+            border-width: 0px;
+            height: 62px;
+        }
+    </style>
     </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Записване на клас</h2>
@@ -26,14 +37,14 @@
             </td>
         </tr>
         <tr>
-            <td>Име на паралелката:</td>
-            <td>
+            <td class="auto-style1">Име на паралелката:</td>
+            <td class="auto-style1">
                 <asp:DropDownList ID="ddlSpecialization" runat="server" AppendDataBoundItems="true" DataSourceID="getSpecialization" DataTextField="Specialization" DataValueField="Id" >
                     <asp:ListItem Text="Изберете име на паралелка" Value="0" /> 
                 </asp:DropDownList>
                 <asp:ObjectDataSource ID="getSpecialization" runat="server" SelectMethod="ReadWithId" TypeName="BusinessLayer.Specialization.CRUD"></asp:ObjectDataSource>
             </td>
-            <td class="hideBorder">
+            <td class="auto-style2">
                 <asp:CompareValidator Operator="GreaterThan" ValueToCompare="0" ValidationGroup="Register" Text="*" CssClass="error"
                      ErrorMessage="Трябва да въведете името на паралелката." ControlToValidate="ddlSpecialization" runat="server" Display="Dynamic" />
             </td>
@@ -41,8 +52,10 @@
         <tr>
             <td>Име на учителя:</td>
             <td>
-                <asp:DropDownList ID="ddlTeacher" runat="server" AppendDataBoundItems="True" DataSourceID="getTeacher" DataTextField="FullTeacherName" DataValueField="EGN" />
-                <asp:ObjectDataSource ID="getTeacher" runat="server" SelectMethod="ReadWithFullNameAndEGN" TypeName="BusinessLayer.Teacher.CRUDInfo"></asp:ObjectDataSource>
+                <asp:DropDownList ID="ddlTeacher" runat="server" AppendDataBoundItems="True" DataSourceID="getTeacher" DataTextField="FullName" DataValueField="EGN">
+                    <asp:ListItem Text ="Изберете учител" Value="0" />
+                </asp:DropDownList>
+                <asp:ObjectDataSource ID="getTeacher" runat="server" SelectMethod="ReadWithoutClass" TypeName="BusinessLayer.Teacher.CRUDInfo"></asp:ObjectDataSource>
             </td>
             <td class="hideBorder">
                             <asp:CompareValidator Operator="GreaterThan" ValueToCompare="0" ValidationGroup="Register" Text="*" CssClass="error"

@@ -13,6 +13,15 @@ namespace SchoolManagementWebsite.LoggedIn.ClassPages {
     public partial class View {
         
         /// <summary>
+        /// lblClassCount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblClassCount;
+        
+        /// <summary>
         /// gridView control.
         /// </summary>
         /// <remarks>
@@ -22,6 +31,24 @@ namespace SchoolManagementWebsite.LoggedIn.ClassPages {
         protected global::System.Web.UI.WebControls.GridView gridView;
         
         /// <summary>
+        /// gridViewStudent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gridViewStudent;
+        
+        /// <summary>
+        /// lblStudentCount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblStudentCount;
+        
+        /// <summary>
         /// getClass control.
         /// </summary>
         /// <remarks>
@@ -29,5 +56,14 @@ namespace SchoolManagementWebsite.LoggedIn.ClassPages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ObjectDataSource getClass;
+        
+        /// <summary>
+        /// getStudentPerClass control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource getStudentPerClass;
     }
 }

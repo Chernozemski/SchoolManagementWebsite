@@ -11,7 +11,7 @@ namespace SchoolManagementWebsite.LoggedIn.Class
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            BusinessLayer.SharedMethods.redirectUser(BusinessLayer.SharedMethods.isUserAuthorized(10), "../Home");
         }
         protected void directorPanel_Load(object sender, EventArgs e)
         {

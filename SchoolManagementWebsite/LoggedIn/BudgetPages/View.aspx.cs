@@ -19,20 +19,25 @@ namespace SchoolManagementWebsite.LoggedIn.BudgetPages
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
+                //get the control from the table and remove лв. from it, in order to sum the total expense and income
+                Label lbl = (e.Row.Cells[4].FindControl("lblSalary") as Label);
+
                 if (e.Row.Cells[2].Text == "Приход")
                 {
-                    totalIncome += decimal.Parse(e.Row.Cells[4].Text);
+                    totalIncome += decimal.Parse(lbl.Text.Remove(lbl.Text.Length - 4));
                 }
                 else
                 {
-                    totalExpense += decimal.Parse(e.Row.Cells[4].Text);
+                    totalExpense += decimal.Parse(lbl.Text.Remove(lbl.Text.Length - 4));
                 }
             }
         }
 
         protected void gridViewBudget_DataBound(object sender, EventArgs e)
         {
-            gridViewBudget.FooterRow.Cells[4].Text += "Приходи : " + totalIncome.ToString() + "\nРазходи : " + totalExpense.ToString();
+            lblBudgetItemsCount.Text = "Брой на приходите/разходите :" + gridViewBudget.Rows.Count; 
+            if (gridViewBudget.Rows.Count > 0)
+            gridViewBudget.FooterRow.Cells[4].Text += "Приходи : " + totalIncome.ToString("0.00 лв") + "\nРазходи : " + totalExpense.ToString("0.00 лв");
         }
     }
 }

@@ -1,13 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/FreePages.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="SchoolManagementWebsite.Pages.Home" %>
 
 <asp:Content ID="content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>Начална примерна страница
+        <h2>Начална примерна страница
     </h2>
     <p>
         Това е уебсайт, създаден за работа с бази данни без нуждата от сваляне на програми.
     </p>
     <p>
-        Тези сайтове имат предимство над настолните програми, поради причината, че те не трябва да се свалят или инсталират на машината за работа.
+        За да се използва сайта, трябва да имате инсталиран MS SQL Server Management Studio и да използвате файловете в папката на сайта "SQL Queries" като трябва да ги вкарате според номерата им в базата данни.
     </p>
     <br />
     <p>
@@ -27,19 +27,6 @@
     </p>
     <p>
         Име : director Парола : 123
-    </p>
-    <p>
-        ЕГН за регистрация : 
-
-    </p>
-    <p>
-        2345678901
-    </p>
-    <p>
-        3456789012
-    </p>
-    <p>
-        0046789012
     </p>
     <style>
         p{

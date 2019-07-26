@@ -89,16 +89,7 @@
                     <asp:Label ID="Label5" runat="server" Text='<%# Bind("EGN") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Клас" SortExpression="Grade">
-                <EditItemTemplate>
-                    <asp:DropDownList ID="Grade" runat="server" SelectedValue='<%# Bind("ClassId") %>'
-                        DataSourceID="getClass" DataTextField="FullClassName" DataValueField="Id" />
-                </EditItemTemplate>
-                <ItemTemplate>
-                    <asp:Label ID="Label6" runat="server" Visible="False" Text='<%# Bind("ClassId") %>'></asp:Label>
-                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("Grade") %>'></asp:Label>
-                </ItemTemplate>
-            </asp:TemplateField>
+            <asp:BoundField DataField="Grade" HeaderText="Клас" NullDisplayText="Няма клас" ReadOnly="True" SortExpression="Grade" />
             <asp:TemplateField HeaderText="Доктор" SortExpression="DoctorFullName">
                 <EditItemTemplate>
                     <asp:DropDownList ID="DropDownList1" runat="server" SelectedValue='<%# Bind("DoctorId") %>'
@@ -155,7 +146,6 @@
             <asp:Parameter Name="phoneNumber" Type="String" />
             <asp:Parameter Name="adress" Type="String" />
             <asp:Parameter Name="Photo" Type="String" />
-            <asp:Parameter Name="ClassId" Type="Int32" />
             <asp:Parameter Name="DoctorId" Type="Int32" />
             <asp:Parameter Name="ParentFullName" Type="String" />
             <asp:Parameter Name="ParentPhoneNumber" Type="String" />

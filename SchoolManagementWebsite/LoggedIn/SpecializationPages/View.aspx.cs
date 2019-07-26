@@ -19,5 +19,10 @@ namespace SchoolManagementWebsite.LoggedIn.Specialization
             classList.Visible = true;
             classList.Caption = gridViewSpecialization.SelectedRow.Cells[1].Text;
         }
+
+        protected void gridViewSpecialization_DataBound(object sender, EventArgs e)
+        {
+            lblSpecializationCount.Text = "Брой специалности :" + gridViewSpecialization.Rows.Count;
+        }
     }
 }

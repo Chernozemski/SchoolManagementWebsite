@@ -3,10 +3,11 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Преглед на класовете</h2>
+    <asp:Label ID="lblSpecializationCount" runat="server" />
     <table>
         <tr>
             <td class="hideBorder">
-                <asp:GridView ID="gridViewSpecialization" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="Id" DataSourceID="getSpecializations" ForeColor="#333333" GridLines="None" PageSize="5" OnSelectedIndexChanged="gridViewSpecialization_SelectedIndexChanged">
+                <asp:GridView ID="gridViewSpecialization" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="Id" DataSourceID="getSpecializations" ForeColor="#333333" GridLines="None" PageSize="5" OnSelectedIndexChanged="gridViewSpecialization_SelectedIndexChanged" OnDataBound="gridViewSpecialization_DataBound">
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                     <Columns>
                         <asp:TemplateField HeaderText="Команда" ShowHeader="False">

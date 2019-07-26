@@ -82,6 +82,17 @@ namespace DataAccessLayer.Position
                 }
             }
         }
+        public decimal GetTotalSalary(DataTable table)
+        {
+            using (SqlConnection con = new SqlConnection(SharedMethods.getConnectionString()))
+            {
+                SqlCommand cmd = new SqlCommand("Select Salary From vwPositionGetTotalSalary_tblBook", con);
+                cmd.CommandType = CommandType.Text;
+
+                con.Open();
+                return (decimal)cmd.ExecuteScalar();
+            }    
+        }
         public int Update(Object.Position position)
         {
             using (SqlConnection con = new SqlConnection(SharedMethods.getConnectionString()))
@@ -108,13 +119,21 @@ namespace DataAccessLayer.Position
         {
             using (SqlConnection con = new SqlConnection(SharedMethods.getConnectionString()))
             {
-                SqlCommand cmd = new SqlCommand("Delete From tblPosition Where Id = @Id", con);
-                cmd.CommandType = CommandType.Text;
+                SqlCommand cmd = new SqlCommand("spDeletePosition_tblPosition", con);
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@Id", position.Id);
 
+                SqlParameter Result = new SqlParameter("@ResultNumber", DbType.Int32);
+                Result.Direction = ParameterDirection.Output;
+
+                cmd.Parameters.Add(Result);
+
                 con.Open();
-                return (int)cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+                return (int)Result.Value;
             }
         }
     }

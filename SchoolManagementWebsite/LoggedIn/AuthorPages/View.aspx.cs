@@ -13,5 +13,10 @@ namespace SchoolManagementWebsite.LoggedIn.AuthorPages
         {
             BusinessLayer.SharedMethods.redirectUser(BusinessLayer.SharedMethods.isUserAuthorized(3), "../Home");
         }
+
+        protected void authors_DataBound(object sender, EventArgs e)
+        {
+            lblAuthorCount.Text = "Брой автори :" + authors.Rows.Count;
+        }
     }
 }

@@ -3,7 +3,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Преглед на издателите и брой книги от тях</h2>
-    <asp:GridView ID="authors" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="getAuthor" ForeColor="#333333" GridLines="None" AllowPaging="True" AllowSorting="True">
+    <asp:Label ID="lblAuthorCount" runat="server" />
+    <asp:GridView ID="authors" runat="server" AutoGenerateColumns="False" CellPadding="4" DataSourceID="getAuthor" ForeColor="#333333" GridLines="None" AllowPaging="True" AllowSorting="True" OnDataBound="authors_DataBound">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:BoundField DataField="Publisher" HeaderText="Издателство" SortExpression="Publisher" />

@@ -99,7 +99,7 @@ namespace DataAccessLayer.Teacher
        {
            using (SqlConnection con = new SqlConnection(SharedMethods.getConnectionString()))
            {
-               SqlCommand cmd = new SqlCommand("Select FullName From vwTeacherInfo_tblTeacherInfo Where SubjectId = @SubjectId", con);
+               SqlCommand cmd = new SqlCommand("Select EGN,FullName From vwTeacherInfo_tblTeacherInfo Where SubjectId = @SubjectId", con);
                cmd.CommandType = CommandType.Text;
 
                cmd.Parameters.AddWithValue("@SubjectId", subject.Id);
@@ -110,6 +110,7 @@ namespace DataAccessLayer.Teacher
                    {
                        DataRow row = table.NewRow();
 
+                       row["EGN"] = rdr["EGN"];
                        row["FullName"] = rdr["FullName"];
 
                        table.Rows.Add(row);
@@ -175,6 +176,30 @@ namespace DataAccessLayer.Teacher
                }
            }
        }
+       public DataTable ReadWithoutClass(DataTable table)
+       {
+           using (SqlConnection con = new SqlConnection(DataAccessLayer.SharedMethods.getConnectionString()))
+           {
+               SqlCommand cmd = new SqlCommand("Select * From vwTeacherWithoutClass_tblTeacherInfo", con);
+               cmd.CommandType = CommandType.Text;
+
+               con.Open();
+               using (SqlDataReader rdr = cmd.ExecuteReader())
+               {
+
+                   while (rdr.Read())
+                   {
+                       DataRow row = table.NewRow();
+
+                       row["FullName"] = rdr["FullName"];
+                       row["EGN"] = rdr["EGN"];
+
+                       table.Rows.Add(row);
+                   }
+                   return table;
+               }
+           }
+       }
        public DataTable ReadWithFullNameAndEGN(DataTable table)
        {
            using (SqlConnection con = new SqlConnection(DataAccessLayer.SharedMethods.getConnectionString()))
@@ -197,6 +222,25 @@ namespace DataAccessLayer.Teacher
                    }
                    return table;
                }
+           }
+       }
+       public int GetTeacherClassId(Object.TeacherInfo teacher)
+       {
+           using (SqlConnection con = new SqlConnection(DataAccessLayer.SharedMethods.getConnectionString()))
+           {
+               SqlCommand cmd = new SqlCommand("spGetTeacherClassByCheckingEGN_tblTeacherInfo", con);
+               cmd.CommandType = CommandType.StoredProcedure;
+
+               cmd.Parameters.AddWithValue("EGN", teacher.EGN);
+
+               SqlParameter Result = new SqlParameter("@ClassId", DbType.Int32);
+               Result.Direction = ParameterDirection.Output;
+
+               con.Open();
+               cmd.ExecuteNonQuery();
+               con.Close();
+
+               return (int)Result.Value;
            }
        }
        public int Update(Object.TeacherInfo teacher)
@@ -235,15 +279,8 @@ namespace DataAccessLayer.Teacher
                SqlCommand cmd = new SqlCommand("Delete From tblTeacherInfo Where Id = @Id", con);
                cmd.Parameters.AddWithValue("@Id", teacher.Id);
 
-               SqlParameter Result = new SqlParameter("@ResultNumber", SqlDbType.Int);
-               Result.Direction = ParameterDirection.Output;
-               cmd.Parameters.Add(Result);
-
                con.Open();
-               cmd.ExecuteScalar();
-               con.Close();
-
-               return (int)Result.Value;
+               return (int)cmd.ExecuteNonQuery();
            }
        }
     }

@@ -26,5 +26,16 @@ namespace SchoolManagementWebsite.LoggedIn.PositionPages
         {
             gridViewTeacher.Visible = true;
         }
+
+        protected void lblTotalSalary_Load(object sender, EventArgs e)
+        {
+            BusinessLayer.Position.CRUD crud = new BusinessLayer.Position.CRUD();
+            (sender as Label).Text = "Общо всички заплати : " + crud.GetTotalSalary().ToString("0.00 лв");
+        }
+
+        protected void gridViewPosition_DataBound(object sender, EventArgs e)
+        {
+            lblPositionCount.Text = "Брой длъжности :" + gridViewPosition.Rows.Count;
+        }
     }
 }

@@ -27,7 +27,7 @@
             <td>Заплащане :
             </td>
             <td class="auto-style1">
-                <asp:TextBox ID="txtSalary" placeholder="Длъжност" runat="server" />
+                <asp:TextBox ID="txtSalary" placeholder="Заплащане" runat="server" />
             </td>
             <td class="hideBorder">
                 <asp:RequiredFieldValidator ValidationGroup="Register" Text="*" CssClass="error" ControlToValidate="txtSalary"

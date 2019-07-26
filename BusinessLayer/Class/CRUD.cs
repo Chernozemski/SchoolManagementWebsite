@@ -52,7 +52,7 @@ namespace BusinessLayer.Class
             DataTable table = new DataTable();
 
             table.Columns.Add("Id");
-            table.Columns.Add("Grade");
+            table.Columns.Add("FullClassName");
 
             return crud.ReadWithId(table);
         }
@@ -80,17 +80,6 @@ namespace BusinessLayer.Class
             table.Columns.Add("Letter");
 
             return crud.ReadWithSelectedId(table, specialization);
-        }
-        public DataTable Test()
-        {
-            DataTable table = new DataTable();
-            table.Columns.Add("Id");
-            table.Columns.Add("Grade");
-            table.Columns.Add("Letter");
-            table.Columns.Add("SpecializationId");
-            table.Columns.Add("ClassTeacherEGN");
-
-            return crud.Test(table);
         }
         public void Update(int Id, int Grade, char Letter, int SpecializationId, string ClassTeacherEGN,
             out string Message, out System.Drawing.Color Color)

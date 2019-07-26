@@ -25,5 +25,10 @@ namespace SchoolManagementWebsite.LoggedIn.SubjectPages
         {
             teacherList.Visible = true;
         }
+
+        protected void viewSubject_DataBound(object sender, EventArgs e)
+        {
+            lblSubjectCount.Text = "Брой предмети :" +viewSubject.Rows.Count;
+        }
     }
 }

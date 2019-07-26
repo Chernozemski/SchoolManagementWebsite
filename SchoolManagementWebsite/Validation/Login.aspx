@@ -6,7 +6,7 @@
         <tr>
             <td>Потребителско име : </td>
             <td>
-                <asp:TextBox ID="txtUserName" placeholder="Потребителско име"  runat="server" />
+                <asp:TextBox ID="txtUserName" placeholder="Потребителско име" autocomplete="off" runat="server" />
             </td>
             <td class="hideBorder">
                 <asp:RequiredFieldValidator ControlToValidate="txtUserName" Display="Dynamic" ErrorMessage="Трябва да въведете потребителско име." ValidationGroup="Login" Text="*" CssClass="error" runat="server" />
@@ -15,7 +15,7 @@
         <tr>
             <td>Парола : </td>
             <td>
-                <asp:TextBox ID="txtPassword" placeholder="Парола" runat="server" TextMode="Password" />
+                <asp:TextBox ID="txtPassword" placeholder="Парола" runat="server" autocomplete="off" TextMode="Password" />
             </td>
             <td class="hideBorder">
                 <asp:RequiredFieldValidator ControlToValidate="txtPassword" Display="Dynamic" ErrorMessage="Трябва да въведете парола." ValidationGroup="Login" Text="*" CssClass="error" runat="server" />

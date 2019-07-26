@@ -47,15 +47,18 @@
     <Compile Include="Budget\CRUDOperationLength.cs" />
     <Compile Include="Budget\CRUDOPerationType.cs" />
     <Compile Include="Class\CRUD.cs" />
+    <Compile Include="Class\CRUDClassStudent.cs" />
     <Compile Include="Class\HelperMethods.cs" />
     <Compile Include="Doctor\CRUD.cs" />
     <Compile Include="Doctor\HelperMethods.cs" />
+    <Compile Include="Grade\CRUD.cs" />
+    <Compile Include="Lesson\CRUD.cs" />
     <Compile Include="Position\CRUD.cs" />
+    <Compile Include="Programme\CRUD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SharedMethods.cs" />
     <Compile Include="Specialization\CRUD.cs" />
     <Compile Include="Student\CRUDInfo.cs" />
-    <Compile Include="Student\Register.cs" />
     <Compile Include="Subject\CRUD.cs" />
     <Compile Include="Teacher\Absent.cs" />
     <Compile Include="Teacher\CRUDAccount.cs" />
@@ -63,6 +66,9 @@
     <Compile Include="Teacher\HelperMethods.cs" />
     <Compile Include="Teacher\LoginAccount.cs" />
     <Compile Include="Teacher\RegisterAccount.cs" />
+    <Compile Include="TimeTable\CRUD.cs" />
+    <Compile Include="TimeTable\CRUDDay.cs" />
+    <Compile Include="TimeTable\CRUDShift.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -73,6 +79,7 @@
       <Name>Object</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

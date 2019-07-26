@@ -30,7 +30,7 @@
             <td>
                 <asp:TextBox ID="txtAmount" placeholder="Стойност" runat="server" />
             </td>
-            <td>
+            <td class="hideBorder">
                 <asp:RequiredFieldValidator Text="*" ValidationGroup="Register" ControlToValidate="txtAmount" Display="Dynamic" CssClass="error"
                     ErrorMessage="Трябва да въведете стойността на тази операция." runat="server" />
                 <asp:RegularExpressionValidator Text="*" ValidationGroup="Register" ControlToValidate="txtAmount" InitialValue="0"

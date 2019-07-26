@@ -40,6 +40,14 @@ namespace BusinessLayer.Position
 
             return crud.ReadWithStaffCount(table);
         }
+        public decimal GetTotalSalary()
+        {
+            DataTable table = new DataTable();
+
+            table.Columns.Add("Salary");
+
+            return crud.GetTotalSalary(table);
+        }
         public void Update(int Id, string Position, decimal Salary, out string Message, out System.Drawing.Color Color)
         {
             Position = Position.Trim();

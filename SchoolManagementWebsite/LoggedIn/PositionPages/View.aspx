@@ -3,10 +3,11 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Преглед на длъжностите</h2>
+    <asp:Label ID="lblPositionCount" runat="server" />
     <table>
         <tr>
             <td class="hideBorder">
-    <asp:GridView ID="gridViewPosition" runat="server" AllowSorting="True" DataKeyNames="Id" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataSourceID="getPosition" ForeColor="#333333" GridLines="None" PageSize="5" OnSelectedIndexChanged="gridViewPosition_SelectedIndexChanged" >
+    <asp:GridView ID="gridViewPosition" runat="server" AllowSorting="True" DataKeyNames="Id" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataSourceID="getPosition" ForeColor="#333333" GridLines="None" PageSize="5" OnSelectedIndexChanged="gridViewPosition_SelectedIndexChanged" OnDataBound="gridViewPosition_DataBound" >
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <EmptyDataTemplate>
             Няма записан(а/и) длъжност(и).
@@ -36,6 +37,7 @@
         <SortedDescendingCellStyle BackColor="#FFFDF8" />
         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
     </asp:GridView>
+                <asp:Label ID="lblTotalSalary" runat="server" OnLoad="lblTotalSalary_Load" Text="Общо заплати :"></asp:Label>
                 </td>
             <td class="hideBorder">
                 <asp:GridView ID="gridViewTeacher" runat="server" AllowPaging="True" AutoGenerateColumns="False" Width="200px" CellPadding="4" DataSourceID="getTeacher" ForeColor="#333333" GridLines="None" OnDataBound="gridViewTeacher_DataBound" Visible="False" >

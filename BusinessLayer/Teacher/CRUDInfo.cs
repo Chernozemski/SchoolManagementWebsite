@@ -93,6 +93,7 @@ namespace BusinessLayer.Teacher
             //Gets the selected subject id value from gridview and displays teacher full name gridview
             DataTable table = new DataTable();
 
+            table.Columns.Add("EGN");
             table.Columns.Add("FullName");
 
             Object.Subject subject = new Object.Subject();
@@ -112,37 +113,77 @@ namespace BusinessLayer.Teacher
 
             return crud.ReadWithSelectedPositionId(table, position);
         }
+        public DataTable ReadWithoutClass()
+        {
+            DataTable table = new DataTable();
+            table.Columns.Add("FullName");
+            table.Columns.Add("EGN");
+
+            return crud.ReadWithoutClass(table);
+        }
+        public int GetTeacherClassId()
+        {
+            string EGN = System.Web.HttpContext.Current.Session["EGN"].ToString();
+
+            Object.TeacherInfo teacher = new Object.TeacherInfo();
+            teacher.EGN = EGN;
+
+            int classId = crud.GetTeacherClassId(teacher);
+
+            if (classId == 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return classId;
+            }
+        }
         public void Update(int Id, string FirstName, string MiddleName, string FamilyName, string EGN, int SubjectId
             , string PhoneNumber, string Adress, int PositionId, string Photo,out string Message,out System.Drawing.Color Color)
         {
-            Object.TeacherInfo teacher = new Object.TeacherInfo();
+            if (Id == 1 && PositionId != 1)
+            {
+                message.Update(-3, out Message, out Color);
+            }
+            else
+            {
+                Object.TeacherInfo teacher = new Object.TeacherInfo();
 
-            teacher.Id = Id;
+                teacher.Id = Id;
 
-            teacher.FirstName = FirstName;
-            teacher.MiddleName = MiddleName;
-            teacher.FamilyName = FamilyName;
+                teacher.FirstName = FirstName;
+                teacher.MiddleName = MiddleName;
+                teacher.FamilyName = FamilyName;
 
-            teacher.EGN = EGN;
-            teacher.SubjectId = SubjectId;
-            teacher.PhoneNumber = PhoneNumber;
-            teacher.Adress = Adress;
-            teacher.PositionId = PositionId;
-            if (Photo != null)
-                teacher.Photo = BusinessLayer.SharedMethods.getImageBase64(Photo);
+                teacher.EGN = EGN;
+                teacher.SubjectId = SubjectId;
+                teacher.PhoneNumber = PhoneNumber;
+                teacher.Adress = Adress;
+                teacher.PositionId = PositionId;
+                if (Photo != null)
+                    teacher.Photo = BusinessLayer.SharedMethods.getImageBase64(Photo);
 
-            int resultNum = crud.Update(teacher);
+                int resultNum = crud.Update(teacher);
 
-            message.Update(resultNum,out Message,out Color);
+                message.Update(resultNum, out Message, out Color);
+            }
         }
         public void Delete(int Id, out string Message,out System.Drawing.Color Color)
         {
             Object.TeacherInfo teacher = new Object.TeacherInfo();
             teacher.Id = Id;
 
-            int resultNum = crud.Delete(teacher);
+            if (Id == 1)
+            {
+                message.Delete(-1, out Message, out Color);
+            }
+            else
+            {
+                int resultNum = crud.Delete(teacher);
 
-            message.Delete(resultNum,out Message,out Color);
+                message.Delete(resultNum, out Message, out Color);
+            }
         }
     }
 }

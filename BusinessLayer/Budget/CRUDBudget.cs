@@ -24,7 +24,7 @@ namespace BusinessLayer.Budget
 
             message.Create(ResultNumber, out Message, out Color);
         }
-        public DataTable ReadFull()
+        public DataTable ReadFull(int ItemId,int Year)
         {
             DataTable table = new DataTable();
 
@@ -37,7 +37,14 @@ namespace BusinessLayer.Budget
             table.Columns.Add("Amount");
             table.Columns.Add("OnDate");
 
-            return crud.ReadFull(table);
+            Object.Budget budget = new Object.Budget();
+            budget.ItemId = ItemId;
+
+            return crud.ReadFull(table,budget,Year);
+        }
+        public List<int> ReadYears()
+        {
+            return crud.ReadYears();
         }
         public void Update(int Id,int ItemId, string DescriptionForItem, decimal Amount, DateTime onDate
             , out string Message, out System.Drawing.Color Color)

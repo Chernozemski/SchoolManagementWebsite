@@ -11,7 +11,7 @@ namespace SchoolManagementWebsite.LoggedIn.TeacherPages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            BusinessLayer.SharedMethods.redirectUser(BusinessLayer.SharedMethods.isUserAuthorized(10), "Teacher");
         }
 
         protected void getTeacher_Load(object sender, EventArgs e)
@@ -26,6 +26,11 @@ namespace SchoolManagementWebsite.LoggedIn.TeacherPages
         {
             if (e.Row.DataItem != null)
                 (e.Row.FindControl("Photo") as Image).ImageUrl = BusinessLayer.SharedMethods.loadImage(e);
+        }
+
+        protected void getTeacher_DataBound(object sender, EventArgs e)
+        {
+            lblTeacherCount.Text = "Брой учители :" + getTeacher.Rows.Count;
         }
     }
 }

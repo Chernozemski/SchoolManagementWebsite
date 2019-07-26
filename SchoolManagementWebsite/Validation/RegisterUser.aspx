@@ -7,7 +7,7 @@
             <td>Потребителско име :
             </td>
             <td>
-                <asp:TextBox ID="txtUserName" placeholder="Потребилтеско име" runat="server"/>
+                <asp:TextBox ID="txtUserName" placeholder="Потребилтеско име" autocomplete="off" runat="server"/>
             </td>
             <td class="hideBorder">
                 <asp:RequiredFieldValidator ValidationGroup="Register" Text="*" CssClass="error" ErrorMessage="Трябва да въведете потребителско име." ControlToValidate="txtUserName" runat="server" Display="Dynamic" />
@@ -18,7 +18,7 @@
             <td>Парола :
             </td>
             <td>
-                <asp:TextBox ID="txtPassword" placeholder="Парола" runat="server" TextMode="Password"/>
+                <asp:TextBox ID="txtPassword" placeholder="Парола" runat="server" autocomplete="off" TextMode="Password"/>
             </td>
             <td class="hideBorder">
                 <asp:RequiredFieldValidator ValidationGroup="Register" Text="*" CssClass="error" ErrorMessage="Трябва да въведете парола." ControlToValidate="txtPassword" runat="server" Display="Dynamic" />
@@ -28,7 +28,7 @@
             <td>Повторна парола :
             </td>
             <td>
-                <asp:TextBox ID="txtRepeatPassword" placeholder="Парола" runat="server" TextMode="Password" />
+                <asp:TextBox ID="txtRepeatPassword" placeholder="Парола" autocomplete="off" runat="server" TextMode="Password" />
             </td>
             <td class="hideBorder">
                 <asp:RequiredFieldValidator ValidationGroup="Register" Text="*" CssClass="error" ErrorMessage="Трябва да въведете повторна парола." ControlToValidate="txtRepeatPassword" runat="server" Display="Dynamic" />
@@ -39,7 +39,7 @@
             <td>ЕГН :
             </td>
             <td>
-                <asp:TextBox ID="txtEGN" placeholder="ЕГН" runat="server"/>
+                <asp:TextBox ID="txtEGN" placeholder="ЕГН" autocomplete="off" runat="server"/>
             </td>
             <td class="hideBorder">
                 <asp:RequiredFieldValidator ValidationGroup="Register" Text="*" CssClass="error" ErrorMessage="Трябва да въведете ЕГН." ControlToValidate="txtEGN" runat="server" Display="Dynamic" />

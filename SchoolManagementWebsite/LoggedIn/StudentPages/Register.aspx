@@ -70,29 +70,6 @@
             </td>
         </tr>
         <tr>
-            <td>Клас:</td>
-            <td>
-                <asp:DropDownList ID="ddlGrade" runat="server" AppendDataBoundItems="True" DataSourceID="getGrade" DataTextField="Grade" DataValueField="Id" AutoPostBack="True">
-                <asp:ListItem Selected="True" Text="Изберете клас" Value="0" />
-                </asp:DropDownList>
-                <asp:SqlDataSource ID="getGrade" runat="server" ConnectionString="<%$ ConnectionStrings:SchoolManagementDBConnectionString %>" SelectCommand="SELECT [Grade], [Id] FROM [tblClass]" />
-                <asp:DropDownList ID="ddlLetter" runat="server" AppendDataBoundItems="True" DataSourceID="getLetter" DataTextField="Specialization" DataValueField="Id" Height="16px" Width="80px">
-                    <asp:ListItem Selected="True" Text="Изберете паралелка" Value="0" />
-                </asp:DropDownList>
-                <asp:SqlDataSource ID="getLetter" runat="server" ConnectionString="<%$ ConnectionStrings:SchoolManagementDBConnectionString %>" SelectCommand="SELECT Id, [FullClassName] + ' ' + [Specialization] as Specialization FROM [vwClass_tblClass] WHERE ([Id] = @Id)">
-                    <SelectParameters>
-                        <asp:ControlParameter ControlID="ddlGrade" Name="Id" PropertyName="SelectedValue" Type="Int32" />
-                    </SelectParameters>
-                </asp:SqlDataSource>
-            </td>
-            <td class="hideBorder">
-                <asp:RequiredFieldValidator ValidationGroup="Register" InitialValue="0" Text="*" CssClass="error"
-                     ErrorMessage="Трябва да въведете клас." ControlToValidate="ddlGrade" runat="server" Display="Dynamic" />
-                <asp:RequiredFieldValidator ValidationGroup="Register" InitialValue="0" Text="*" CssClass="error" 
-                    ErrorMessage="Трябва да въведете паралелка." ControlToValidate="ddlLetter" runat="server" Display="Dynamic" />
-            </td>
-        </tr>
-        <tr>
             <td>Снимка:
             </td>
             <td>
@@ -110,15 +87,15 @@
         </tr>
         <tr>
             <td>Доктор:</td>
-            <td class="auto-style1">
-                <asp:TextBox ID="txtDoctor" placeholder="Име и фамиля" runat="server" />
-                <asp:Button ID="btncheckDoctorId" Text="Провери име" runat="server" OnClick="btncheckDoctorId_Click"/>
-                <asp:Image ID="hasDoctorImage" Visible="false" runat="server" CssClass="resizeImageVerySmall" />
-            </td>
+            <td>
+                <asp:DropDownList ID="ddlDoctor" runat="server" DataSourceID="getDoctor" AppendDataBoundItems="true" DataTextField="FullDoctorName" DataValueField="Id">
+                    <asp:ListItem Text="Изберете доктор" Value="0" />
+                </asp:DropDownList>
+                <asp:ObjectDataSource ID="getDoctor" runat="server" SelectMethod="ReadWithId" TypeName="BusinessLayer.Doctor.CRUD"></asp:ObjectDataSource>
+                </td>
             <td class="hideBorder">
-                <asp:RequiredFieldValidator ValidationGroup="Register" CssClass="error" Text="*" 
-                    ErrorMessage="Трябва да въведете името на доктора." ControlToValidate="txtDoctor" Display="Dynamic" runat="server" />
-                <asp:RegularExpressionValidator ValidationGroup="Register" Text="*" CssClass="error" ErrorMessage="Името на доктора не трябва да притежава цифри или знаци" ValidationExpression="^[А-Яа-я- ]+$" ControlToValidate="txtDoctor" runat="server" Display="Dynamic" />
+                <asp:RequiredFieldValidator ValidationGroup="Register" CssClass="error" Text="*"  InitialValue="0"
+                    ErrorMessage="Трябва да изберете името на доктора." ControlToValidate="ddlDoctor" Display="Dynamic" runat="server" />
             </td>
         </tr>
         <tr>

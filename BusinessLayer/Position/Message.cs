@@ -54,7 +54,7 @@ namespace BusinessLayer.Position
                     color = Color.Green;
                     break;
                 case 0:
-                    message = "Длъжността не е изтрита.";
+                    message = "Длъжността не е изтрита. Възможно е да са записани хора под тази длъжност.";
                     color = Color.DarkRed;
                     break;
                 default:

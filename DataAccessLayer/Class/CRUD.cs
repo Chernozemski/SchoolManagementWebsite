@@ -88,34 +88,6 @@ namespace DataAccessLayer.Class
                 }
             }
         }
-        public DataTable Test(DataTable table)
-        {
-            using (SqlConnection con = new SqlConnection(SharedMethods.getConnectionString()))
-            {
-                SqlCommand cmd = new SqlCommand("Select Id,Grade,Letter,SpecializationId,ClassTeacherEGN From tblClass", con);
-                cmd.CommandType = CommandType.Text;
-
-                con.Open();
-                using (SqlDataReader rdr = cmd.ExecuteReader())
-                {
-
-                    while (rdr.Read())
-                    {
-                        DataRow row = table.NewRow();
-
-                        row["Id"] = rdr["Id"];
-                        row["Grade"] = rdr["Grade"];
-                        row["Letter"] = rdr["Letter"];
-                        row["SpecializationId"] = rdr["SpecializationId"];
-                        row["ClassTeacherEGN"] = rdr["ClassTeacherEGN"];
-
-                        table.Rows.Add(row);
-                    }
-
-                    return table;
-                }
-            }
-        }
         public DataTable ReadWithSelectedId(DataTable table,Object.Specialization specialization)
         {
             using (SqlConnection con = new SqlConnection(SharedMethods.getConnectionString()))

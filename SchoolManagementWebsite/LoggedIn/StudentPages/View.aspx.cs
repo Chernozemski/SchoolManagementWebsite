@@ -55,5 +55,10 @@ namespace SchoolManagementWebsite.LoggedIn.StudentPages
                     (e.Row.FindControl("Photo") as Image).ImageUrl = url;
                 }
         }
+
+        protected void viewStudent_DataBound(object sender, EventArgs e)
+        {
+            lblStudentCount.Text = "Брой ученици :" +viewStudent.Rows.Count;
+        }
     }
 }

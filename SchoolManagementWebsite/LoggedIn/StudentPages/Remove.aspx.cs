@@ -13,5 +13,10 @@ namespace SchoolManagementWebsite.LoggedIn.StudentPages
         {
             BusinessLayer.SharedMethods.redirectUser(BusinessLayer.SharedMethods.isUserAuthorized(2), "Student");
         }
+
+        protected void getAndRemoveStudent_Deleted(object sender, ObjectDataSourceStatusEventArgs e)
+        {
+            BusinessLayer.SharedMethods.SetMessage(e, ref lblMessage);
+        }
     }
 }

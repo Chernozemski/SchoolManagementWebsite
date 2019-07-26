@@ -67,42 +67,6 @@ namespace SchoolManagementWebsite.LoggedIn.StudentPages {
         protected global::System.Web.UI.WebControls.TextBox txtAdress;
         
         /// <summary>
-        /// ddlGrade control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlGrade;
-        
-        /// <summary>
-        /// getGrade control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource getGrade;
-        
-        /// <summary>
-        /// ddlLetter control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlLetter;
-        
-        /// <summary>
-        /// getLetter control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource getLetter;
-        
-        /// <summary>
         /// fileUploadPhoto control.
         /// </summary>
         /// <remarks>
@@ -121,31 +85,22 @@ namespace SchoolManagementWebsite.LoggedIn.StudentPages {
         protected global::System.Web.UI.WebControls.Button btnClear;
         
         /// <summary>
-        /// txtDoctor control.
+        /// ddlDoctor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDoctor;
+        protected global::System.Web.UI.WebControls.DropDownList ddlDoctor;
         
         /// <summary>
-        /// btncheckDoctorId control.
+        /// getDoctor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btncheckDoctorId;
-        
-        /// <summary>
-        /// hasDoctorImage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image hasDoctorImage;
+        protected global::System.Web.UI.WebControls.ObjectDataSource getDoctor;
         
         /// <summary>
         /// txtParentName control.

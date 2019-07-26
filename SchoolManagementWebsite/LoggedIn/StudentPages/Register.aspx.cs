@@ -9,8 +9,6 @@ namespace SchoolManagementWebsite.LoggedIn.StudentPages
 {
     public partial class Register : System.Web.UI.Page
     {
-        int doctorId = -1;
-        BusinessLayer.Student.Register student = new BusinessLayer.Student.Register();
         protected void Page_Load(object sender, EventArgs e)
         {
             BusinessLayer.SharedMethods.redirectUser(BusinessLayer.SharedMethods.isUserAuthorized(2),"Student");
@@ -20,39 +18,20 @@ namespace SchoolManagementWebsite.LoggedIn.StudentPages
         {
             fileUploadPhoto.Attributes.Clear();
         }
-
-        protected void btncheckDoctorId_Click(object sender, EventArgs e)
-        {
-            int result = student.getDoctorId(txtDoctor.Text);
-                            hasDoctorImage.Visible = true;
-
-            if (result == 0)
-            {
-                hasDoctorImage.ImageUrl = "/Images/Remove.png";
-            }
-            else
-            {
-                hasDoctorImage.ImageUrl = "/Images/Check.png";
-                doctorId = result;
-            }
-        }
-
         protected void btnRegister_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
             {
-                BusinessLayer.Student.Register student = new BusinessLayer.Student.Register();
+                BusinessLayer.Student.CRUDInfo crud = new BusinessLayer.Student.CRUDInfo();
 
-                if (doctorId == -1)
-                {
-                    doctorId = student.getDoctorId(txtDoctor.Text);
-                }
-                    object[] result = student.register(txtFirstName.Text, txtMiddleName.Text, txtFamilyName.Text, txtEGN.Text, txtNumber.Text
-    , txtAdress.Text, Convert.ToInt32(ddlLetter.SelectedValue), fileUploadPhoto, doctorId, txtParentName.Text
-    , txtParentNumber.Text, txtParentAdress.Text);
+                string message;
+                System.Drawing.Color color;
+                crud.Create(txtFirstName.Text, txtMiddleName.Text, txtFamilyName.Text, txtEGN.Text,
+                    txtNumber.Text, txtAdress.Text, fileUploadPhoto, int.Parse(ddlDoctor.SelectedValue), txtParentName.Text,
+                    txtParentNumber.Text, txtParentAdress.Text, out message, out color);
 
-                lblMessage.Text = result[0].ToString();
-                lblMessage.ForeColor = (System.Drawing.Color)result[1];
+                lblMessage.Text = message;
+                lblMessage.ForeColor = color;
             }
         }
     }

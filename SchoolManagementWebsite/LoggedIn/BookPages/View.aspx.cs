@@ -13,5 +13,10 @@ namespace SchoolManagementWebsite.LoggedIn.BookPages
         {
             BusinessLayer.SharedMethods.redirectUser(BusinessLayer.SharedMethods.isUserAuthorized(2), "Book");
         }
+
+        protected void gridViewBook_DataBound(object sender, EventArgs e)
+        {
+            lblBookCount.Text = "Брой книги :" + gridViewBook.Rows.Count;
+        }
     }
 }

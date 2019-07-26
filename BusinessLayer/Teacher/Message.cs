@@ -55,6 +55,10 @@ namespace BusinessLayer.Teacher
                     message="Длъжността директор вече е заета.";
                     color=Color.DarkRed;
                     break;
+                case -3:
+                    message = "Не може да променяте този запис с позиция различна от директор.";
+                    color = Color.DarkRed;
+                    break;
                 default:
                     message="Възникна проблем, който не е разпознат.";
                     color=Color.DarkRed;
@@ -73,12 +77,15 @@ namespace BusinessLayer.Teacher
                     message = "Записът на учителя не беше изтрит.";
                     color = Color.DarkRed;
                     break;
+                case -1 :
+                    message = "Не може да изтриете директорският запис, само може да го променяте.";
+                    color = Color.DarkRed;
+                    break;
                 default:
                     message = "Възникна проблем, който не е разпознат.";
                     color = Color.DarkRed;
                     break;
             }
         }
-
     }
 }

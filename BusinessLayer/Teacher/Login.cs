@@ -25,7 +25,8 @@ namespace BusinessLayer.Teacher
                         int rank = getRank(username);
                         //EGN always is proper
                         string EGN = getEGN(username);
-                        assingSession(username,rank,EGN);
+                        int classId = getClassId(EGN);
+                        assingSession(username, rank, EGN, classId);
                     }
 
                     return Messages(result);
@@ -48,12 +49,13 @@ namespace BusinessLayer.Teacher
                         return "Грешно име / парола или потребителят не съществува.";
                     }
                 }
-                private void assingSession(string username,int Rank,string EGN)
+                private void assingSession(string username,int Rank,string EGN,int ClassId)
                 {
                  HttpContext.Current.Session["UserName"] = username;
                  HttpContext.Current.Session["Rank"] = Rank;
                  HttpContext.Current.Session["EGN"] = EGN;
-                        
+                 HttpContext.Current.Session["ClassId"] = ClassId;
+
                         //Goto school system
                  System.Web.Security.FormsAuthentication.RedirectFromLoginPage(username, false);
                 }
@@ -64,6 +66,10 @@ namespace BusinessLayer.Teacher
                 private string getEGN(string username)
                 {
                     return methods.getEGN(username).ToString();
+                }
+                private int getClassId(string EGN)
+                {
+                    return methods.getTeacherClassId(EGN);
                 }
             }
 }

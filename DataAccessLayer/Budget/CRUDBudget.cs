@@ -33,12 +33,15 @@ namespace DataAccessLayer.Budget
                 return (int)Result.Value;
             }
         }
-        public DataTable ReadFull(DataTable table)
+        public DataTable ReadFull(DataTable table, Object.Budget budget, int Year)
         {
             using (SqlConnection con = new SqlConnection(SharedMethods.getConnectionString()))
             {
-                SqlCommand cmd = new SqlCommand("Select Id,ItemId,Item,Operation,Payment,DescriptionForItem,Amount,OnDate From vwBudgetFull_tblBudget", con);
-                cmd.CommandType = CommandType.Text;
+                SqlCommand cmd = new SqlCommand("spReadBudgetViewByType_tblBudget", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@ItemId", budget.ItemId);
+                cmd.Parameters.AddWithValue("@Year", Year);
 
                 con.Open();
                 using (SqlDataReader rdr = cmd.ExecuteReader())
@@ -61,6 +64,26 @@ namespace DataAccessLayer.Budget
                     }
 
                     return table;
+                }
+            }
+        }
+        public List<int> ReadYears()
+        {
+            using (SqlConnection con = new SqlConnection(SharedMethods.getConnectionString()))
+            {
+                SqlCommand cmd = new SqlCommand("Select Year(OnDate) As Year From tblBudget", con);
+                cmd.CommandType = CommandType.Text;
+
+                con.Open();
+                using (SqlDataReader rdr = cmd.ExecuteReader())
+                {
+                    List<int> Years = new List<int>(); ;
+                    while (rdr.Read())
+                    {
+                        Years.Add((int)rdr["Year"]);
+                    }
+
+                    return Years;
                 }
             }
         }

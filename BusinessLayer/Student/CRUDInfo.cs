@@ -14,7 +14,7 @@ namespace BusinessLayer.Student
         public void Create(string firstName, string middleName, string familyName,
             string EGN, string phoneNumber, string adress,
             System.Web.UI.WebControls.FileUpload fileUploadPhoto,
-            int ClassId,int DoctorId,string ParentFullName,string ParentPhoneNumber,
+            int DoctorId,string ParentFullName,string ParentPhoneNumber,
             string ParentAdress,out string Message, out System.Drawing.Color Color)
         {
             Object.StudentInfo student = new Object.StudentInfo();
@@ -27,7 +27,6 @@ namespace BusinessLayer.Student
             student.Adress = adress;
             student.Photo = SharedMethods.getImage(fileUploadPhoto);
 
-            student.ClassId = ClassId;
             student.DoctorId = DoctorId;
 
             student.ParentFullName = ParentFullName;
@@ -56,7 +55,6 @@ namespace BusinessLayer.Student
             table.Columns.Add("EGN");
             table.Columns.Add("Photo", typeof(byte[]));
 
-            table.Columns.Add("ClassId");
             table.Columns.Add("Grade");
             table.Columns.Add("DoctorId");
             table.Columns.Add("DoctorFullName");
@@ -89,7 +87,7 @@ namespace BusinessLayer.Student
         }
         public void Update(int Id,string firstName, string middleName, string familyName,
             string EGN, string phoneNumber, string adress, string Photo,
-            int ClassId,int DoctorId,string ParentFullName,string ParentPhoneNumber,
+            int DoctorId,string ParentFullName,string ParentPhoneNumber,
             string ParentAdress,out string Message, out System.Drawing.Color Color)
         {
             Object.StudentInfo student = new Object.StudentInfo();
@@ -107,7 +105,6 @@ namespace BusinessLayer.Student
             if (Photo != null)
                 student.Photo = BusinessLayer.SharedMethods.getImageBase64(Photo);
 
-            student.ClassId = ClassId;
             student.DoctorId = DoctorId;
 
             student.ParentFullName = ParentFullName;

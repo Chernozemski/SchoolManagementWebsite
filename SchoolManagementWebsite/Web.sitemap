@@ -17,15 +17,23 @@
     <siteMapNode url="/LoggedIn/ClassPages/Class.aspx" title="Класове">
       <siteMapNode url="/LoggedIn/ClassPages/View.aspx" title="Преглеждане на класовете"  />
       <siteMapNode url="/LoggedIn/ClassPages/Register.aspx" title="Добавяне на клас"  />
-       <siteMapNode url="/LoggedIn/ClassPages/Update.aspx" title="Промяна на клас" />
+      <siteMapNode url="/LoggedIn/ClassPages/Update.aspx" title="Промяна на клас" />
       <siteMapNode url="/LoggedIn/ClassPages/Remove.aspx" title="Отписване на клас"  />
-      
+
       <siteMapNode url="/LoggedIn/SpecializationPages/Specialization.aspx" title="Паралелки">
         <siteMapNode url="/LoggedIn/SpecializationPages/View.aspx" title="Преглеждане на паралелките"  />
         <siteMapNode url="/LoggedIn/SpecializationPages/Register.aspx" title="Добавяне на паралелка"  />
         <siteMapNode url="/LoggedIn/SpecializationPages/Update.aspx" title="Промяна на паралелка"  />
         <siteMapNode url="/LoggedIn/SpecializationPages/Remove.aspx" title="Отписване на паралелка"  />
       </siteMapNode>
+
+      <siteMapNode url="/LoggedIn/ClassStudentPages/ClassStudent.aspx" title="Ученици в клас">
+        <siteMapNode url="/LoggedIn/ClassStudentPages/View.aspx" title="Преглеждане на учениците в клас"/>
+        <siteMapNode url="/LoggedIn/ClassStudentPages/Update.aspx" title="Промяна на учениците в клас"/>
+        <siteMapNode url="/LoggedIn/ClassStudentPages/Register.aspx" title="Добавяне на ученик в клас"/>
+        <siteMapNode url="/LoggedIn/ClassStudentPages/Remove.aspx" title="Отписване на ученик в клас"/>
+      </siteMapNode>
+
     </siteMapNode>
     <siteMapNode url="/LoggedIn/SubjectPages/Subject.aspx" title="Предмети">
       <siteMapNode url="/LoggedIn/SubjectPages/View.aspx" title="Преглеждане на предметите"/>
@@ -55,12 +63,43 @@
       <siteMapNode url="/LoggedIn/BudgetPages/Update.aspx" title="Промяна на бюджета"/>
       <siteMapNode url="/LoggedIn/BudgetPages/Register.aspx" title="Добавяне на бюджета"/>
       <siteMapNode url="/LoggedIn/BudgetPages/Remove.aspx" title="Отписване на бюджета"/>
+
+      <siteMapNode url="/LoggedIn/BudgetTypePages/BudgetType.aspx" title="Операция">
+        <siteMapNode url="/LoggedIn/BudgetTypePages/View.aspx" title="Преглеждане на бюджета"/>
+        <siteMapNode url="/LoggedIn/BudgetTypePages/Update.aspx" title="Промяна на бюджета"/>
+        <siteMapNode url="/LoggedIn/BudgetTypePages/Register.aspx" title="Добавяне на бюджета"/>
+        <siteMapNode url="/LoggedIn/BudgetTypePages/Remove.aspx" title="Отписване на бюджета"/>
+      </siteMapNode>
     </siteMapNode>
     <siteMapNode url="/LoggedIn/AuthorPages/Author.aspx" title="Издатели">
       <siteMapNode url="/LoggedIn/AuthorPages/View.aspx" title="Преглеждане на издателите"/>
       <siteMapNode url="/LoggedIn/AuthorPages/Update.aspx" title="Промяна на издателите"/>
       <siteMapNode url="/LoggedIn/AuthorPages/Register.aspx" title="Добавяне на издател"/>
       <siteMapNode url="/LoggedIn/AuthorPages/Remove.aspx" title="Отписване на издател"/>
+    </siteMapNode>
+    <siteMapNode url="/LoggedIn/TimeTablePages/TimeTable.aspx" title="Часове">
+      <siteMapNode url="/LoggedIn/TimeTablePages/View.aspx" title="Преглеждане на часовете"/>
+      <siteMapNode url="/LoggedIn/TimeTablePages/Update.aspx" title="Промяна на часовете"/>
+      <siteMapNode url="/LoggedIn/TimeTablePages/Register.aspx" title="Добавяне на час"/>
+      <siteMapNode url="/LoggedIn/TimeTablePages/Remove.aspx" title="Отписване на час"/>
+    </siteMapNode>
+    <siteMapNode url="/LoggedIn/ProgrammePages/Programme.aspx" title="Програми">
+      <siteMapNode url="/LoggedIn/ProgrammePages/View.aspx" title="Преглеждане на програмите"/>
+      <siteMapNode url="/LoggedIn/ProgrammePages/Update.aspx" title="Промяна на програмите"/>
+      <siteMapNode url="/LoggedIn/ProgrammePages/Register.aspx" title="Добавяне на програма"/>
+      <siteMapNode url="/LoggedIn/ProgrammePages/Remove.aspx" title="Отписване на програма"/>
+    </siteMapNode>
+      <siteMapNode url="/LoggedIn/LessonPages/Lesson.aspx" title="Уроци">
+      <siteMapNode url="/LoggedIn/LessonPages/View.aspx" title="Преглеждане на уроците"/>
+      <siteMapNode url="/LoggedIn/LessonPages/Update.aspx" title="Промяна на уроците"/>
+      <siteMapNode url="/LoggedIn/LessonPages/Register.aspx" title="Добавяне на урок"/>
+      <siteMapNode url="/LoggedIn/LessonPages/Remove.aspx" title="Отписване на урок"/>
+    </siteMapNode>
+    <siteMapNode url="/LoggedIn/GradePages/Grade.aspx" title="Оценки">
+      <siteMapNode url="/LoggedIn/GradePages/View.aspx" title="Преглеждане на оценките"/>
+      <siteMapNode url="/LoggedIn/GradePages/Update.aspx" title="Промяна на оценките"/>
+      <siteMapNode url="/LoggedIn/GradePages/Register.aspx" title="Добавяне на оценка"/>
+      <siteMapNode url="/LoggedIn/GradePages/Remove.aspx" title="Отписване на оценка"/>
     </siteMapNode>
   </siteMapNode>
 </siteMap>

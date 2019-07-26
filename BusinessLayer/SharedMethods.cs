@@ -32,11 +32,24 @@ namespace BusinessLayer
             else
                 return false;
         }
+        public static bool hasTeacherClass()
+        {
+           if (HttpContext.Current.Session["ClassId"]!= null)
+            {
+                if ((int)HttpContext.Current.Session["ClassId"] > 0)
+                    return true;
+                else
+                    return false;
+            }
+            else
+                return false;
+        }
         public static void resetSessionInfo()
         {
             HttpContext.Current.Session["UserName"] = null;
             HttpContext.Current.Session["Rank"] = null;
             HttpContext.Current.Session["EGN"] = null;
+            HttpContext.Current.Session["ClassId"] = null;
         }
         public static void redirectUser(bool isUserAuthorized,string toPage)
         {

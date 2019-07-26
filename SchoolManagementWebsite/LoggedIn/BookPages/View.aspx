@@ -3,7 +3,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
         <h2>Преглед на учебниците</h2>
-<asp:GridView ID="gridViewBook" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataSourceID="getBook" ForeColor="#333333" GridLines="None" PageSize="5" >
+    <asp:Label ID="lblBookCount" runat="server" />
+<asp:GridView ID="gridViewBook" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataSourceID="getBook" ForeColor="#333333" GridLines="None" PageSize="5" OnDataBound="gridViewBook_DataBound" >
     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <EmptyDataTemplate>
             Няма записан(а/и) книг(а/и).

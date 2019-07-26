@@ -14,9 +14,11 @@ namespace SchoolManagementWebsite.LoggedIn.ClassPages
         BusinessLayer.Class.CRUD crud = new BusinessLayer.Class.CRUD();
         protected void Page_Load(object sender, EventArgs e)
         {
-            ddlGrade.Items.AddRange(setGrade());
-            ddlLetter.Items.AddRange(setLetter());
-            ddlTeacher.Items.Add(new ListItem("Изберете учител", "0"));
+            if (!Page.IsPostBack)
+            {
+                ddlGrade.Items.AddRange(setGrade());
+                ddlLetter.Items.AddRange(setLetter());
+            }
         }
         protected void btnRegister_Click(object sender, EventArgs e)
         {
@@ -29,6 +31,9 @@ namespace SchoolManagementWebsite.LoggedIn.ClassPages
 
                 lblMessage.Text = Message;
                 lblMessage.ForeColor = Color;
+
+                if (!lblMessage.ForeColor.Equals(System.Drawing.Color.DarkRed))
+                ddlTeacher.Items.Remove(ddlTeacher.SelectedItem);
             }
         }
         private ListItem[] setGrade()

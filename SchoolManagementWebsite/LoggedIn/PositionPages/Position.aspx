@@ -6,7 +6,7 @@
     <table class="hideBorder">
         <tr>
             <td>
-                <img alt="Длъжност" class="resizeImage" title="Длъжност" src="../../Images/Specialization.png" />
+                <img alt="Длъжност" class="resizeImage" title="Длъжност" src="../../Images/Position.png" />
             </td>
         </tr>
         <tr>
@@ -22,6 +22,8 @@
                         <img alt="Прибавяне на длъжност" class="resizeImageSmall" title="Прибавяне на длъжност" src="../../Images/Add.png" /></a>
                     <a href="Update.aspx">
                         <img alt="Промяна на длъжност" class="resizeImageSmall" title="Промяна на длъжност" src="../../Images/Update.png" /></a>
+                    <a href="Remove.aspx">
+                        <img alt="Премахване на длъжност" class="resizeImageSmall" title="Премахване на длъжност" src="../../Images/Remove.png" /></a>
                 </td>
             </tr>
         </asp:Panel>

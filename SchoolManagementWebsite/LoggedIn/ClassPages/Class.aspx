@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-        <h2>Класове</h2>
+    <h2>Класове</h2>
     <table class="hideBorder">
         <tr>
             <td>
@@ -34,5 +34,11 @@
                 </td>
             </tr>
         </asp:Panel>
+        <tr>
+            <td>
+                <a href="../ClassStudentPages/ClassStudent.aspx">
+                    <img alt="Ученици в клас" class="resizeImageSmall" title="Ученици в клас" src="../../Images/ClassStudent.png" /></a>
+            </td>
+        </tr>
     </table>
 </asp:Content>

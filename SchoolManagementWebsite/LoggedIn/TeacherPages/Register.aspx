@@ -54,7 +54,7 @@
             </td>
         </tr>
         <tr>
-            <td class="auto-style10">ЕГН:
+            <td >ЕГН:
             </td>
             <td>
                 <asp:TextBox ID="txtEGN" placeholder="ЕГН (10 цифри)" runat="server" />

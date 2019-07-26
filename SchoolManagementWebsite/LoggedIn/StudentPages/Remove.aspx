@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Отписване на ученик</h2>
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" AllowPaging="True" AllowSorting="True" DataKeyNames="Id" DataSourceID="DeleteStudent" PageSize="5">
+    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" AllowPaging="True" AllowSorting="True" DataKeyNames="Id" DataSourceID="getAndRemoveStudent" PageSize="5">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:TemplateField HeaderText="Команда">
@@ -13,8 +13,7 @@
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:BoundField DataField="FullName" HeaderText="Име" ReadOnly="True" SortExpression="FullName" />
-            <asp:BoundField DataField="Grade" HeaderText="Клас" ReadOnly="True" SortExpression="Grade" />
-            <asp:BoundField DataField="ParentFullName" HeaderText="Родител" SortExpression="ParentFullName" />
+            <asp:BoundField DataField="Grade" HeaderText="Клас" SortExpression="Grade" ReadOnly="True" NullDisplayText="Няма клас" />
         </Columns>
         <EditRowStyle BackColor="#999999" />
         <EmptyDataTemplate>
@@ -32,8 +31,12 @@
         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
 
     </asp:GridView>
-    <asp:SqlDataSource ID="DeleteStudent" runat="server"
-        ConnectionString="<%$ ConnectionStrings:SchoolManagementDBConnectionString %>"
-        SelectCommand="SELECT [Id], [FullName], [Grade], [ParentFullName], [Photo] FROM [vwStudentInfo_tblStudentInfo]"
-        DeleteCommand ="Delete From tblStudentInfo Where Id = @Id"></asp:SqlDataSource>
+    <asp:ObjectDataSource ID="getAndRemoveStudent" runat="server" DeleteMethod="Delete" OnDeleted="getAndRemoveStudent_Deleted" SelectMethod="ReadWithId" TypeName="BusinessLayer.Student.CRUDInfo">
+        <DeleteParameters>
+            <asp:Parameter Name="Id" Type="Int32" />
+            <asp:Parameter Direction="Output" Name="Message" Type="String" />
+            <asp:Parameter Direction="Output" Name="Color" Type="Object" />
+        </DeleteParameters>
+    </asp:ObjectDataSource>
+    <asp:Label ID="lblMessage" runat="server" CssClass="BigText"></asp:Label>
 </asp:Content>

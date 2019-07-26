@@ -4,8 +4,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Преглед на ученическият състав
     </h2>
+    <asp:Label ID="lblStudentCount" runat="server" />
     <asp:GridView ID="viewStudent" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" 
-        DataSourceID="getStudent" ForeColor="#333333" GridLines="None" OnRowDataBound="viewStudent_RowDataBound" PageSize="5">
+        DataSourceID="getStudent" ForeColor="#333333" GridLines="None" OnRowDataBound="viewStudent_RowDataBound" PageSize="5" OnDataBound="viewStudent_DataBound">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:TemplateField HeaderText="Снимка" SortExpression="Photo">
@@ -19,7 +20,7 @@
             <asp:BoundField DataField="FullName" HeaderText="Ученик" ReadOnly="True" SortExpression="FullName" />
             <asp:BoundField DataField="PhoneNumber" HeaderText="Тел. номер" ReadOnly="True" SortExpression="PhoneNumber" />
             <asp:BoundField DataField="Adress" HeaderText="Местоживеене" SortExpression="Adress" />
-            <asp:BoundField DataField="Grade" HeaderText="Клас" ReadOnly="True" SortExpression="Grade" />
+            <asp:BoundField DataField="Grade" HeaderText="Клас" ReadOnly="True" SortExpression="Grade"  NullDisplayText="Няма клас"/>
             <asp:BoundField DataField="DoctorFullName" HeaderText="Доктор" ReadOnly="True" SortExpression="DoctorFullName" />
             <asp:BoundField DataField="ParentFullName" HeaderText="Родител" SortExpression="ParentFullName" />
             <asp:BoundField DataField="ParentPhoneNumber" HeaderText="Тел. номер на родител" SortExpression="ParentPhoneNumber" />

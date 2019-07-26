@@ -21,11 +21,10 @@ namespace DataAccessLayer.Student
                 cmd.Parameters.AddWithValue("@FamilyName", student.FamilyName);
                 
                 cmd.Parameters.AddWithValue("@EGN", student.EGN);
-                cmd.Parameters.AddWithValue("@PhoneNumber", student.PhoneNumber);
+                cmd.Parameters.AddWithValue("@Phone", student.PhoneNumber);
                 cmd.Parameters.AddWithValue("@Adress", student.Adress);
                 cmd.Parameters.AddWithValue("@Photo", student.Photo);
 
-                cmd.Parameters.AddWithValue("@ClassId", student.ClassId);
                 cmd.Parameters.AddWithValue("@DoctorId", student.DoctorId);
 
                 cmd.Parameters.AddWithValue("@ParentFullname", student.ParentFullName);
@@ -104,7 +103,6 @@ namespace DataAccessLayer.Student
                         row["EGN"] = rdr["EGN"];
                         row["Photo"] = rdr["Photo"];
 
-                        row["ClassId"] = rdr["ClassId"];
                         row["DoctorId"] = rdr["DoctorId"];
                         row["Grade"] = rdr["Grade"];
                         row["DoctorFullName"] = rdr["DoctorFullName"];
@@ -137,7 +135,6 @@ namespace DataAccessLayer.Student
                 cmd.Parameters.AddWithValue("@Adress", student.Adress);
                 cmd.Parameters.AddWithValue("@Photo", student.Photo);
 
-                cmd.Parameters.AddWithValue("@ClassId", student.ClassId);
                 cmd.Parameters.AddWithValue("@DoctorId", student.DoctorId);
 
                 cmd.Parameters.AddWithValue("@ParentFullname", student.ParentFullName);
@@ -162,15 +159,8 @@ namespace DataAccessLayer.Student
                 SqlCommand cmd = new SqlCommand("Delete From tblStudentInfo Where Id = @Id", con);
                 cmd.Parameters.AddWithValue("@Id", student.Id);
 
-                SqlParameter Result = new SqlParameter("@ResultNumber", SqlDbType.Int);
-                Result.Direction = ParameterDirection.Output;
-                cmd.Parameters.Add(Result);
-
                 con.Open();
-                cmd.ExecuteScalar();
-                con.Close();
-
-                return (int)Result.Value;
+                return (int)cmd.ExecuteNonQuery();
             }
         }
     }

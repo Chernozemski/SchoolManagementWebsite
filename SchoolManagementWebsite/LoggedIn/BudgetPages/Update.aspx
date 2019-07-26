@@ -4,7 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
         <h2>Промяна на приход/разход</h2>
     <asp:GridView ID="gridViewBudget" runat="server" AllowPaging="True" DataKeyNames="Id" AllowSorting="True"
-         AutoGenerateColumns="False" CellPadding="4" DataSourceID="getAndUpdateBudget" ForeColor="#333333" GridLines="None" ShowFooter="True" OnRowDataBound="gridViewBudget_RowDataBound" >
+         AutoGenerateColumns="False" CellPadding="4" DataSourceID="getAndUpdateBudget" ForeColor="#333333" GridLines="None" OnRowDataBound="gridViewBudget_RowDataBound" >
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <EmptyDataTemplate>
             Няма записан(а/и) операци(и/я).
@@ -46,7 +46,7 @@
                     ValidationExpression="(^[0-9]{1,9}$|^[1-9]{1,7}[.]{1}[0-9]{2}$)" runat="server" />
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("Amount") %>'></asp:Label>
+                    <asp:Label ID="Label2" runat="server" Text='<%# Eval("Amount","{0} лв.") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="На дата" SortExpression="OnDate">
@@ -78,7 +78,33 @@
         <SortedDescendingCellStyle BackColor="#FFFDF8" />
         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
         </asp:GridView>
-    <asp:ObjectDataSource ID="getAndUpdateBudget" runat="server" SelectMethod="ReadFull" TypeName="BusinessLayer.Budget.CRUDBudget" OnUpdating="getAndUpdateBudget_Updating" UpdateMethod="Update" OnUpdated="getAndUpdateBudget_Updated" >
+   <table>
+        <tr>
+            <td>
+                Операция :
+            </td>
+            <td>
+                <asp:DropDownList ID="ddlItem" runat="server" DataSourceID="getItemId" AutoPostBack="true" AppendDataBoundItems="true" DataTextField="Item" DataValueField="Id">
+               <asp:ListItem Text="Изберете операция" Value="0" />
+                     </asp:DropDownList>
+                <asp:ObjectDataSource ID="getItemId" runat="server" SelectMethod="ReadWithId" TypeName="BusinessLayer.Budget.CRUDBudgetType"></asp:ObjectDataSource>
+            </td>
+        </tr>
+        <tr>
+            <td>Година :</td>
+            <td>
+                <asp:DropDownList ID="ddlYear" runat="server" AutoPostBack="true" AppendDataBoundItems="True" DataSourceID="getYear">
+                    <asp:ListItem Text="Изберете година" Value ="0" />
+                </asp:DropDownList>
+                <asp:ObjectDataSource ID="getYear" runat="server" SelectMethod="ReadYears" TypeName="BusinessLayer.Budget.CRUDBudget"></asp:ObjectDataSource>
+            </td>
+        </tr>
+    </table>
+        <asp:ObjectDataSource ID="getAndUpdateBudget" runat="server" SelectMethod="ReadFull" TypeName="BusinessLayer.Budget.CRUDBudget" OnUpdating="getAndUpdateBudget_Updating" UpdateMethod="Update" OnUpdated="getAndUpdateBudget_Updated" >
+            <SelectParameters>
+                <asp:ControlParameter ControlID="ddlItem" DefaultValue="0" Name="ItemId" PropertyName="SelectedValue" Type="Int32" />
+                <asp:ControlParameter ControlID="ddlYear" DefaultValue="0" Name="Year" PropertyName="SelectedValue" Type="Int32" />
+            </SelectParameters>
         <UpdateParameters>
             <asp:Parameter Name="Id" Type="Int32" />
             <asp:Parameter Name="ItemId" Type="Int32" />
@@ -90,7 +116,8 @@
         </UpdateParameters>
         </asp:ObjectDataSource>
         <asp:ObjectDataSource ID="getBudgetType" runat="server" SelectMethod="ReadWithId" TypeName="BusinessLayer.Budget.CRUDBudgetType"></asp:ObjectDataSource>
-        <asp:ValidationSummary ID="ErrorSummary" runat="server" CssClass="error" DisplayMode="List" HeaderText="Проблеми при Обноняването" 
+        
+     <asp:ValidationSummary ID="ErrorSummary" runat="server" CssClass="error" DisplayMode="List" HeaderText="Проблеми при Обноняването" 
         ShowSummary="true" ShowValidationErrors="true" ValidationGroup="Update" />
     <asp:Label ID="lblMessage" runat="server" CssClass="BigText" />
 </asp:Content>

@@ -3,6 +3,7 @@ Go
 
 Create view vwTeacherInfo_tblTeacherInfo As
 	Select tblTeacherInfo.Id,FirstName + ' ' + MiddleName + ' ' + FamilyName As FullName
+	,tblTeacherInfo.EGN
 	,tblSubject.Id As SubjectId, tblSubject.SubjectName,  STUFF(STUFF(PhoneNumber,7,0,'-'),4,0,'-') as PhoneNumber
 	, Adress,tblPosition.Id As PositionId, tblPosition.Position, Photo, Convert(varchar,tblClass.Grade) + ' ' + tblClass.Letter as Class
 	From tblTeacherInfo
@@ -34,7 +35,7 @@ Create View vwBudgetTypeFull_tblBudgetType As
 Go
 
 Create View vwBudgetFull_tblBudget As
-	Select a.Id,b.Id as ItemId,b.Item,c.Operation,d.Payment,a.DescriptionForItem,a.Amount,a.OnDate
+	Select a.Id,b.Id as ItemId,b.Item, c.Operation, d.Payment,a.DescriptionForItem,a.Amount,a.OnDate
 	From tblBudget a
 	Left Join tblBudgetType b
 	On a.BudgetTypeId = b.Id
@@ -46,7 +47,7 @@ Go
 
 
 Create View vwClassFull_tblClass As 
-	Select tblClass.Id
+	Select Distinct tblClass.Id
 	,Grade, Letter
 	,tblSpecialization.Id As SpecializationId, tblSpecialization.Specialization
 	,tblTeacherInfo.EGN As ClassTeacherEGN, tblTeacherInfo.FirstName + ' ' + tblTeacherInfo.MiddleName + ' ' +tblTeacherInfo.FamilyName As FullTeacherName
@@ -77,33 +78,48 @@ Create View vwSubject_tblSubject As
 Go
 
 Create View vwStudentInfoWithId_tblStudentInfo AS
-	Select a.Id
+	Select a.Id,d.StudentInClassId
 	,a.FirstName + ' ' + a.MiddleName + ' ' + a.FamilyName as FullName
 	, STUFF(STUFF(a.PhoneNumber,7,0,'-'),4,0,'-') as PhoneNumber
 	, Adress, a.Photo
-	, Convert(nvarchar,b.Grade) + ' ' + b.Letter as Grade
+	, Convert(nvarchar,b.Grade) + ' ' + b.Letter as Grade, b.Id as ClassId
 	, c.FirstName + ' ' + c.FamilyName as DoctorFullName
 	, ParentFullName, ParentPhoneNumber, ParentAdress
 
 	From tblStudentInfo a
+	Left Join tblStudentInfoInClass d
+	On a.Id = d.StudentId
 	Left Join tblClass b
-	On b.Id = a.ClassId
+	On b.Id = d.ClassId
 	Left Join tblDoctor c
 	On c.Id = a.DoctorId
 Go
 
+Create View vwStudentInfoWithClassId_tblStudentInfoInClass AS
+	Select a.Id,d.StudentInClassId
+	,a.FirstName + ' ' + a.MiddleName + ' ' + a.FamilyName as FullName, b.Id as ClassId
+
+	From tblStudentInfo a
+	Left Join tblStudentInfoInClass d
+	On a.Id = d.StudentId
+	Left Join tblClass b
+	On b.Id = d.ClassId
+Go
+
 Create View vwStudentInfoFull_tblStudentInfo AS
-	Select a.Id
+	Select a.Id,d.StudentInClassId
 	,a.FirstName,a.MiddleName,a.FamilyName
 	,a.PhoneNumber
-	, Adress,EGN, a.Photo, a.ClassId, a.DoctorId
+	, Adress,EGN, a.Photo, a.DoctorId
 	, Convert(nvarchar,b.Grade) + ' ' + b.Letter as Grade
 	, c.FirstName + ' ' + c.FamilyName as DoctorFullName
 	, ParentFullName, ParentPhoneNumber, ParentAdress
 
 	From tblStudentInfo a
+	Left Join tblStudentInfoInClass d
+	On a.Id = d.StudentId
 	Left Join tblClass b
-	On b.Id = a.ClassId
+	On b.Id = d.ClassId
 	Left Join tblDoctor c
 	On c.Id = a.DoctorId
 Go
@@ -172,6 +188,120 @@ Create View vwBookFull_tblBook As
 	On a.SubjectId = c.Id
 Go
 
+Create View vwPositionGetTotalSalary_tblBook As
+	Select Sum(a.Salary) as Salary
+	From tblPosition a
+	Inner Join tblTeacherInfo b
+	On a.Id = b.PositionId
+Go
+
+Create view vwStudentInfoInClassFull_tblStudentInfoInClass As
+	Select a.Id,a.StudentInClassId,Convert(nvarchar,b.Grade) + ' ' + letter As ClassName
+	,a.ClassId
+	,c.FirstName + ' ' + c.FamilyName as StudentName
+	,a.StudentId
+	, a.TimesAbsent, a.TimesExcused, a.TimesLate
+
+	From tblStudentInfoInClass a
+	Left Join tblClass b
+	On b.Id = a.ClassId
+	Left Join tblStudentInfo c
+	On a.StudentId = c.Id
+Go
+
+Create View vwTimeTableFull_tblTimeTable As
+Select a.Id,a.LessonHour,a.LessonTime,b.ShiftName,a.ShiftType
+From tblTimeTable a
+Inner Join tblShift b
+On a.ShiftType = b.ShiftType
+Go
+
+Create View vwTimeTableWithId_tblTimeTable As
+Select a.Id,a.LessonHour
+From tblTimeTable a
+Go
+
+Create view vwProgrammeFull_tblProgramme As
+	Select Distinct a.Id, Convert(nvarchar,b.Grade) + ' ' + b.letter As ClassName
+	,a.ClassId,f.NameDay,a.DayId
+	,c.LessonHour,a.HourId
+	,d.SubjectName, a.SubjectId
+	,a.RoomId
+	,e.FirstName + ' ' + e.FamilyName As TeacherFullName
+	,a.TeacherEGN
+
+	From tblProgramme a
+	Left Join tblDay f
+	On a.DayId = f.Id
+	Left Join tblClass b
+	On a.ClassId = b.Id
+	Left Join tblTimeTable c
+	On a.HourId = c.Id
+	Left join tblSubject d
+	On a.SubjectId = d.Id
+	Left Join tblTeacherInfo e
+	On a.TeacherEGN = e.EGN
+Go
+
+Create View vwLessonFull_tblLesson As
+	Select a.Id,a.LessonName,a.OnDate,a.TeacherEGN,a.MissingStudentId,a.LateStudentId,b.Id As ProgrammeId
+	, Convert(nvarchar,d.Grade) + ' ' + d.letter As ClassName, b.ClassId
+	,c.NameDay
+	,e.LessonHour
+	,f.SubjectName, f.Id as SubjectId
+	,g.FirstName + ' ' + g.FamilyName As TeacherFullName
+
+	From tblLesson a
+	Left Join tblProgramme b 
+	On a.ProgrammeId = b.Id
+	Left Join tblDay c
+	On b.DayId = c.Id
+	Left Join tblClass d
+	On b.ClassId = d.Id
+	Left Join tblTimeTable e
+	On b.HourId = e.Id
+	Left join tblSubject f
+	On b.SubjectId = f.Id
+	Left Join tblTeacherInfo g
+	On a.TeacherEGN = g.EGN
+Go
+
+Create view vwGradeFull_tblGrade As
+	Select a.Id,a.Grade,a.ClassId
+	, Convert(nvarchar,b.Grade) + ' ' + b.letter As ClassName
+	,a.LessonId, c.LessonName, c.OnDate
+	,a.StudentInClassId, e.FirstName + ' ' + e.FamilyName As StudentName
+	,f.FirstName + ' ' + f.MiddleName + ' ' + f.FamilyName as FullTeacherName
+	,f.EGN As TeacherEGN
+
+	From tblGrade a
+	Left Join tblClass b
+	On a.ClassId = b.Id
+	Left Join tblLesson c
+	On a.LessonId = c.Id
+	Left Join tblStudentInfoInClass d
+	On a.StudentInClassId = d.StudentId
+	Left Join tblStudentInfo e
+	On d.StudentId = e.Id
+	Left Join tblTeacherInfo f
+	On c.TeacherEGN = f.EGN
+Go
+
+Create view vwTeacherWithoutClass_tblTeacherInfo As
+	Select Distinct a.FirstName + ' ' + a.MiddleName + ' ' + a.FamilyName as FullName, a.EGN From tblTeacherInfo a
+	Left Join tblClass b 
+	On a.EGN = b.ClassTeacherEGN
+	Where b.ClassTeacherEGN is Null
+Go
+
+Create View vwTimeTableWithIdByClass_tblTimeTable As
+	Select Distinct a.Id,Convert(varchar,a.LessonHour) + ' - ' + c.SubjectName as LessonHour,b.ClassId,b.DayId From tblTimeTable a
+	Inner Join tblProgramme b
+	On b.HourId = a.Id
+	Inner Join tblSubject c
+	On b.SubjectId = c.Id
+Go
+
 Create Procedure spAddTeacher_tblTeacherInfo
 
 @FirstName nvarchar(20),
@@ -234,7 +364,7 @@ Begin
 				End
 			Else
 				Begin
-					If ((@PositionId = 1) And Exists (Select Id From tblTeacherInfo Where PositionId = 1))
+					If ((@PositionId = 1) And Exists (Select Id From tblTeacherInfo Where PositionId = 1 And Id <> @Id))
 						Begin
 							Set @ResultNumber = -2 --Director position already taken.
 						End
@@ -428,6 +558,7 @@ Begin
 												Begin
 													Insert Into tblClass
 													Values (@ClassGrade,@ClassLetter,@SpecializationId,@ClassTeacherEGN)
+
 													Set @ResultNumber =  1 --Successesful registation
 												End
 											Else
@@ -498,7 +629,7 @@ Begin
 	Set @Id = (Select Id From tblTeacherAccount Where UserName = @UserName)
 
 	--Directly return the EGN as BigInt, otherwise int overflow error
-	Select Convert(BigInt,(Select EGN From tblTeacherInfo Where Id = @Id))
+	Select (Select EGN From tblTeacherInfo Where Id = @Id)
 End
 Go
 
@@ -511,8 +642,7 @@ Create Procedure spAddStudent_tblStudentInfo
 ,@Phone varchar(10)
 ,@Adress nvarchar(50)
 
-,@ClassId int
-,@Photo varbinary(max) = null
+,@Photo varbinary(max)  = null
 ,@DoctorId int
 
 ,@ParentFullName nvarchar(60)
@@ -523,33 +653,34 @@ Create Procedure spAddStudent_tblStudentInfo
 )
 AS
 Begin
-	If Not Exists (Select Id From tblClass Where tblClass.Id = @ClassId)
-		Begin
-			Set @ResultNumber = -1 --The class does not exist.
-		End
-
-	Else
-		Begin
-			If Not Exists (Select Id From tblDoctor Where tblDoctor.Id = @DoctorId)
-				Begin
-					Set @ResultNumber =  -2 --The doctor does not exist.
+	Begin
+		If Not Exists (Select Id From tblDoctor Where tblDoctor.Id = @DoctorId)
+			Begin
+				Set @ResultNumber =  -2 --The doctor does not exist.
+			End
+		Else
+			Begin
+				If Not Exists (Select Id From tblStudentInfo Where EGN = @EGN)
+					Begin
+						If (IsNull(DATALENGTH(@Photo),0) = 0)
+							Begin
+								Insert Into tblStudentInfo
+								Values (@FirstName,@MiddleName,@FamilyName,@Egn,@Phone,@Adress,null,@DoctorId,@ParentFullName,@ParentPhoneNumber,@ParentAdress)
+							End
+						Else
+							Begin
+								Insert Into tblStudentInfo
+								Values (@FirstName,@MiddleName,@FamilyName,@Egn,@Phone,@Adress,@Photo,@DoctorId,@ParentFullName,@ParentPhoneNumber,@ParentAdress)
+							End
+						Set @ResultNumber =  1 --Successes.
+					End
+				Else
+					Begin
+						Set @ResultNumber =  0 --Student already registered
+					End
 				End
-			Else
-				Begin
-							If Not Exists (Select Id From tblStudentInfo Where EGN = @EGN)
-								Begin
-									Insert Into tblStudentInfo
-									Values (@FirstName,@MiddleName,@FamilyName,@Egn,@Phone,@Adress,@Photo,@ClassId,@DoctorId,@ParentFullName,@ParentPhoneNumber,@ParentAdress)
-					
-									Set @ResultNumber =  1 --Successes.
-								End
-							Else
-								Begin
-									Set @ResultNumber =  0 --Student already registered
-								End
-						End
-				End
-		End
+			End
+	End
 Go
 
 Create Procedure spAddDoctor_tblDoctor
@@ -639,7 +770,6 @@ Create Procedure spUpdateStudentInfo_tblStudentInfo
 ,@Adress nvarchar(50)
 ,@Photo varbinary(max) = null
 
-,@ClassId int
 ,@DoctorId int
 
 ,@ParentFullName nvarchar(60)
@@ -662,29 +792,22 @@ Begin
 				End
 			Else
 				Begin
-					If Not Exists (Select Id From tblClass Where Id = @ClassId)
+					If (IsNull(DATALENGTH(@Photo),0) = 0)
 						Begin
-							Set @ResultNumber = -2  --The input class id does NOT exist.
+							Update tblStudentInfo
+							Set FirstName = @FirstName, MiddleName = @MiddleName, FamilyName = @FamilyName, EGN = @EGN, PhoneNumber = @PhoneNumber, Adress = @Adress, DoctorId = @DoctorId, ParentFullName = @ParentFullName, ParentPhoneNumber = @ParentPhoneNumber, ParentAdress = @ParentAdress
+							Where Id = @Id
+					
+							Set @ResultNumber = 2 --Success WITHOUT changing photo.
 						End
 					Else
 						Begin
-							If (IsNull(DATALENGTH(@Photo),0) = 0)
-								Begin
-									Update tblStudentInfo
-									Set FirstName = @FirstName, MiddleName = @MiddleName, FamilyName = @FamilyName, EGN = @EGN, PhoneNumber = @PhoneNumber, Adress = @Adress, ClassId = @ClassId, DoctorId = @DoctorId, ParentFullName = @ParentFullName, ParentPhoneNumber = @ParentPhoneNumber, ParentAdress = @ParentAdress
-									Where Id = @Id
-
-									Set @ResultNumber = 2 --Success WITHOUT changing photo.
-								End
-							Else
-								Begin
-									Update tblStudentInfo
-									Set FirstName = @FirstName, MiddleName = @MiddleName, FamilyName = @FamilyName, EGN = @EGN, PhoneNumber = @PhoneNumber, Adress = @Adress, Photo = @Photo, ClassId = @ClassId, DoctorId = @DoctorId, ParentFullName = @ParentFullName, ParentPhoneNumber = @ParentPhoneNumber, ParentAdress = @ParentAdress
-									Where Id = @Id
-
-									Set @ResultNumber = 1 --Success with changing photo.
-								End
-						End
+							Update tblStudentInfo
+							Set FirstName = @FirstName, MiddleName = @MiddleName, FamilyName = @FamilyName, EGN = @EGN, PhoneNumber = @PhoneNumber, Adress = @Adress, Photo = @Photo, DoctorId = @DoctorId, ParentFullName = @ParentFullName, ParentPhoneNumber = @ParentPhoneNumber, ParentAdress = @ParentAdress
+							Where Id = @Id
+					
+							Set @ResultNumber = 1 --Success with changing photo.
+						End	
 				End
 		End
 End
@@ -692,8 +815,7 @@ Go
 
 Create Procedure spAddSpecialization_tblSpecialization
 (
-@Id int
-,@Specialization nvarchar(50)
+@Specialization nvarchar(50)
 ,@ResultNumber int Output
 )
 As
@@ -1100,5 +1222,629 @@ Begin
 
 			Set @ResultNumber = 1 --Success.
 		End
+End
+Go
+
+Create Procedure spDeletePosition_tblPosition 
+(
+@Id int
+
+,@ResultNumber int Output
+)
+As
+Begin
+Begin Transaction 
+	Begin Try
+		Delete From tblPosition Where Id = @Id
+		 
+		Set @ResultNumber= 1
+		Commit Transaction
+	 End Try
+		Begin Catch
+			Set @ResultNumber = 0 --There are people assigned to this position 
+			RollBack Transaction
+		End Catch
+End
+Go
+
+Create Procedure spReadBudgetViewByType_tblBudget 
+(
+@ItemId int
+,@Year Int
+)
+As
+Begin
+	If (@ItemId = 0 And @Year = 0)
+		Begin
+			Select * from vwBudgetFull_tblBudget
+		End
+	Else If (@ItemId <> 0 And @Year = 0 )
+		Begin
+			Select * from vwBudgetFull_tblBudget Where ItemId = @ItemId
+		End
+	Else if (@ItemId = 0 And @Year <> 0 )
+		Begin
+			Select * from vwBudgetFull_tblBudget Where Year(OnDate) = @Year
+		End
+	Else
+		Begin
+			Select * from vwBudgetFull_tblBudget Where ItemId = @ItemId And Year(OnDate) =@Year
+		End
+End
+Go
+
+Create Procedure spAddStudentInClass_tblStudentInfoInClass
+(
+@ClassId int
+,@StudentInClassId int
+,@StudentId int
+,@TimesAbsent int
+,@TimesExcused int
+,@TimesLate decimal(2,2)
+
+,@ResultNumber int Output
+)
+As
+Begin
+If Not Exists (Select Id From tblClass Where Id = @ClassId)
+	Begin
+		Set @ResultNumber = 0 --This class does not exist.
+	End
+Else
+	Begin
+		If Not Exists (Select Id From tblStudentInfo Where Id = @StudentId)
+			Begin
+				Set @ResultNumber = -1 --This student does not exist
+			End
+		Else
+			Begin
+				If Exists (Select StudentId From tblStudentInfoInClass Where StudentId = @StudentId)
+					Begin
+						Set @ResultNumber = -2 --This student is already in class
+					End
+				Else
+					Begin
+						If Exists (Select StudentInClassId From tblStudentInfoInClass Where StudentInClassId = @StudentInClassId And ClassId = @ClassId)
+							Begin
+								Set @ResultNumber = -3 --Student with this class id exists
+							End
+						Else
+							Begin
+								Insert into tblStudentInfoInClass
+								Values (@StudentInClassId,@ClassId,@StudentId,@TimesAbsent,@TimesExcused,@TimesLate)
+
+								Set @ResultNumber = 1 --Success.
+							End
+					End
+			End
+	End
+End
+Go
+
+Create Procedure spUpdateStudentInClass_tblStudentInfoInClass
+(
+@Id int
+,@ClassId int
+,@StudentInClassId int
+,@StudentId int
+,@TimesAbsent int
+,@TimesExcused int
+,@TimesLate decimal(2,2)
+
+,@ResultNumber int Output
+)
+As
+Begin
+If Not Exists (Select Id From tblClass Where Id = @ClassId)
+	Begin
+		Set @ResultNumber = 0 --This class does not exist.
+	End
+Else
+	Begin
+		If Not Exists (Select Id From tblStudentInfo Where Id = @StudentId)
+			Begin
+				Set @ResultNumber = -1 --This student does not exist
+			End
+		Else
+			Begin
+				If Exists (Select StudentId From tblStudentInfoInClass Where StudentId = @StudentId And Id <> @Id And ClassId = @ClassId)
+					Begin
+						Set @ResultNumber = -2 --This student is in class
+					End
+				Else
+					Begin
+						If Exists (Select StudentInClassId From tblStudentInfoInClass Where StudentInClassId = @StudentInClassId And StudentId <> @StudentId And ClassId = @ClassId)
+							Begin
+								Set @ResultNumber = -3 --This student id in class already exists
+							End
+						Else
+							Begin
+								Update tblStudentInfoInClass
+								Set StudentInClassId = @StudentInClassId,ClassId = @ClassId,StudentId = @StudentId,TimesAbsent = @TimesAbsent,TimesExcused =@TimesExcused, TimesLate = @TimesLate
+								Where Id = @Id
+
+								Set @ResultNumber = 1 --Success.
+							End
+					End
+			End
+	End
+End
+Go
+
+Create Procedure spAddTimeTable_tblTimeTable
+(
+@LessonHour int
+,@LessonTime Time(0)
+,@ShiftType int
+
+,@ResultNumber int Output
+)
+As
+Begin
+If Not Exists (Select ShiftType From tblShift Where ShiftType = @ShiftType)
+	Begin
+		Set @ResultNumber = 0 --Shift does not exist
+	End
+Else
+	Begin
+		If Exists (Select Id From tblTimeTable Where (LessonHour = @LessonHour And ShiftType = @ShiftType) Or LessonTime = @LessonTime)
+			Begin
+				Set @ResultNumber = -1 --This hour is already taken
+			End
+		Else
+			Begin
+				Insert into tblTimeTable
+				Values (@LessonHour,@LessonTime,@ShiftType)
+
+				Set @ResultNumber = 1 --Success.
+			End
+	End
+End
+Go
+
+Create Procedure spUpdateTimeTable_tblTimeTable
+(
+@Id int
+,@LessonHour int
+,@LessonTime Time(0)
+,@ShiftType int
+
+,@ResultNumber int Output
+)
+As
+Begin
+If Not Exists (Select ShiftType From tblShift Where ShiftType = @ShiftType)
+	Begin
+		Set @ResultNumber = 0 --Shift does not exist
+	End
+Else
+	Begin
+		If Exists (Select Id From tblTimeTable Where LessonHour = @LessonHour And ShiftType = @ShiftType And Id <> @Id)
+			Begin
+				Set @ResultNumber = -1 --this lesson hour already exist
+			End
+		Else
+			Begin
+				If Exists (Select Id From tblTimeTable Where LessonTime = @LessonTime And Id <>@Id)
+					Begin
+						Set @ResultNumber = -2 --this time is already taken
+					End
+				Else
+					Begin
+						Update tblTimeTable
+						Set LessonHour = @LessonHour,LessonTime =@LessonTime,ShiftType = @ShiftType
+						Where Id = @Id
+
+						Set @ResultNumber = 1 --Success.
+					End
+			End
+	End
+End
+Go
+
+Create Procedure spAddProgramme_tblProgramme
+(
+@ClassId int
+,@DayId int
+,@HourId int
+,@SubjectId int
+,@RoomId int
+,@TeacherEGN varchar(10)
+
+,@ResultNumber int Output
+)
+As
+Begin
+If Exists (Select RoomId From tblProgramme Where DayId =@DayId And HourId = @HourId And RoomId = @RoomId)
+	Begin
+		Set @ResultNumber = -6 --This room is already taken
+	End
+Else
+	Begin
+		If Exists (Select DayId From tblProgramme Where DayId = @DayId And HourId = @HourId And ClassId = @ClassId)
+			Begin
+				Set @ResultNumber = 0 --This hour at this day is currently taken
+			End
+		Else
+			Begin
+				If Not Exists (Select Id From tblClass Where Id = @ClassId)
+					Begin
+						Set @ResultNumber = -1 --This class does not Exist.
+					End
+				Else 
+					Begin
+						If Not Exists (Select Id From tblTimeTable Where Id = @HourId)
+							Begin
+								Set @ResultNumber = -2 --This time does not exist
+							End
+						Else
+							Begin
+								If Not Exists (Select Id From tblSubject Where Id = @SubjectId)
+									Begin
+										Set @ResultNumber = -3 --This subject does not exist.
+									End
+								Else
+									Begin
+										If Not Exists (Select Id From tblTeacherInfo Where EGN = @TeacherEGN)
+											Begin
+												Set @ResultNumber = -4 --This teacher does not exist.
+											End
+										Else 
+											Begin
+												If Exists (Select HourId From tblProgramme Where TeacherEGN = @TeacherEGN And HourId = @HourId And DayId = @DayId)
+													Begin
+														Set @ResultNumber = -5 --This teacher is taken at this time
+													End
+												Else
+													Begin
+														Insert into tblProgramme
+														Values (@ClassId,@DayId,@HourId,@SubjectId,@RoomId,@TeacherEGN)
+
+														Set @ResultNumber = 1 --Success.
+													End
+											End
+									End
+							End
+					End
+			End
+	End
+End
+Go
+
+Create Procedure spUpdateProgramme_tblProgramme
+(
+@Id int
+,@ClassId int
+,@DayId int
+,@HourId int
+,@SubjectId int
+,@RoomId int
+,@TeacherEGN varchar(10)
+
+,@ResultNumber int Output
+)
+As
+Begin
+If Exists (Select RoomId From tblProgramme Where DayId =@DayId And HourId = @HourId And RoomId = @RoomId And Id <> @Id)
+	Begin
+		Set @ResultNumber = -6 --This room is already taken
+	End
+Else
+	Begin
+		If Exists (Select DayId From tblProgramme Where DayId = @DayId And HourId = @HourId And ClassId = ClassId And Id <>@Id)
+			Begin
+				Set @ResultNumber = 0 --This hour at this day is currently taken
+			End
+		Else
+			Begin
+				If Not Exists (Select Id From tblClass Where Id = @ClassId)
+					Begin
+						Set @ResultNumber = -1 --This class does not Exist.
+					End
+				Else 
+					Begin
+						If Not Exists (Select Id From tblTimeTable Where Id = @HourId)
+							Begin
+								Set @ResultNumber = -2 --This time does not exist
+							End
+						Else
+							Begin
+								If Not Exists (Select Id From tblSubject Where Id = @SubjectId)
+									Begin
+										Set @ResultNumber = -3 --This subject does not exist.
+									End
+								Else
+									Begin
+										If Not Exists (Select Id From tblTeacherInfo Where EGN = @TeacherEGN)
+											Begin
+												Set @ResultNumber = -4 --This teacher does not exist.
+											End
+										Else 
+											Begin
+												If Exists (Select HourId From tblProgramme Where TeacherEGN = @TeacherEGN And HourId = @HourId And DayId = @DayId And ClassId <> @ClassId)
+													Begin
+														Set @ResultNumber = -5 --This teacher is taken at this time
+													End
+												Else
+													Begin
+														Update tblProgramme
+														Set ClassId = @ClassId,DayId = @DayId,HourId = @HourId,SubjectId = @SubjectId,RoomId = @RoomId,TeacherEGN = @TeacherEGN
+														Where Id = @Id
+														
+														Set @ResultNumber = 1 --Success.
+													End
+											End
+									End
+							End
+					End
+			End
+	End
+End
+Go
+
+Create Procedure spAddLesson_tblLesson
+(
+@ProgrammeId int
+,@LessonName nvarchar(50)
+,@OnDate smallDateTime
+,@TeacherEGN varchar(10)
+,@MissingStudentId varchar(150)
+,@LateStudentId varchar(150)
+,@ClassId int
+
+,@ResultNumber int Output
+)
+As
+Begin
+If Not Exists (Select @ProgrammeId From tblProgramme Where Id = @ProgrammeId)
+	Begin
+		Set @ResultNumber = 0 --This program item does not exist
+	End
+Else
+	Begin
+		If Not Exists (Select Id From tblTeacherInfo Where EGN = @TeacherEGN)
+			Begin
+				Set @ResultNumber = -1 --This teacher does not exist
+			End
+		Else
+			Begin
+				--DateDiff, checking if a whole week has passed, if no return -2
+				If Exists (Select Id From tblLesson Where DateDiff(day,OnDate,@OnDate) < 7 And ProgrammeId = @ProgrammeId)
+					Begin
+						Set @ResultNumber = -2 --This lesson already exists
+					End
+				Else
+					Begin
+						Insert into tblLesson
+						Values (@ProgrammeId,@LessonName,@OnDate,@TeacherEGN,(' '+@MissingStudentId),(' '+@LateStudentId))
+
+						While Len(@MissingStudentId) > 0
+							Begin
+							--Get each one of the missing student's id, then add their values to the table tblStudentInfoInClass
+								Declare @absentId int
+								Set @absentId = Convert(int,Substring(@MissingStudentId,0,PATINDEX('%,%', @MissingStudentId)))
+								Set @MissingStudentId = Substring(@MissingStudentId,PATINDEX('%,%', @MissingStudentId) + 2,Len(@MissingStudentId))
+
+								Update tblStudentInfoInClass
+								Set TimesAbsent = TimesAbsent + 1
+								Where StudentInClassId = @absentId And ClassId = @ClassId
+							End
+
+						While Len(@LateStudentId) > 0
+							Begin
+							--Get each one of the missing student's id, then add their values to the table tblStudentInfoInClass
+								Declare @lateId int
+								Set @lateId = Convert(int,Substring(@LateStudentId,0,PATINDEX('%,%', @LateStudentId)))
+								Set @LateStudentId = Substring(@LateStudentId,PATINDEX('%,%', @LateStudentId) + 2,Len(@LateStudentId))
+
+								Update tblStudentInfoInClass
+								Set TimesLate = TimesLate + 0.50
+								Where StudentInClassId = @lateId And ClassId = @ClassId
+							End
+				
+						Set @ResultNumber = 1 --Success.
+					End
+			End
+	End
+End
+Go
+
+Create Procedure spDeleteLesson_tblLesson
+(
+@Id int
+,@ClassId int
+
+,@ResultNumber int Output
+)
+As
+Begin
+	Begin Try
+		Declare @MissingStudentId varchar(150)
+		Set @MissingStudentId = (Select MissingStudentId From tblLesson Where Id = @Id)
+		Declare @LateStudentId varchar(150)
+		Set @LateStudentId = (Select LateStudentId From tblLesson Where Id = @Id)
+
+		While Len(@MissingStudentId) > 0
+			Begin
+			--Get each one of the missing student's id, then add their values to the table tblStudentInfoInClass
+				Declare @absentId int
+				Set @absentId = Convert(int,Substring(@MissingStudentId,0,PATINDEX('%,%', @MissingStudentId)))
+				Set @MissingStudentId = Substring(@MissingStudentId,PATINDEX('%,%', @MissingStudentId) + 2,Len(@MissingStudentId))
+
+				Update tblStudentInfoInClass
+				Set TimesAbsent = TimesAbsent - 1
+				Where StudentInClassId = @absentId And ClassId = @ClassId
+			End
+		
+		While Len(@LateStudentId) > 0
+			Begin
+			--Get each one of the missing student's id, then add their values to the table tblStudentInfoInClass
+				Declare @lateId int
+				Set @lateId = Convert(int,Substring(@LateStudentId,0,PATINDEX('%,%', @LateStudentId)))
+				Set @LateStudentId = Substring(@LateStudentId,PATINDEX('%,%', @LateStudentId) + 2,Len(@LateStudentId))
+		
+				Update tblStudentInfoInClass
+				Set TimesLate = TimesLate - 0.50
+				Where StudentInClassId = @lateId And ClassId = @ClassId
+			End
+
+		Delete From tblLesson
+		Where Id = @Id
+
+		Set @ResultNumber = 1
+	End Try
+	Begin Catch
+		Set @ResultNumber = 0 --There are grades attached to this lesson
+	End Catch
+End
+Go
+
+Create Procedure spUpdateLesson_tblLesson
+(
+@Id int
+,@ProgrammeId int
+,@LessonName nvarchar(50)
+,@OnDate smallDateTime
+,@TeacherEGN varchar(10)
+,@MissingStudentId varchar(150)
+,@LateStudentId varchar(150)
+
+,@ResultNumber int Output
+)
+As
+Begin
+If Not Exists (Select @ProgrammeId From tblProgramme Where Id = @ProgrammeId)
+	Begin
+		Set @ResultNumber = 0 --This program item does not exist
+	End
+Else
+	Begin
+		If Not Exists (Select Id From tblTeacherInfo Where EGN = @TeacherEGN)
+			Begin
+				Set @ResultNumber = -1 --This teacher does not exist
+			End
+		Else
+			Begin
+				If Exists (Select Id From tblLesson Where ProgrammeId = @ProgrammeId And Id <> @Id)
+					Begin
+						Set @ResultNumber = -2 --This lesson already exists
+					End
+				Else
+					Begin
+						Update tblLesson
+						Set ProgrammeId = @ProgrammeId,LessonName = @LessonName,OnDate = @OnDate,TeacherEGN = @TeacherEGN,MissingStudentId = @MissingStudentId,LateStudentId = @LateStudentId
+				
+						Set @ResultNumber = 1 --Success.
+					End
+			End
+	End
+End
+Go
+
+Create Procedure spAddGrade_tblGrade
+(
+@Grade int
+,@ClassId int
+,@LessonId int
+,@StudentInClassId int
+,@TeacherEGN varchar(10)
+
+,@ResultNumber int Output
+)
+As
+Begin
+If Not Exists (Select Id From tblClass Where Id = @ClassId)
+	Begin
+		Set @ResultNumber = 0 --This class does not exist.
+	End
+Else
+	Begin
+		If Not Exists (Select Id From tblLesson Where Id = @LessonId)
+			Begin
+				Set @ResultNumber = -1 --This lesson does not exist.
+			End
+		Else
+			Begin
+				If Not Exists (Select StudentInClassId From tblStudentInfoInClass Where StudentInClassId = @StudentInClassId)
+					Begin
+						Set @ResultNumber = -2 --This student does not exist
+					End
+				Else
+					Begin
+						If Exists (Select Id From tblLesson Where MissingStudentId Like ('% '+Convert(varchar(10),@StudentInClassId)+',%') And Id = @LessonId)
+							Begin
+								Set @ResultNumber = -3 --Cannot grade a student which is missing.
+							End 
+						Else 
+							Begin
+								Insert into tblGrade	
+								Values (@Grade,@ClassId,@LessonId,@StudentInClassId,@TeacherEGN)
+						
+								Set @ResultNumber = 1 --Success.
+							End
+					End
+			End
+	End
+End
+Go
+
+Create Procedure spUpdateGrade_tblGrade
+(
+@Id int
+,@Grade int
+,@ClassId int
+,@LessonId int
+,@StudentInClassId int
+,@TeacherEGN varchar(10)
+
+,@ResultNumber int Output
+)
+As
+Begin
+If Not Exists (Select Id From tblClass Where Id = @ClassId)
+	Begin
+		Set @ResultNumber = 0 --This class does not exist.
+	End
+Else
+	Begin
+		If Not Exists (Select Id From tblLesson Where Id = @LessonId)
+			Begin
+				Set @ResultNumber = -1 --This lesson does not exist.
+			End
+		Else
+			Begin
+				If Not Exists (Select Id From tblStudentInfoInClass Where StudentId = @StudentInClassId)
+					Begin
+						Set @ResultNumber = -2 --This student does not exist
+					End
+				Else
+					Begin
+						If Exists (Select Id From tblLesson Where MissingStudentId Like ('% '+Convert(varchar(10),@StudentInClassId)+',%') And Id = @LessonId)
+							Begin
+								Set @ResultNumber = -3 --Cannot grade a student which is missing.
+							End 
+						Else
+							Begin
+								Update tblGrade	
+								Set Grade = @Grade,ClassId = @ClassId,LessonId = @LessonId,StudentInClassId = @StudentInClassId, TeacherEGN = @TeacherEGN
+								Where Id = @Id
+							
+								Set @ResultNumber = 1 --Success.
+							End
+					End
+			End
+	End
+End
+Go
+
+Create Procedure spGetTeacherClassByCheckingEGN_tblTeacherInfo
+(
+@EGN varchar(10)
+
+,@ClassId int Output
+)
+As
+Begin
+		Set @ClassId = IsNull((Select Id from tblClass Where ClassTeacherEGN = @EGN),0)
 End
 Go

@@ -3,10 +3,11 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Преглед на предметите</h2>
+    <asp:Label ID="lblSubjectCount" runat="server" />
     <table>
         <tr>
             <td class="hideBorder">
-    <asp:GridView ID="viewSubject" runat="server" AllowPaging="True" DataKeyNames="Id" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataSourceID="getSubject" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="viewSubject_SelectedIndexChanged" PageSize="5">
+    <asp:GridView ID="viewSubject" runat="server" AllowPaging="True" DataKeyNames="Id" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataSourceID="getSubject" ForeColor="#333333" GridLines="None" OnSelectedIndexChanged="viewSubject_SelectedIndexChanged" PageSize="5" OnDataBound="viewSubject_DataBound">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:TemplateField HeaderText="Команда">

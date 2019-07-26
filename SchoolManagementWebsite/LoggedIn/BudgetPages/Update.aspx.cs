@@ -22,7 +22,7 @@ namespace SchoolManagementWebsite.LoggedIn.BudgetPages
                 OnDate = DateTime.Parse((e.Row.FindControl("lblOnDate") as Label).Text);
             }
         }
-        private int ItemId = 0;
+        private static int ItemId = 0;
         private static DateTime OnDate;
         protected void getAndUpdateBudget_Updating(object sender, ObjectDataSourceMethodEventArgs e)
         {

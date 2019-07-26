@@ -13,5 +13,10 @@ namespace SchoolManagementWebsite.LoggedIn.DoctorPages
         {
             BusinessLayer.SharedMethods.redirectUser(BusinessLayer.SharedMethods.isUserAuthorized(3), "Doctor");
         }
+
+        protected void doctors_DataBound(object sender, EventArgs e)
+        {
+            lblDoctorCount.Text = "Брой доктори :" +doctors.Rows.Count;
+        }
     }
 }
